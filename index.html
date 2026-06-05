@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Álbum Mundial 2026 – León Álvarez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0F0A1E;--bg2:#160D2A;--bg3:#1C1235;
+  --blue:#2A398D;--blue-light:#3D52C4;
+  --red:#E61D25;--green:#3CAC3B;
+  --white:#FFFFFF;--gold:#FFDB00;
+  --border:rgba(42,57,141,0.35);
+  --ft:'Bebas Neue',sans-serif;
+  --fc:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;
+}
+body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--white);}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 50%,#1A1050 100%);border-bottom:3px solid var(--red);padding:18px 20px 14px;position:relative;overflow:hidden;}
+.hdr::before{content:'26';font-family:var(--ft);font-size:200px;color:rgba(230,29,37,0.05);position:absolute;right:-10px;top:-30px;line-height:1;pointer-events:none;letter-spacing:-8px;}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green),var(--red));opacity:.6;}
+.htop{display:flex;align-items:center;gap:14px;margin-bottom:14px;position:relative;}
+.logo{width:54px;height:54px;background:linear-gradient(135deg,var(--red),#B01018);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-size:10px;color:var(--white);text-align:center;line-height:1.15;flex-shrink:0;border:2px solid rgba(255,255,255,.2);letter-spacing:.5px;}
+.htitles h1{font-family:var(--ft);font-size:28px;color:var(--white);letter-spacing:3px;line-height:1;}
+.htitles p{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.45);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;}
+.flag-stripe{display:flex;gap:3px;margin-bottom:12px;}
+.fs{height:3px;border-radius:2px;flex:1;}
+.sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.sc{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center;}
+.sn{font-family:var(--ft);font-size:25px;line-height:1;}
+.sl{font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
+.pglobal{margin-top:12px;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green));border-radius:3px;transition:width .5s ease;}
+
+/* CONTROLS */
+.ctrl{padding:11px 20px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.srch{flex:1;min-width:150px;background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fb);font-size:13px;outline:none;}
+.srch::placeholder{color:rgba(255,255,255,.25);}
+.srch:focus{border-color:var(--blue-light);}
+.csel{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;cursor:pointer;letter-spacing:.5px;min-width:155px;max-width:200px;}
+.csel:focus{border-color:var(--blue-light);}
+.csel option{background:#160D2A;color:#fff;}
+.fb{background:rgba(42,57,141,.1);border:1px solid rgba(42,57,141,.3);border-radius:6px;padding:7px 12px;color:rgba(255,255,255,.55);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:.5px;white-space:nowrap;}
+.fb:hover{background:rgba(42,57,141,.25);color:var(--white);}
+.fb.active{background:var(--blue);border-color:var(--blue-light);color:var(--white);font-weight:700;}
+.fb.red.active{background:var(--red);border-color:var(--red);color:var(--white);font-weight:700;}
+.fb.green.active{background:var(--green);border-color:var(--green);color:var(--white);font-weight:700;}
+.breset{background:rgba(230,29,37,.1);border:1px solid rgba(230,29,37,.28);border-radius:6px;padding:7px 12px;color:rgba(230,29,37,.8);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
+.breset:hover{background:rgba(230,29,37,.22);}
+.saved{font-family:var(--fc);font-size:11px;color:rgba(42,57,141,.7);text-align:right;padding:4px 20px 0;letter-spacing:.5px;}
+
+/* GRID */
+.content{padding:14px 20px 40px;max-width:1200px;margin:0 auto;}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
+
+/* CARD */
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .15s;}
+.scard:hover{border-color:rgba(61,82,196,.6);transform:translateY(-1px);}
+.scard.complete{border-color:var(--gold);box-shadow:0 0 14px rgba(255,219,0,.07);}
+.scard.complete .shdr{background:rgba(255,219,0,.05);}
+.shdr{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:rgba(0,0,0,.35);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
+.sname{font-family:var(--fc);font-size:15px;font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:7px;}
+.flag{font-size:18px;}
+.sprog{display:flex;align-items:center;gap:7px;}
+.pct{font-family:var(--ft);font-size:14px;color:var(--blue-light);}
+.mbar{width:55px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.mfill{height:100%;border-radius:2px;transition:width .3s;}
+.cbadge{background:var(--gold);color:#0F0A1E;font-family:var(--ft);font-size:10px;padding:2px 7px;border-radius:4px;letter-spacing:1px;}
+.tarrow{font-size:9px;color:rgba(42,57,141,.5);transition:transform .2s;}
+.tarrow.open{transform:rotate(180deg);}
+.stgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:11px 13px;}
+.st{aspect-ratio:1;border-radius:5px;border:1.5px solid rgba(42,57,141,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:10px;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;background:rgba(42,57,141,.06);color:rgba(255,255,255,.28);letter-spacing:.3px;position:relative;overflow:hidden;}
+.st:hover{border-color:var(--blue-light);background:rgba(42,57,141,.22);color:var(--white);transform:scale(1.07);}
+.st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
+.st.owned::after{content:'✓';position:absolute;top:1px;right:3px;font-size:7px;color:#6EE06D;font-weight:900;}
+.sfoot{padding:7px 13px;background:rgba(0,0,0,.18);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.3);}
+.co{color:#6EE06D;font-weight:700;}
+.cm{color:var(--red);font-weight:700;}
+.collapsed .stgrid,.collapsed .sfoot{display:none;}
+.empty{text-align:center;padding:50px 20px;color:rgba(42,57,141,.5);font-family:var(--fc);font-size:17px;letter-spacing:1px;}
+
+/* DETAIL */
+.dp{background:var(--bg3);border:1px solid rgba(42,57,141,.4);border-left:4px solid var(--red);border-radius:10px;padding:16px 18px;margin-bottom:16px;}
+.dp-title{font-family:var(--ft);font-size:24px;color:var(--white);letter-spacing:2px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.dp-title .subtitle{font-size:13px;color:rgba(255,255,255,.35);letter-spacing:1px;font-family:var(--fc);}
+.dp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.dp-sc{background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;}
+.dp-n{font-family:var(--ft);font-size:22px;line-height:1;}
+.dp-l{font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;}
+.dp-pgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;}
+@media(max-width:600px){.dp-pgrid{grid-template-columns:repeat(5,1fr);}.sbar{grid-template-columns:repeat(2,1fr);}}
+.dp-st{aspect-ratio:1;border-radius:6px;border:1.5px solid rgba(42,57,141,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fc);font-size:9px;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;background:rgba(42,57,141,.07);color:rgba(255,255,255,.28);position:relative;overflow:hidden;padding:2px;}
+.dp-st:hover{border-color:var(--blue-light);background:rgba(42,57,141,.25);color:#fff;transform:scale(1.06);}
+.dp-st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
+.dp-st.owned::after{content:'✓';position:absolute;top:1px;right:3px;font-size:7px;color:#6EE06D;font-weight:900;}
+.dp-num{font-size:14px;font-weight:700;line-height:1.1;}
+.dp-code{font-size:8px;opacity:.45;line-height:1;}
+.dp-bar{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-top:12px;}
+.dp-bfill{height:100%;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green));border-radius:3px;transition:width .3s;}
+.dp-pct-label{font-family:var(--ft);font-size:12px;color:rgba(255,255,255,.3);margin-top:4px;letter-spacing:1.5px;}
+.close-dp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 14px;color:rgba(255,255,255,.4);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.5px;}
+.close-dp:hover{background:rgba(255,255,255,.1);color:#fff;}
+.section-label{font-family:var(--ft);font-size:13px;color:rgba(42,57,141,.6);letter-spacing:2px;margin-bottom:10px;border-left:3px solid var(--red);padding-left:8px;}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="hdr">
+    <div class="htop">
+      <div class="logo">FIFA<br>WORLD<br>CUP<br>2026</div>
+      <div class="htitles">
+        <h1>ÁLBUM MUNDIAL 2026</h1>
+        <p>León Álvarez Huequelef · Registro de Láminas</p>
+      </div>
+    </div>
+    <div class="flag-stripe">
+      <div class="fs" style="background:var(--red)"></div>
+      <div class="fs" style="background:var(--blue)"></div>
+      <div class="fs" style="background:var(--green)"></div>
+      <div class="fs" style="background:var(--gold)"></div>
+      <div class="fs" style="background:var(--red)"></div>
+      <div class="fs" style="background:var(--blue-light)"></div>
+      <div class="fs" style="background:var(--green)"></div>
+    </div>
+    <div class="sbar">
+      <div class="sc"><div class="sn" style="color:var(--green)" id="st-t">0</div><div class="sl">Tengo</div></div>
+      <div class="sc"><div class="sn" style="color:var(--red)" id="st-f">0</div><div class="sl">Faltan</div></div>
+      <div class="sc"><div class="sn" style="color:var(--gold)" id="st-p">0%</div><div class="sl">Completado</div></div>
+      <div class="sc"><div class="sn" style="color:var(--blue-light)" id="st-s">0</div><div class="sl">Secciones</div></div>
+    </div>
+    <div class="pglobal"><div class="pfill" id="gbar" style="width:0%"></div></div>
+  </div>
+
+  <div class="ctrl">
+    <input class="srch" type="text" placeholder="🔍 Buscar sección..." id="srch"/>
+    <select class="csel" id="csel"><option value="">🌍 Seleccionar país...</option></select>
+    <button class="fb active" data-f="all">Todas</button>
+    <button class="fb red" data-f="owned">Con láminas</button>
+    <button class="fb" data-f="missing">Incompletas</button>
+    <button class="fb green" data-f="complete">⭐ Completas</button>
+    <button class="breset" id="breset">↺ Reiniciar</button>
+  </div>
+  <div class="saved" id="saved-msg">Cargando...</div>
+
+  <div class="content">
+    <div id="dp-container"></div>
+    <div id="grid-label" class="section-label" style="display:none"></div>
+    <div class="sgrid" id="grid"></div>
+  </div>
+</div>
+
+<script>
+const FLAGS={
+  'Argelia':'🇩🇿','Argentina':'🇦🇷','Austria':'🇦🇹','Coca-Cola':'🥤',
+  'Colombia':'🇨🇴','Croacia':'🇭🇷','FIFA World Cup History':'🏆',
+  'Ghana':'🇬🇭','Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Iraq':'🇮🇶','Jordania':'🇯🇴',
+  'Noruega':'🇳🇴','Panamá':'🇵🇦','Portugal':'🇵🇹','RD del Congo':'🇨🇩',
+  'Senegal':'🇸🇳','Uzbekistán':'🇺🇿','Francia':'🇫🇷','Uruguay':'🇺🇾',
+  'Arabia Saudita':'🇸🇦','Cabo Verde':'🇨🇻','España':'🇪🇸',
+  'Nueva Zelanda':'🇳🇿','Irán':'🇮🇷','Egipto':'🇪🇬','Bélgica':'🇧🇪',
+  'Túnez':'🇹🇳','Suecia':'🇸🇪','Japón':'🇯🇵','Países Bajos':'🇳🇱',
+  'Ecuador':'🇪🇨','Costa de Marfil':'🇨🇮','Curazao':'🇨🇼',
+  'Alemania':'🇩🇪','Turquía':'🇹🇷','Australia':'🇦🇺','Paraguay':'🇵🇾',
+  'USA':'🇺🇸','Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Haití':'🇭🇹','Marruecos':'🇲🇦',
+  'Brasil':'🇧🇷','Suiza':'🇨🇭','Qatar':'🇶🇦','Bosnia':'🇧🇦',
+  'Canadá':'🇨🇦','Sudáfrica':'🇿🇦','Czechia':'🇨🇿','Korea':'🇰🇷','Mexico':'🇲🇽'
+};
+
+const DATA=[
+  {name:'Argelia',codes:['ALG 1','ALG 2','ALG 3','ALG 4','ALG 5','ALG 6','ALG 8','ALG 9','ALG 10','ALG 11','ALG 12','ALG 13','ALG 14','ALG 15','ALG 16','ALG 17','ALG 18','ALG 19','ALG 20'],init:['ALG 6']},
+  {name:'Argentina',codes:['ARG 1','ARG 2','ARG 3','ARG 4','ARG 5','ARG 6','ARG 7','ARG 8','ARG 9','ARG 10','ARG 11','ARG 12','ARG 14','ARG 15','ARG 16','ARG 17','ARG 18','ARG 19','ARG 20'],init:['ARG 13']},
+  {name:'Austria',codes:['AUT 1','AUT 2','AUT 3','AUT 4','AUT 5','AUT 7','AUT 8','AUT 9','AUT 10','AUT 11','AUT 12','AUT 13','AUT 14','AUT 15','AUT 16','AUT 17','AUT 18','AUT 19','AUT 20'],init:['AUT 6']},
+  {name:'Coca-Cola',codes:['CC 1','CC 2','CC 3','CC 4','CC 5','CC 6','CC 7','CC 8','CC 9','CC 10','CC 11','CC 12','CC 13','CC 14'],init:[]},
+  {name:'Colombia',codes:['COL 1','COL 2','COL 3','COL 4','COL 5','COL 6','COL 7','COL 8','COL 9','COL 10','COL 11','COL 12','COL 13','COL 14','COL 15','COL 16','COL 17','COL 18','COL 19','COL 20'],init:['COL 1','COL 8']},
+  {name:'Croacia',codes:['CRO 1','CRO 2','CRO 3','CRO 4','CRO 5','CRO 6','CRO 7','CRO 8','CRO 9','CRO 10','CRO 11','CRO 12','CRO 14','CRO 15','CRO 16','CRO 17','CRO 18','CRO 19','CRO 20'],init:['CRO 13']},
+  {name:'FIFA World Cup History',codes:['FWC 1','FWC 2','FWC 3','FWC 4','FWC 5','FWC 6','FWC 7','FWC 8','FWC 9','FWC 10','FWC 11','PWC 12','FWC 13'],init:[]},
+  {name:'Ghana',codes:['GHA 1','GHA 2','GHA 3','GHA 4','GHA 5','GHA 6','GHA 7','GHA 8','GHA 9','GHA 10','GHA 11','GHA 12','GHA 13','GHA 14','GHA 15','GHA 16','GHA 17','GHA 18','GHA 19','GHA 20'],init:[]},
+  {name:'Inglaterra',codes:['ENG 1','ENG 2','ENG 3','ENG 4','ENG 5','ENG 6','ENG 7','ENG 8','ENG 9','ENG 10','ENG 11','ENG 12','ENG 13','ENG 14','ENG 15','ENG 16','ENG 17','ENG 18','ENG 19','ENG 20'],init:[]},
+  {name:'Iraq',codes:['IRQ 1','IRQ 2','IRQ 3','IRQ 4','IRQ 5','IRQ 6','IRQ 7','IRQ 8','IRQ 9','IRQ 10','IRQ 11','IRQ 13','IRQ 14','IRQ 15','IRQ 16','IRQ 17','IRQ 18','IRQ 19','IRQ 20'],init:['IRQ 12']},
+  {name:'Jordania',codes:['JOR 1','JOR 2','JOR 3','JOR 4','JOR 5','JOR 6','JOR 7','JOR 8','JOR 9','JOR 10','JOR 11','JOR 12','JOR 13','JOR 14','JOR 15','JOR 16','JOR 17','JOR 18','JOR 19','JOR 20'],init:['JOR 5','JOR 12','JOR 18']},
+  {name:'Noruega',codes:['NOR 1','NOR 2','NOR 3','NOR 4','NOR 5','NOR 6','NOR 7','NOR 8','NOR 9','NOR 10','NOR 11','NOR 12','NOR 13','NOR 14','NOR 15','NOR 16','NOR 17','NOR 18','NOR 19','NOR 20'],init:[]},
+  {name:'Panamá',codes:['PAN 1','PAN 2','PAN 3','PAN 4','PAN 5','PAN 6','PAN 7','PAN 8','PAN 9','PAN 10','PAN 11','PAN 12','PAN 13','PAN 14','PAN 15','PAN 16','PAN 17','PAN 18','PAN 19','PAN 20'],init:[]},
+  {name:'Portugal',codes:['POR 1','POR 2','POR 3','POR 4','POR 5','POR 6','POR 7','POR 8','POR 9','POR 10','POR 11','POR 12','POR 14','POR 15','POR 16','POR 17','POR 18','POR 19','POR 20'],init:['POR 13']},
+  {name:'RD del Congo',codes:['COD 1','COD 2','COD 3','COD 4','COD 5','COD 6','COD 7','COD 8','COD 9','COD 10','COD 11','COD 12','COD 13','COD 14','COD 15','COD 16','COD 17','COD 18','COD 19','COD 20'],init:['COD 12','COD 17']},
+  {name:'Senegal',codes:['SEN 1','SEN 2','SEN 3','SEN 4','SEN 5','SEN 6','SEN 7','SEN 8','SEN 9','SEN 10','SEN 11','SEN 12','SEN 13','SEN 14','SEN 15','SEN 16','SEN 17','SEN 18','SEN 19','SEN 20'],init:['SEN 3','SEN 7','SEN 20']},
+  {name:'Uzbekistán',codes:['UZB 1','UZB 2','UZB 3','UZB 4','UZB 5','UZB 6','UZB 7','UZB 8','UZB 9','UZB 10','UZB 11','UZB 12','UZB 13','UZB 14','UZB 15','UZB 16','UZB 17','UZB 18','UZB 19','UZB 20'],init:['UZB 5','UZB 20']},
+  {name:'Francia',codes:['FRA 1','FRA 2','FRA 3','FRA 4','FRA 5','FRA 6','FRA 7','FRA 8','FRA 9','FRA 10','FRA 11','FRA 12','FRA 13','FRA 14','FRA 15','FRA 16','FRA 17','FRA 18','FRA 19','FRA 20'],init:['FRA 1','FRA 3','FRA 16','FRA 20']},
+  {name:'Uruguay',codes:['URU 1','URU 2','URU 3','URU 4','URU 5','URU 6','URU 7','URU 8','URU 9','URU 10','URU 11','URU 12','URU 13','URU 14','URU 15','URU 16','URU 17','URU 18','URU 19','URU 20'],init:['URU 5','URU 9']},
+  {name:'Arabia Saudita',codes:['KSA 1','KSA 2','KSA 3','KSA 4','KSA 5','KSA 6','KSA 7','KSA 8','KSA 9','KSA 10','KSA 11','KSA 12','KSA 13','KSA 14','KSA 15','KSA 16','KSA 17','KSA 18','KSA 19','KSA 20'],init:['KSA 5','KSA 16']},
+  {name:'Cabo Verde',codes:['CPV 1','CPV 2','CPV 3','CPV 4','CPV 5','CPV 6','CPV 7','CPV 8','CPV 9','CPV 10','CPV 11','CPV 12','CPV 13','CPV 14','CPV 15','CPV 16','CPV 17','CPV 18','CPV 19','CPV 20'],init:['CPV 11','CPV 20']},
+  {name:'España',codes:['ESP 1','ESP 2','ESP 3','ESP 4','ESP 5','ESP 6','ESP 7','ESP 8','ESP 9','ESP 10','ESP 11','ESP 12','ESP 13','ESP 14','ESP 15','ESP 16','ESP 17','ESP 18','ESP 19','ESP 20'],init:[]},
+  {name:'Nueva Zelanda',codes:['NZL 1','NZL 2','NZL 3','NZL 4','NZL 5','NZL 6','NZL 7','NZL 8','NZL 9','NZL 10','NZL 11','NZL 12','NZL 13','NZL 14','NZL 15','NZL 16','NZL 17','NZL 18','NZL 19','NZL 20'],init:[]},
+  {name:'Irán',codes:['IRN 1','IRN 2','IRN 3','IRN 4','IRN 5','IRN 6','IRN 7','IRN 8','IRN 9','IRN 10','IRN 11','IRN 12','IRN 13','IRN 14','IRN 15','IRN 16','IRN 17','IRN 18','IRN 19','IRN 20'],init:[]},
+  {name:'Egipto',codes:['EGY 1','EGY 2','EGY 3','EGY 4','EGY 5','EGY 6','EGY 7','EGY 8','EGY 9','EGY 10','EGY 11','EGY 12','EGY 13','EGY 14','EGY 15','EGY 16','EGY 17','EGY 18','EGY 19','EGY 20'],init:['EGY 7']},
+  {name:'Bélgica',codes:['BEL 1','BEL 2','BEL 3','BEL 4','BEL 5','BEL 6','BEL 7','BEL 8','BEL 9','BEL 10','BEL 11','BEL 12','BEL 13','BEL 14','BEL 15','BEL 16','BEL 17','BEL 18','BEL 19','BEL 20'],init:['BEL 5','BEL 16']},
+  {name:'Túnez',codes:['TUN 1','TUN 2','TUN 3','TUN 4','TUN 5','TUN 6','TUN 7','TUN 8','TUN 9','TUN 10','TUN 11','TUN 12','TUN 13','TUN 14','TUN 15','TUN 16','TUN 17','TUN 18','TUN 19','TUN 20'],init:['TUN 11','TUN 20']},
+  {name:'Suecia',codes:['SWE 1','SWE 2','SWE 3','SWE 4','SWE 5','SWE 6','SWE 7','SWE 8','SWE 9','SWE 10','SWE 11','SWE 12','SWE 13','SWE 14','SWE 15','SWE 16','SWE 17','SWE 18','SWE 19','SWE 20'],init:['SWE 2']},
+  {name:'Japón',codes:['JPN 1','JPN 2','JPN 3','JPN 4','JPN 5','JPN 6','JPN 7','JPN 8','JPN 9','JPN 10','JPN 11','JPN 12','JPN 13','JPN 14','JPN 15','JPN 16','JPN 17','JPN 18','JPN 19','JPN 20'],init:['JPN 11']},
+  {name:'Países Bajos',codes:['NED 1','NED 2','NED 3','NED 4','NED 5','NED 6','NED 7','NED 8','NED 9','NED 10','NED 11','NED 12','NED 13','NED 14','NED 15','NED 16','NED 17','NED 18','NED 19','NED 20'],init:[]},
+  {name:'Ecuador',codes:['ECU 1','ECU 2','ECU 3','ECU 4','ECU 5','ECU 6','ECU 7','ECU 8','ECU 9','ECU 10','ECU 11','ECU 12','ECU 13','ECU 14','ECU 15','ECU 16','ECU 17','ECU 18','ECU 19','ECU 20'],init:[]},
+  {name:'Costa de Marfil',codes:['CIV 1','CIV 2','CIV 3','CIV 4','CIV 5','CIV 6','CIV 7','CIV 8','CIV 9','CIV 10','CIV 11','CIV 12','CIV 13','CIV 14','CIV 15','CIV 16','CIV 17','CIV 18','CIV 19','CIV 20'],init:[]},
+  {name:'Curazao',codes:['CUW 1','CUW 2','CUW 3','CUW 4','CUW 5','CUW 6','CUW 7','CUW 8','CUW 9','CUW 10','CUW 11','CUW 12','CUW 13','CUW 14','CUW 15','CUW 16','CUW 17','CUW 18','CUW 19','CUW 20'],init:[]},
+  {name:'Alemania',codes:['GER 1','GER 2','GER 3','GER 4','GER 5','GER 6','GER 7','GER 8','GER 9','GER 10','GER 11','GER 12','GER 13','GER 14','GER 15','GER 16','GER 17','GER 18','GER 19','GER 20'],init:['GER 1','GER 5','GER 12']},
+  {name:'Turquía',codes:['TUR 1','TUR 2','TUR 3','TUR 4','TUR 5','TUR 6','TUR 7','TUR 8','TUR 9','TUR 10','TUR 11','TUR 12','TUR 13','TUR 14','TUR 15','TUR 16','TUR 17','TUR 18','TUR 19','TUR 20'],init:['TUR 3','TUR 5','TUR 9','TUR 11','TUR 16','TUR 18']},
+  {name:'Australia',codes:['AUS 1','AUS 2','AUS 3','AUS 4','AUS 5','AUS 6','AUS 7','AUS 8','AUS 9','AUS 10','AUS 11','AUS 12','AUS 13','AUS 14','AUS 15','AUS 16','AUS 17','AUS 18','AUS 19','AUS 20'],init:[]},
+  {name:'Paraguay',codes:['PAR 1','PAR 2','PAR 3','PAR 4','PAR 5','PAR 6','PAR 7','PAR 8','PAR 9','PAR 10','PAR 11','PAR 12','PAR 13','PAR 14','PAR 15','PAR 16','PAR 17','PAR 18','PAR 19','PAR 20'],init:['PAR 15']},
+  {name:'USA',codes:['USA 1','USA 2','USA 3','USA 4','USA 5','USA 6','USA 7','USA 8','USA 9','USA 10','USA 11','USA 12','USA 13','USA 14','USA 15','USA 16','USA 17','USA 18','USA 19','USA 20'],init:['USA 16','USA 20']},
+  {name:'Escocia',codes:['SCO 1','SCO 2','SCO 3','SCO 4','SCO 5','SCO 6','SCO 7','SCO 8','SCO 9','SCO 10','SCO 11','SCO 12','SCO 13','SCO 14','SCO 15','SCO 16','SCO 17','SCO 18','SCO 19','SCO 20'],init:['SCO 20']},
+  {name:'Haití',codes:['HAI 1','HAI 2','HAI 3','HAI 4','HAI 5','HAI 6','HAI 7','HAI 8','HAI 9','HAI 10','HAI 11','HAI 12','HAI 13','HAI 14','HAI 15','HAI 16','HAI 17','HAI 18','HAI 19','HAI 20'],init:['HAI 4','HAI 5','HAI 9','HAI 16']},
+  {name:'Marruecos',codes:['MAR 1','MAR 2','MAR 3','MAR 4','MAR 5','MAR 6','MAR 7','MAR 8','MAR 9','MAR 10','MAR 11','MAR 12','MAR 13','MAR 14','MAR 15','MAR 16','MAR 17','MAR 18','MAR 19','MAR 20'],init:['MAR 9']},
+  {name:'Brasil',codes:['BRA 1','BRA 2','BRA 3','BRA 4','BRA 5','BRA 6','BRA 7','BRA 8','BRA 9','BRA 10','BRA 11','BRA 12','BRA 13','BRA 14','BRA 15','BRA 16','BRA 17','BRA 18','BRA 19','BRA 20'],init:[]},
+  {name:'Suiza',codes:['SUI 1','SUI 2','SUI 3','SUI 4','SUI 5','SUI 6','SUI 7','SUI 8','SUI 9','SUI 10','SUI 11','SUI 12','SUI 13','SUI 14','SUI 15','SUI 16','SUI 17','SUI 18','SUI 19','SUI 20'],init:[]},
+  {name:'Qatar',codes:['QAT 1','QAT 2','QAT 3','QAT 4','QAT 5','QAT 6','QAT 7','QAT 8','QAT 9','QAT 10','QAT 11','QAT 12','QAT 13','QAT 14','QAT 15','QAT 16','QAT 17','QAT 18','QAT 19','QAT 20'],init:[]},
+  {name:'Bosnia',codes:['BIH 1','BIH 2','BIH 3','BIH 4','BIH 5','BIH 6','BIH 7','BIH 8','BIH 9','BIH 10','BIH 11','BIH 12','BIH 13','BIH 14','BIH 15','BIH 16','BIH 17','BIH 18','BIH 19','BIH 20'],init:['BIH 5','BIH 16','BIH 20']},
+  {name:'Canadá',codes:['CAN 1','CAN 2','CAN 3','CAN 4','CAN 5','CAN 6','CAN 7','CAN 8','CAN 9','CAN 10','CAN 11','CAN 12','CAN 13','CAN 14','CAN 15','CAN 16','CAN 17','CAN 18','CAN 19','CAN 20'],init:[]},
+  {name:'Sudáfrica',codes:['RSA 1','RSA 2','RSA 3','RSA 4','RSA 5','RSA 6','RSA 7','RSA 8','RSA 9','RSA 10','RSA 11','RSA 12','RSA 13','RSA 14','RSA 15','RSA 16','RSA 17','RSA 18','RSA 19','RSA 20'],init:['RSA 19']},
+  {name:'Czechia',codes:['CZE 1','CZE 2','CZE 3','CZE 4','CZE 5','CZE 6','CZE 7','CZE 8','CZE 9','CZE 10','CZE 11','CZE 12','CZE 13','CZE 14','CZE 15','CZE 16','CZE 17','CZE 18','CZE 19','CZE 20'],init:['CZE 2','CZE 3','CZE 4','CZE 5','CZE 10','CZE 11','CZE 19']},
+  {name:'Korea',codes:['KOR 1','KOR 2','KOR 3','KOR 4','KOR 5','KOR 6','KOR 7','KOR 8','KOR 9','KOR 10','KOR 11','KOR 12','KOR 13','KOR 14','KOR 15','KOR 16','KOR 17','KOR 18','KOR 19','KOR 20'],init:['KOR 5','KOR 10','KOR 19']},
+  {name:'Mexico',codes:['MEX 1','MEX 2','MEX 3','MEX 4','MEX 5','MEX 6','MEX 7','MEX 8','MEX 9','MEX 10','MEX 11','MEX 12','MEX 13','MEX 14','MEX 15','MEX 16','MEX 17','MEX 18','MEX 19','MEX 20'],init:['MEX 8','MEX 12']},
+];
+
+const SK='mundial2026_v3';
+let state={},collapsed={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null;
+
+function getOwned(n){const s=state[n];if(!s)return new Set();return s instanceof Set?s:new Set(s);}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(SK);
+    if(raw){const d=JSON.parse(raw);state=d.state||{};collapsed=d.collapsed||{};}
+    else initDef();
+  }catch{initDef();}
+  DATA.forEach(s=>{
+    if(state[s.name]&&!(state[s.name] instanceof Set))state[s.name]=new Set(state[s.name]);
+    else if(!state[s.name])state[s.name]=new Set(s.init);
+  });
+}
+
+function initDef(){state={};DATA.forEach(s=>{state[s.name]=new Set(s.init);});}
+
+function saveState(){
+  const t={};for(const[k,v]of Object.entries(state))t[k]=v instanceof Set?[...v]:v;
+  try{
+    localStorage.setItem(SK,JSON.stringify({state:t,collapsed}));
+    document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+  }catch{document.getElementById('saved-msg').textContent='⚠ No se pudo guardar';}
+}
+function qSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,600);}
+
+function updateStats(){
+  let tot=0,own=0;DATA.forEach(s=>{tot+=s.codes.length;own+=getOwned(s.name).size;});
+  const pct=tot?Math.round(own/tot*100):0;
+  document.getElementById('st-t').textContent=own;
+  document.getElementById('st-f').textContent=tot-own;
+  document.getElementById('st-p').textContent=pct+'%';
+  document.getElementById('st-s').textContent=DATA.length;
+  document.getElementById('gbar').style.width=pct+'%';
+}
+
+function populateSel(){
+  const sel=document.getElementById('csel');
+  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;sel.appendChild(o);});
+}
+
+function renderDetail(name){
+  const c=document.getElementById('dp-container');
+  if(!name){c.innerHTML='';return;}
+  const sec=DATA.find(s=>s.name===name);if(!sec){c.innerHTML='';return;}
+  const owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
+  const pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
+  const stHTML=sec.codes.map(code=>{
+    const num=code.split(' ')[1]||code,pre=code.split(' ')[0];
+    return `<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}"><span class="dp-num">${num}</span><span class="dp-code">${pre}</span></div>`;
+  }).join('');
+  c.innerHTML=`<div class="dp">
+    <div class="dp-title"><span style="font-size:30px">${flag}</span>${name.toUpperCase()}<span class="subtitle">· ${total} LÁMINAS</span></div>
+    <div class="dp-stats">
+      <div class="dp-sc"><div class="dp-n" style="color:#3CAC3B">${cnt}</div><div class="dp-l">Tengo</div></div>
+      <div class="dp-sc"><div class="dp-n" style="color:#E61D25">${total-cnt}</div><div class="dp-l">Faltan</div></div>
+      <div class="dp-sc"><div class="dp-n" style="color:#FFDB00">${pct}%</div><div class="dp-l">Progreso</div></div>
+    </div>
+    <div class="dp-pgrid">${stHTML}</div>
+    <div class="dp-bar"><div class="dp-bfill" style="width:${pct}%"></div></div>
+    <div class="dp-pct-label">${pct}% COMPLETADO · ${cnt} DE ${total} LÁMINAS</div>
+    <button class="close-dp" id="cdp">✕ Cerrar</button>
+  </div>`;
+  c.querySelectorAll('.dp-st').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const o=getOwned(el.dataset.sec);
+      if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);
+      state[el.dataset.sec]=o;qSave();updateStats();renderDetail(selectedCountry);updateCard(el.dataset.sec);
+    });
+  });
+  document.getElementById('cdp').addEventListener('click',()=>{selectedCountry='';document.getElementById('csel').value='';renderDetail('');});
+}
+
+function updateCard(name){
+  const owned=getOwned(name),sec=DATA.find(s=>s.name===name);if(!sec)return;
+  const total=sec.codes.length,cnt=owned.size,pct=total?Math.round(cnt/total*100):0;
+  const card=document.querySelector(`[data-sec="${CSS.escape(name)}"]`);if(!card)return;
+  card.querySelector('.pct').textContent=pct+'%';
+  card.querySelector('.mfill').style.width=pct+'%';
+  card.querySelector('.mfill').style.background=pct===100?'#FFDB00':pct>=60?'#3CAC3B':pct>=30?'#3D52C4':'#E61D25';
+  card.querySelector('.co').textContent=cnt;card.querySelector('.cm').textContent=total-cnt;
+  card.classList.toggle('complete',cnt===total);
+  const cb=card.querySelector('.cbadge');if(cb)cb.style.display=cnt===total?'inline-block':'none';
+  card.querySelectorAll('.st').forEach(el=>{el.classList.toggle('owned',owned.has(el.dataset.code));});
+}
+
+function buildCard(sec){
+  const name=sec.name,owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
+  const pct=total?Math.round(cnt/total*100):0,complete=cnt===total,flag=FLAGS[name]||'🌍',isCol=!!collapsed[name];
+  const barC=pct===100?'#FFDB00':pct>=60?'#3CAC3B':pct>=30?'#3D52C4':'#E61D25';
+  const div=document.createElement('div');
+  div.className='scard'+(complete?' complete':'')+(isCol?' collapsed':'');div.dataset.sec=name;
+  const stHTML=sec.codes.map(code=>`<div class="st${owned.has(code)?' owned':''}" data-code="${code}" title="${code}">#${code.split(' ')[1]}</div>`).join('');
+  div.innerHTML=`<div class="shdr">
+    <div class="sname"><span class="flag">${flag}</span><span>${name}</span></div>
+    <div class="sprog">
+      <span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span>
+      <span class="pct">${pct}%</span>
+      <div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC}"></div></div>
+      <span class="tarrow${isCol?'':' open'}">▼</span>
+    </div>
+  </div>
+  <div class="stgrid">${stHTML}</div>
+  <div class="sfoot">
+    <span><span class="co">${cnt}</span> pegadas · <span class="cm">${total-cnt}</span> faltan</span>
+    <span style="color:rgba(61,82,196,.4)">${total} total</span>
+  </div>`;
+  div.querySelector('.shdr').addEventListener('click',()=>{
+    collapsed[name]=!collapsed[name];qSave();
+    div.classList.toggle('collapsed',!!collapsed[name]);div.querySelector('.tarrow').classList.toggle('open',!collapsed[name]);
+  });
+  div.querySelectorAll('.st').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.stopPropagation();const o=getOwned(name);
+      if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);
+      state[name]=o;qSave();updateStats();if(selectedCountry===name)renderDetail(name);updateCard(name);
+    });
+  });
+  return div;
+}
+
+function getFiltered(){
+  let s=DATA;
+  if(searchQ)s=s.filter(x=>x.name.toLowerCase().includes(searchQ.toLowerCase()));
+  if(filterMode==='owned')s=s.filter(x=>getOwned(x.name).size>0);
+  if(filterMode==='missing')s=s.filter(x=>{const c=getOwned(x.name).size;return c>0&&c<x.codes.length;});
+  if(filterMode==='complete')s=s.filter(x=>getOwned(x.name).size===x.codes.length);
+  return s;
+}
+
+function renderAll(){
+  const grid=document.getElementById('grid');grid.innerHTML='';
+  const label=document.getElementById('grid-label');
+  const secs=getFiltered();
+  if(!secs.length){grid.innerHTML='<div class="empty">NO HAY SECCIONES QUE MOSTRAR</div>';label.style.display='none';return;}
+  label.style.display='block';
+  label.textContent=secs.length+' SECCIÓN'+(secs.length!==1?'ES':'')+' · '+secs.reduce((a,s)=>a+s.codes.length,0)+' LÁMINAS';
+  secs.forEach(sec=>grid.appendChild(buildCard(sec)));
+}
+
+document.querySelectorAll('.fb[data-f]').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterMode=b.dataset.f;renderAll();});
+});
+document.getElementById('srch').addEventListener('input',e=>{searchQ=e.target.value;document.getElementById('csel').value='';selectedCountry='';renderDetail('');renderAll();});
+document.getElementById('csel').addEventListener('change',e=>{
+  selectedCountry=e.target.value;searchQ='';document.getElementById('srch').value='';renderDetail(selectedCountry);
+  if(selectedCountry){const c=document.querySelector(`[data-sec="${CSS.escape(selectedCountry)}"]`);if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}
+});
+document.getElementById('breset').addEventListener('click',()=>{
+  if(!confirm('¿Reiniciar el álbum desde cero? Se perderá todo el progreso.'))return;
+  initDef();saveState();updateStats();renderDetail(selectedCountry);renderAll();
+});
+
+loadState();
+populateSel();
+updateStats();
+renderAll();
+document.getElementById('saved-msg').textContent='Datos cargados · haz clic en una lámina para marcarla';
+</script>
+</body>
+</html>
