@@ -32,18 +32,24 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .flag-stripe{display:flex;gap:3px;margin-bottom:12px;}
 .fs{height:3px;border-radius:2px;flex:1;}
 .sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.sc{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center;}
+.sc{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center;cursor:default;}
 .sn{font-family:var(--ft);font-size:25px;line-height:1;}
 .sl{font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
 .pglobal{margin-top:12px;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
 .pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green));border-radius:3px;transition:width .5s ease;}
 
+/* NAV TABS */
+.nav-tabs{display:flex;background:var(--bg2);border-bottom:2px solid var(--border);padding:0 20px;}
+.nav-tab{font-family:var(--ft);font-size:15px;letter-spacing:1.5px;padding:12px 18px;cursor:pointer;color:rgba(255,255,255,.4);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.nav-tab:hover{color:rgba(255,255,255,.7);}
+.nav-tab.active{color:var(--white);border-bottom-color:var(--red);}
+
 /* CONTROLS */
 .ctrl{padding:11px 20px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.srch{flex:1;min-width:150px;background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fb);font-size:13px;outline:none;}
+.srch{flex:1;min-width:140px;background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fb);font-size:13px;outline:none;}
 .srch::placeholder{color:rgba(255,255,255,.25);}
 .srch:focus{border-color:var(--blue-light);}
-.csel{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;cursor:pointer;letter-spacing:.5px;min-width:155px;max-width:200px;}
+.csel{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;cursor:pointer;letter-spacing:.5px;min-width:150px;max-width:200px;}
 .csel:focus{border-color:var(--blue-light);}
 .csel option{background:#160D2A;color:#fff;}
 .fb{background:rgba(42,57,141,.1);border:1px solid rgba(42,57,141,.3);border-radius:6px;padding:7px 12px;color:rgba(255,255,255,.55);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:.5px;white-space:nowrap;}
@@ -55,8 +61,10 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .breset:hover{background:rgba(230,29,37,.22);}
 .saved{font-family:var(--fc);font-size:11px;color:rgba(42,57,141,.7);text-align:right;padding:4px 20px 0;letter-spacing:.5px;}
 
-/* GRID */
+/* CONTENT */
 .content{padding:14px 20px 40px;max-width:1200px;margin:0 auto;}
+.view{display:none;}
+.view.active{display:block;}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
 
 /* CARD */
@@ -107,6 +115,129 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .close-dp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 14px;color:rgba(255,255,255,.4);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.5px;}
 .close-dp:hover{background:rgba(255,255,255,.1);color:#fff;}
 .section-label{font-family:var(--ft);font-size:13px;color:rgba(42,57,141,.6);letter-spacing:2px;margin-bottom:10px;border-left:3px solid var(--red);padding-left:8px;}
+
+/* ===== REPORTES ===== */
+.rpt-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+.rpt-title{font-family:var(--ft);font-size:22px;letter-spacing:2px;color:var(--gold);}
+.rpt-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.btn-rpt{background:rgba(42,57,141,.15);border:1px solid rgba(42,57,141,.4);border-radius:6px;padding:8px 14px;color:rgba(255,255,255,.7);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+.btn-rpt:hover{background:rgba(42,57,141,.3);color:#fff;}
+.btn-rpt.export{background:rgba(60,172,59,.12);border-color:rgba(60,172,59,.35);color:#6EE06D;}
+.btn-rpt.export:hover{background:rgba(60,172,59,.25);}
+.btn-rpt.print{background:rgba(255,219,0,.1);border-color:rgba(255,219,0,.3);color:var(--gold);}
+.btn-rpt.print:hover{background:rgba(255,219,0,.2);}
+
+/* resumen global */
+.rpt-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px;}
+.rpt-sum-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.rsc-label{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.rsc-val{font-family:var(--ft);font-size:30px;line-height:1;}
+.rsc-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);margin-top:2px;}
+.rpt-bar-wrap{background:rgba(255,255,255,.05);border-radius:4px;height:8px;overflow:hidden;margin-top:8px;}
+.rpt-bar-fill{height:100%;border-radius:4px;transition:width .5s;}
+
+/* tabla reporte */
+.rpt-table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+.rpt-table-title{font-family:var(--ft);font-size:16px;letter-spacing:2px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:space-between;}
+.rpt-table-title span{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
+table{width:100%;border-collapse:collapse;}
+th{font-family:var(--fc);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);padding:8px 14px;text-align:left;border-bottom:1px solid var(--border);background:rgba(0,0,0,.15);}
+td{font-family:var(--fc);font-size:13px;padding:8px 14px;border-bottom:1px solid rgba(42,57,141,.12);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(42,57,141,.07);}
+.td-flag{font-size:16px;}
+.td-name{font-weight:600;letter-spacing:.3px;}
+.td-bar{width:80px;}
+.td-bar-inner{height:4px;border-radius:2px;}
+.td-pct{font-family:var(--ft);font-size:14px;text-align:right;}
+.td-owned{color:#6EE06D;font-weight:700;}
+.td-missing{color:var(--red);font-weight:700;}
+.tag-complete{background:var(--gold);color:#0F0A1E;font-family:var(--ft);font-size:9px;padding:1px 6px;border-radius:3px;letter-spacing:1px;vertical-align:middle;}
+.tag-empty{background:rgba(230,29,37,.2);color:var(--red);font-family:var(--ft);font-size:9px;padding:1px 6px;border-radius:3px;letter-spacing:1px;}
+
+/* chips de láminas faltantes */
+.chips{display:flex;flex-wrap:wrap;gap:4px;padding:10px 14px;border-top:1px solid var(--border);}
+.chip{background:rgba(230,29,37,.12);border:1px solid rgba(230,29,37,.25);border-radius:4px;font-family:var(--fc);font-size:11px;color:rgba(255,100,100,.9);padding:2px 7px;letter-spacing:.3px;}
+.chip.owned-chip{background:rgba(60,172,59,.12);border-color:rgba(60,172,59,.25);color:#6EE06D;}
+
+/* selector tipo reporte */
+.rpt-type-sel{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.rpt-type-btn{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 14px;color:rgba(255,255,255,.5);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
+.rpt-type-btn:hover{background:rgba(42,57,141,.2);color:#fff;}
+.rpt-type-btn.active{background:var(--blue);border-color:var(--blue-light);color:#fff;font-weight:700;}
+
+/* ===== PIN LOCK MODAL ===== */
+#lock-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(10,6,25,0.97);
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);
+}
+#lock-overlay.hidden{display:none;}
+.lock-box{
+  background:var(--bg2);
+  border:1px solid rgba(42,57,141,.5);
+  border-top:3px solid var(--red);
+  border-radius:14px;
+  padding:32px 28px 28px;
+  width:320px;max-width:90vw;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  animation:lockIn .3s ease;
+}
+@keyframes lockIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+.lock-icon{font-size:42px;margin-bottom:10px;}
+.lock-title{font-family:var(--ft);font-size:24px;color:var(--white);letter-spacing:2px;margin-bottom:4px;}
+.lock-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:22px;}
+.lock-dots{display:flex;justify-content:center;gap:10px;margin-bottom:20px;}
+.lock-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:transparent;transition:all .15s;}
+.lock-dot.filled{background:var(--blue-light);border-color:var(--blue-light);box-shadow:0 0 8px rgba(61,82,196,.5);}
+.lock-dot.error{background:var(--red);border-color:var(--red);box-shadow:0 0 8px rgba(230,29,37,.5);}
+.lock-dot.success{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(60,172,59,.5);}
+.pin-input{
+  width:100%;background:rgba(42,57,141,.1);
+  border:1px solid var(--border);border-radius:8px;
+  padding:12px 14px;color:var(--white);
+  font-family:var(--fc);font-size:20px;
+  text-align:center;letter-spacing:6px;
+  outline:none;margin-bottom:14px;
+}
+.pin-input:focus{border-color:var(--blue-light);}
+.pin-input::placeholder{font-size:13px;letter-spacing:1px;color:rgba(255,255,255,.2);}
+.pin-btn{
+  width:100%;background:var(--blue);
+  border:none;border-radius:8px;
+  padding:12px;color:var(--white);
+  font-family:var(--ft);font-size:16px;
+  letter-spacing:2px;cursor:pointer;
+  transition:all .15s;
+}
+.pin-btn:hover{background:var(--blue-light);}
+.pin-btn:active{transform:scale(.97);}
+.lock-error{font-family:var(--fc);font-size:12px;color:var(--red);margin-top:10px;letter-spacing:.5px;min-height:18px;}
+.lock-timer-info{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.2);margin-top:14px;letter-spacing:.5px;}
+/* indicador sesión activa */
+#session-indicator{
+  position:fixed;bottom:12px;right:14px;z-index:100;
+  font-family:var(--fc);font-size:11px;
+  color:rgba(255,255,255,.2);letter-spacing:.5px;
+  display:flex;align-items:center;gap:5px;
+  pointer-events:none;
+}
+#session-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+#session-dot.warning{background:var(--gold);}
+
+/* print styles */
+@media print{
+  .nav-tabs,.ctrl,.saved,.rpt-header,.rpt-btns,.rpt-type-sel,#view-album{display:none!important;}
+  body{background:#fff;color:#000;}
+  .hdr{background:#0F0A1E!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .rpt-table-wrap,table,th,td{border-color:#ccc!important;}
+  th,td{color:#000!important;}
+  .rpt-sum-card{border:1px solid #ccc;}
+  .view#view-reports{display:block!important;}
+  .rpt-btns{display:none!important;}
+}
 </style>
 </head>
 <body>
@@ -138,7 +269,14 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
     <div class="pglobal"><div class="pfill" id="gbar" style="width:0%"></div></div>
   </div>
 
-  <div class="ctrl">
+  <!-- TABS -->
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-view="album">📋 ÁLBUM</div>
+    <div class="nav-tab" data-view="reports">📊 REPORTES</div>
+  </div>
+
+  <!-- ALBUM CONTROLS -->
+  <div class="ctrl" id="album-ctrl">
     <input class="srch" type="text" placeholder="🔍 Buscar sección..." id="srch"/>
     <select class="csel" id="csel"><option value="">🌍 Seleccionar país...</option></select>
     <button class="fb active" data-f="all">Todas</button>
@@ -150,9 +288,41 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
   <div class="saved" id="saved-msg">Cargando...</div>
 
   <div class="content">
-    <div id="dp-container"></div>
-    <div id="grid-label" class="section-label" style="display:none"></div>
-    <div class="sgrid" id="grid"></div>
+
+    <!-- VISTA ÁLBUM -->
+    <div class="view active" id="view-album">
+      <div id="dp-container"></div>
+      <div id="grid-label" class="section-label" style="display:none"></div>
+      <div class="sgrid" id="grid"></div>
+    </div>
+
+    <!-- VISTA REPORTES -->
+    <div class="view" id="view-reports">
+
+      <div class="rpt-header">
+        <div class="rpt-title">📊 REPORTES</div>
+        <div class="rpt-btns">
+          <button class="btn-rpt export" id="btn-csv">⬇ Exportar CSV</button>
+          <button class="btn-rpt print" id="btn-print">🖨 Imprimir / PDF</button>
+        </div>
+      </div>
+
+      <!-- Resumen global -->
+      <div class="rpt-summary" id="rpt-summary"></div>
+
+      <!-- Selector tipo reporte -->
+      <div class="rpt-type-sel">
+        <button class="rpt-type-btn active" data-rpt="all">Todas las secciones</button>
+        <button class="rpt-type-btn" data-rpt="missing">Solo faltan láminas</button>
+        <button class="rpt-type-btn" data-rpt="owned">Solo tengo láminas</button>
+        <button class="rpt-type-btn" data-rpt="complete">Secciones completas</button>
+        <button class="rpt-type-btn" data-rpt="detail">Detalle por sección</button>
+      </div>
+
+      <!-- Tabla principal -->
+      <div id="rpt-table-container"></div>
+
+    </div>
   </div>
 </div>
 
@@ -172,7 +342,6 @@ const FLAGS={
   'Brasil':'🇧🇷','Suiza':'🇨🇭','Qatar':'🇶🇦','Bosnia':'🇧🇦',
   'Canadá':'🇨🇦','Sudáfrica':'🇿🇦','Czechia':'🇨🇿','Korea':'🇰🇷','Mexico':'🇲🇽'
 };
-
 const DATA=[
   {name:'Argelia',codes:['ALG 1','ALG 2','ALG 3','ALG 4','ALG 5','ALG 6','ALG 8','ALG 9','ALG 10','ALG 11','ALG 12','ALG 13','ALG 14','ALG 15','ALG 16','ALG 17','ALG 18','ALG 19','ALG 20'],init:['ALG 6']},
   {name:'Argentina',codes:['ARG 1','ARG 2','ARG 3','ARG 4','ARG 5','ARG 6','ARG 7','ARG 8','ARG 9','ARG 10','ARG 11','ARG 12','ARG 14','ARG 15','ARG 16','ARG 17','ARG 18','ARG 19','ARG 20'],init:['ARG 13']},
@@ -227,30 +396,25 @@ const DATA=[
 ];
 
 const SK='mundial2026_v3';
-let state={},collapsed={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null;
+let state={},collapsed={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all';
 
 function getOwned(n){const s=state[n];if(!s)return new Set();return s instanceof Set?s:new Set(s);}
+function getMissing(n){const sec=DATA.find(s=>s.name===n);if(!sec)return[];return sec.codes.filter(c=>!getOwned(n).has(c));}
+function barC(p){return p===100?'#FFDB00':p>=60?'#3CAC3B':p>=30?'#3D52C4':'#E61D25';}
 
 function loadState(){
-  try{
-    const raw=localStorage.getItem(SK);
-    if(raw){const d=JSON.parse(raw);state=d.state||{};collapsed=d.collapsed||{};}
-    else initDef();
-  }catch{initDef();}
+  try{const r=localStorage.getItem(SK);if(r){const d=JSON.parse(r);state=d.state||{};collapsed=d.collapsed||{};}else initDef();}
+  catch{initDef();}
   DATA.forEach(s=>{
     if(state[s.name]&&!(state[s.name] instanceof Set))state[s.name]=new Set(state[s.name]);
     else if(!state[s.name])state[s.name]=new Set(s.init);
   });
 }
-
 function initDef(){state={};DATA.forEach(s=>{state[s.name]=new Set(s.init);});}
-
 function saveState(){
   const t={};for(const[k,v]of Object.entries(state))t[k]=v instanceof Set?[...v]:v;
-  try{
-    localStorage.setItem(SK,JSON.stringify({state:t,collapsed}));
-    document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
-  }catch{document.getElementById('saved-msg').textContent='⚠ No se pudo guardar';}
+  try{localStorage.setItem(SK,JSON.stringify({state:t,collapsed}));document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});}
+  catch{document.getElementById('saved-msg').textContent='⚠ No se pudo guardar';}
 }
 function qSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,600);}
 
@@ -269,35 +433,20 @@ function populateSel(){
   DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;sel.appendChild(o);});
 }
 
+/* ---- DETALLE ---- */
 function renderDetail(name){
   const c=document.getElementById('dp-container');
   if(!name){c.innerHTML='';return;}
   const sec=DATA.find(s=>s.name===name);if(!sec){c.innerHTML='';return;}
-  const owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
-  const pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
-  const stHTML=sec.codes.map(code=>{
-    const num=code.split(' ')[1]||code,pre=code.split(' ')[0];
-    return `<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}"><span class="dp-num">${num}</span><span class="dp-code">${pre}</span></div>`;
-  }).join('');
-  c.innerHTML=`<div class="dp">
-    <div class="dp-title"><span style="font-size:30px">${flag}</span>${name.toUpperCase()}<span class="subtitle">· ${total} LÁMINAS</span></div>
-    <div class="dp-stats">
-      <div class="dp-sc"><div class="dp-n" style="color:#3CAC3B">${cnt}</div><div class="dp-l">Tengo</div></div>
-      <div class="dp-sc"><div class="dp-n" style="color:#E61D25">${total-cnt}</div><div class="dp-l">Faltan</div></div>
-      <div class="dp-sc"><div class="dp-n" style="color:#FFDB00">${pct}%</div><div class="dp-l">Progreso</div></div>
-    </div>
-    <div class="dp-pgrid">${stHTML}</div>
-    <div class="dp-bar"><div class="dp-bfill" style="width:${pct}%"></div></div>
-    <div class="dp-pct-label">${pct}% COMPLETADO · ${cnt} DE ${total} LÁMINAS</div>
-    <button class="close-dp" id="cdp">✕ Cerrar</button>
-  </div>`;
-  c.querySelectorAll('.dp-st').forEach(el=>{
-    el.addEventListener('click',()=>{
-      const o=getOwned(el.dataset.sec);
-      if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);
-      state[el.dataset.sec]=o;qSave();updateStats();renderDetail(selectedCountry);updateCard(el.dataset.sec);
-    });
-  });
+  const owned=getOwned(name),total=sec.codes.length,cnt=owned.size,pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
+  const stHTML=sec.codes.map(code=>{const num=code.split(' ')[1]||code,pre=code.split(' ')[0];return`<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}"><span class="dp-num">${num}</span><span class="dp-code">${pre}</span></div>`;}).join('');
+  c.innerHTML=`<div class="dp"><div class="dp-title"><span style="font-size:30px">${flag}</span>${name.toUpperCase()}<span class="subtitle">· ${total} LÁMINAS</span></div>
+  <div class="dp-stats"><div class="dp-sc"><div class="dp-n" style="color:#3CAC3B">${cnt}</div><div class="dp-l">Tengo</div></div><div class="dp-sc"><div class="dp-n" style="color:#E61D25">${total-cnt}</div><div class="dp-l">Faltan</div></div><div class="dp-sc"><div class="dp-n" style="color:#FFDB00">${pct}%</div><div class="dp-l">Progreso</div></div></div>
+  <div class="dp-pgrid">${stHTML}</div>
+  <div class="dp-bar"><div class="dp-bfill" style="width:${pct}%"></div></div>
+  <div class="dp-pct-label">${pct}% COMPLETADO · ${cnt} DE ${total} LÁMINAS</div>
+  <button class="close-dp" id="cdp">✕ Cerrar</button></div>`;
+  c.querySelectorAll('.dp-st').forEach(el=>{el.addEventListener('click',()=>{const o=getOwned(el.dataset.sec);if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);state[el.dataset.sec]=o;qSave();updateStats();renderDetail(selectedCountry);updateCard(el.dataset.sec);});});
   document.getElementById('cdp').addEventListener('click',()=>{selectedCountry='';document.getElementById('csel').value='';renderDetail('');});
 }
 
@@ -306,8 +455,7 @@ function updateCard(name){
   const total=sec.codes.length,cnt=owned.size,pct=total?Math.round(cnt/total*100):0;
   const card=document.querySelector(`[data-sec="${CSS.escape(name)}"]`);if(!card)return;
   card.querySelector('.pct').textContent=pct+'%';
-  card.querySelector('.mfill').style.width=pct+'%';
-  card.querySelector('.mfill').style.background=pct===100?'#FFDB00':pct>=60?'#3CAC3B':pct>=30?'#3D52C4':'#E61D25';
+  card.querySelector('.mfill').style.width=pct+'%';card.querySelector('.mfill').style.background=barC(pct);
   card.querySelector('.co').textContent=cnt;card.querySelector('.cm').textContent=total-cnt;
   card.classList.toggle('complete',cnt===total);
   const cb=card.querySelector('.cbadge');if(cb)cb.style.display=cnt===total?'inline-block':'none';
@@ -317,35 +465,14 @@ function updateCard(name){
 function buildCard(sec){
   const name=sec.name,owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
   const pct=total?Math.round(cnt/total*100):0,complete=cnt===total,flag=FLAGS[name]||'🌍',isCol=!!collapsed[name];
-  const barC=pct===100?'#FFDB00':pct>=60?'#3CAC3B':pct>=30?'#3D52C4':'#E61D25';
   const div=document.createElement('div');
   div.className='scard'+(complete?' complete':'')+(isCol?' collapsed':'');div.dataset.sec=name;
   const stHTML=sec.codes.map(code=>`<div class="st${owned.has(code)?' owned':''}" data-code="${code}" title="${code}">#${code.split(' ')[1]}</div>`).join('');
-  div.innerHTML=`<div class="shdr">
-    <div class="sname"><span class="flag">${flag}</span><span>${name}</span></div>
-    <div class="sprog">
-      <span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span>
-      <span class="pct">${pct}%</span>
-      <div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC}"></div></div>
-      <span class="tarrow${isCol?'':' open'}">▼</span>
-    </div>
-  </div>
+  div.innerHTML=`<div class="shdr"><div class="sname"><span class="flag">${flag}</span><span>${name}</span></div><div class="sprog"><span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span><span class="pct">${pct}%</span><div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC(pct)}"></div></div><span class="tarrow${isCol?'':' open'}">▼</span></div></div>
   <div class="stgrid">${stHTML}</div>
-  <div class="sfoot">
-    <span><span class="co">${cnt}</span> pegadas · <span class="cm">${total-cnt}</span> faltan</span>
-    <span style="color:rgba(61,82,196,.4)">${total} total</span>
-  </div>`;
-  div.querySelector('.shdr').addEventListener('click',()=>{
-    collapsed[name]=!collapsed[name];qSave();
-    div.classList.toggle('collapsed',!!collapsed[name]);div.querySelector('.tarrow').classList.toggle('open',!collapsed[name]);
-  });
-  div.querySelectorAll('.st').forEach(el=>{
-    el.addEventListener('click',e=>{
-      e.stopPropagation();const o=getOwned(name);
-      if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);
-      state[name]=o;qSave();updateStats();if(selectedCountry===name)renderDetail(name);updateCard(name);
-    });
-  });
+  <div class="sfoot"><span><span class="co">${cnt}</span> pegadas · <span class="cm">${total-cnt}</span> faltan</span><span style="color:rgba(61,82,196,.4)">${total} total</span></div>`;
+  div.querySelector('.shdr').addEventListener('click',()=>{collapsed[name]=!collapsed[name];qSave();div.classList.toggle('collapsed',!!collapsed[name]);div.querySelector('.tarrow').classList.toggle('open',!collapsed[name]);});
+  div.querySelectorAll('.st').forEach(el=>{el.addEventListener('click',e=>{e.stopPropagation();const o=getOwned(name);if(o.has(el.dataset.code))o.delete(el.dataset.code);else o.add(el.dataset.code);state[name]=o;qSave();updateStats();if(selectedCountry===name)renderDetail(name);updateCard(name);});});
   return div;
 }
 
@@ -368,6 +495,137 @@ function renderAll(){
   secs.forEach(sec=>grid.appendChild(buildCard(sec)));
 }
 
+/* ===== REPORTES ===== */
+function getReportSections(){
+  if(rptMode==='missing') return DATA.filter(s=>getMissing(s.name).length>0&&getOwned(s.name).size>0);
+  if(rptMode==='owned')   return DATA.filter(s=>getOwned(s.name).size>0);
+  if(rptMode==='complete')return DATA.filter(s=>getOwned(s.name).size===s.codes.length);
+  return DATA;
+}
+
+function renderReportSummary(){
+  let tot=0,own=0,comp=0,empty=0;
+  DATA.forEach(s=>{tot+=s.codes.length;const c=getOwned(s.name).size;own+=c;if(c===s.codes.length)comp++;if(c===0)empty++;});
+  const pct=tot?Math.round(own/tot*100):0;
+  const missing=tot-own;
+  document.getElementById('rpt-summary').innerHTML=`
+    <div class="rpt-sum-card"><div class="rsc-label">Total láminas</div><div class="rsc-val" style="color:var(--white)">${tot}</div><div class="rsc-sub">${DATA.length} secciones</div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Tengo pegadas</div><div class="rsc-val" style="color:#3CAC3B">${own}</div><div class="rsc-sub">${pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${pct}%;background:#3CAC3B"></div></div></div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Me faltan</div><div class="rsc-val" style="color:#E61D25">${missing}</div><div class="rsc-sub">${100-pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${100-pct}%;background:#E61D25"></div></div></div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Secciones completas</div><div class="rsc-val" style="color:#FFDB00">${comp}</div><div class="rsc-sub">de ${DATA.length} secciones</div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Sin ninguna</div><div class="rsc-val" style="color:rgba(255,255,255,.4)">${empty}</div><div class="rsc-sub">secciones vacías</div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Generado</div><div class="rsc-val" style="font-size:16px;color:rgba(255,255,255,.6)">${new Date().toLocaleDateString('es-CL')}</div><div class="rsc-sub">${new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'})}</div></div>`;
+}
+
+function renderReportTable(){
+  const secs=getReportSections();
+  const container=document.getElementById('rpt-table-container');
+  if(!secs.length){container.innerHTML='<div class="empty">No hay datos para este filtro</div>';return;}
+
+  if(rptMode==='detail'){
+    // Vista detalle: tabla expandida con chips de láminas
+    let html=`<div class="rpt-table-wrap">
+      <div class="rpt-table-title">DETALLE POR SECCIÓN <span>${secs.length} SECCIONES</span></div>
+      <table><thead><tr><th>País</th><th>Pegadas</th><th>Faltan</th><th>%</th><th>Progreso</th></tr></thead><tbody>`;
+    secs.forEach(sec=>{
+      const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
+      const pct=total?Math.round(cnt/total*100):0;
+      const miss=getMissing(sec.name);
+      const ownedList=[...owned].sort((a,b)=>{const na=parseInt(a.split(' ')[1]),nb=parseInt(b.split(' ')[1]);return na-nb;});
+      html+=`<tr><td><span class="td-flag">${FLAGS[sec.name]||'🌍'}</span></td><td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}</td>
+        <td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td>
+        <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
+        <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)};height:4px;border-radius:2px"></div></td></tr>`;
+      if(ownedList.length>0||miss.length>0){
+        html+=`<tr><td colspan="6" style="padding:0">`;
+        if(ownedList.length>0){
+          html+=`<div style="padding:6px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✓ Tengo (${ownedList.length})</div><div class="chips">`;
+          ownedList.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});
+          html+=`</div>`;
+        }
+        if(miss.length>0){
+          html+=`<div style="padding:6px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✗ Faltan (${miss.length})</div><div class="chips">`;
+          miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});
+          html+=`</div>`;
+        }
+        html+=`</td></tr>`;
+      }
+    });
+    html+=`</tbody></table></div>`;
+    container.innerHTML=html;
+    return;
+  }
+
+  // Vista tabla simple
+  const titles={all:'TODAS LAS SECCIONES',missing:'LÁMINAS FALTANTES',owned:'LÁMINAS QUE TENGO',complete:'SECCIONES COMPLETAS'};
+  let html=`<div class="rpt-table-wrap">
+    <div class="rpt-table-title">${titles[rptMode]||''} <span>${secs.length} SECCIONES</span></div>
+    <table><thead><tr><th></th><th>Sección</th><th>Tengo</th><th>Faltan</th><th>Total</th><th>%</th><th>Progreso</th>`;
+  if(rptMode==='missing'||rptMode==='owned') html+=`<th>Láminas</th>`;
+  html+=`</tr></thead><tbody>`;
+
+  secs.forEach(sec=>{
+    const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
+    const pct=total?Math.round(cnt/total*100):0;
+    const miss=getMissing(sec.name);
+    const ownedArr=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
+    html+=`<tr>
+      <td class="td-flag">${FLAGS[sec.name]||'🌍'}</td>
+      <td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}${cnt===0?'<span class="tag-empty" style="margin-left:6px">VACÍA</span>':''}</td>
+      <td class="td-owned">${cnt}</td>
+      <td class="td-missing">${miss.length}</td>
+      <td style="color:rgba(255,255,255,.4)">${total}</td>
+      <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
+      <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)}"></div></td>`;
+    if(rptMode==='missing'){
+      html+=`<td><div class="chips" style="padding:0;gap:3px">`;
+      miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});
+      html+=`</div></td>`;
+    } else if(rptMode==='owned'){
+      html+=`<td><div class="chips" style="padding:0;gap:3px">`;
+      ownedArr.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});
+      html+=`</div></td>`;
+    }
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  container.innerHTML=html;
+}
+
+function renderReports(){
+  renderReportSummary();
+  renderReportTable();
+}
+
+/* ---- CSV EXPORT ---- */
+function exportCSV(){
+  let csv='Sección,Tengo,Faltan,Total,Porcentaje,Láminas Pegadas,Láminas Faltantes\n';
+  DATA.forEach(sec=>{
+    const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
+    const pct=total?Math.round(cnt/total*100):0;
+    const ownedArr=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1])).join(' | ');
+    const missArr=getMissing(sec.name).join(' | ');
+    csv+=`"${sec.name}",${cnt},${total-cnt},${total},${pct}%,"${ownedArr}","${missArr}"\n`;
+  });
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='Album_Mundial_2026_'+new Date().toISOString().split('T')[0]+'.csv';
+  a.click();URL.revokeObjectURL(url);
+}
+
+/* ---- EVENTS ---- */
+document.querySelectorAll('.nav-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-'+tab.dataset.view).classList.add('active');
+    document.getElementById('album-ctrl').style.display=tab.dataset.view==='album'?'flex':'none';
+    if(tab.dataset.view==='reports') renderReports();
+  });
+});
+
 document.querySelectorAll('.fb[data-f]').forEach(b=>{
   b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterMode=b.dataset.f;renderAll();});
 });
@@ -380,12 +638,238 @@ document.getElementById('breset').addEventListener('click',()=>{
   if(!confirm('¿Reiniciar el álbum desde cero? Se perderá todo el progreso.'))return;
   initDef();saveState();updateStats();renderDetail(selectedCountry);renderAll();
 });
+document.querySelectorAll('.rpt-type-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.rpt-type-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');rptMode=b.dataset.rpt;renderReports();
+  });
+});
+document.getElementById('btn-csv').addEventListener('click',exportCSV);
+document.getElementById('btn-print').addEventListener('click',()=>window.print());
 
+/* ---- INIT ---- */
 loadState();
 populateSel();
 updateStats();
 renderAll();
 document.getElementById('saved-msg').textContent='Datos cargados · haz clic en una lámina para marcarla';
+</script>
+
+<!-- SESSION INDICATOR -->
+<div id="session-indicator" style="position:fixed;bottom:12px;right:14px;z-index:100;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.5px;display:flex;align-items:center;gap:5px;pointer-events:none;">
+  <div id="session-dot" style="width:6px;height:6px;border-radius:50%;background:#3CAC3B;flex-shrink:0;"></div>
+  <span id="session-timer-label">Sesión activa</span>
+</div>
+
+<!-- PIN LOCK OVERLAY -->
+<div id="lock-overlay" style="position:fixed;inset:0;z-index:9999;background:rgba(10,6,25,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
+  <div class="lock-box">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">ÁLBUM PROTEGIDO</div>
+    <div class="lock-sub" id="lock-subtitle">INGRESA EL CÓDIGO DE ACCESO</div>
+    <div class="lock-dots" id="lock-dots"></div>
+    <input class="pin-input" type="password" id="pin-input" placeholder="Código de acceso" maxlength="11" autocomplete="off" autocorrect="off" spellcheck="false"/>
+    <button class="pin-btn" id="pin-btn">INGRESAR</button>
+    <div class="lock-error" id="lock-error"></div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.15);margin-top:16px;letter-spacing:.5px;">FIFA WORLD CUP 2026 · León Álvarez Huequelef</div>
+  </div>
+</div>
+
+<script>
+/* ===== PIN / SESSION SYSTEM ===== */
+const PIN_CODE = 'Director2020';
+const SESSION_TIMEOUT = 60 * 60 * 1000; // 1 hora en ms
+const WARN_AT = 5 * 60 * 1000; // advertencia 5 min antes
+
+let sessionActive = false;
+let lastActivity = Date.now();
+let sessionCheckInterval = null;
+let sessionWarnTimeout = null;
+let sessionLockTimeout = null;
+
+const overlay   = document.getElementById('lock-overlay');
+const pinInput  = document.getElementById('pin-input');
+const pinBtn    = document.getElementById('pin-btn');
+const lockError = document.getElementById('lock-error');
+const lockDots  = document.getElementById('lock-dots');
+const lockSub   = document.getElementById('lock-subtitle');
+const sessDot   = document.getElementById('session-dot');
+const sessLabel = document.getElementById('session-timer-label');
+
+/* Construir puntos indicadores según largo del PIN */
+function buildDots(){
+  lockDots.innerHTML='';
+  for(let i=0;i<PIN_CODE.length;i++){
+    const d=document.createElement('div');
+    d.className='lock-dot';d.id='ld'+i;
+    lockDots.appendChild(d);
+  }
+}
+
+/* Actualizar puntos mientras escribe */
+function updateDots(val){
+  for(let i=0;i<PIN_CODE.length;i++){
+    const d=document.getElementById('ld'+i);
+    if(!d)continue;
+    d.classList.remove('filled','error','success');
+    if(i<val.length)d.classList.add('filled');
+  }
+}
+
+/* Animación error */
+function shakeError(msg){
+  lockError.textContent=msg;
+  const dots=lockDots.querySelectorAll('.lock-dot');
+  dots.forEach(d=>{d.classList.remove('filled','success');d.classList.add('error');});
+  lockDots.style.animation='shake .4s ease';
+  setTimeout(()=>{lockDots.style.animation='';dots.forEach(d=>{d.classList.remove('error');});pinInput.value='';},600);
+}
+
+/* Animación éxito */
+function showSuccess(){
+  const dots=lockDots.querySelectorAll('.lock-dot');
+  dots.forEach(d=>{d.classList.remove('filled','error');d.classList.add('success');});
+  lockError.textContent='';
+  lockSub.textContent='✓ ACCESO CONCEDIDO';
+  lockSub.style.color='#3CAC3B';
+}
+
+/* Desbloquear */
+function unlock(){
+  showSuccess();
+  sessionActive=true;
+  lastActivity=Date.now();
+  scheduleAutoLock();
+  startSessionDisplay();
+  setTimeout(()=>{
+    overlay.style.display='none';
+    pinInput.value='';
+    lockSub.textContent='INGRESA EL CÓDIGO DE ACCESO';
+    lockSub.style.color='';
+    lockError.textContent='';
+    updateDots('');
+  },700);
+}
+
+/* Bloquear */
+function lock(){
+  sessionActive=false;
+  overlay.style.display='flex';
+  clearTimeouts();
+  sessDot.style.background='#E61D25';
+  sessLabel.textContent='Sesión bloqueada';
+  pinInput.focus();
+}
+
+function clearTimeouts(){
+  clearTimeout(sessionWarnTimeout);
+  clearTimeout(sessionLockTimeout);
+  clearInterval(sessionCheckInterval);
+}
+
+/* Programar bloqueo automático */
+function scheduleAutoLock(){
+  clearTimeouts();
+  const remaining=SESSION_TIMEOUT-(Date.now()-lastActivity);
+  const warnIn=remaining-WARN_AT;
+
+  if(warnIn>0){
+    sessionWarnTimeout=setTimeout(()=>{
+      sessDot.style.background='#FFDB00';
+      sessLabel.textContent='Sesión expira en 5 min';
+    },warnIn);
+  }
+
+  sessionLockTimeout=setTimeout(()=>{
+    lock();
+  },remaining>0?remaining:0);
+}
+
+/* Contador visual de tiempo restante */
+function startSessionDisplay(){
+  clearInterval(sessionCheckInterval);
+  sessionCheckInterval=setInterval(()=>{
+    if(!sessionActive)return;
+    const elapsed=Date.now()-lastActivity;
+    const remaining=SESSION_TIMEOUT-elapsed;
+    if(remaining<=0){lock();return;}
+    const mins=Math.floor(remaining/60000);
+    const secs=Math.floor((remaining%60000)/1000);
+    if(remaining<=WARN_AT){
+      sessDot.style.background='#FFDB00';
+      sessLabel.textContent=`Cierra en ${mins}:${String(secs).padStart(2,'0')}`;
+    } else {
+      sessDot.style.background='#3CAC3B';
+      sessLabel.textContent=`Sesión: ${mins}m restante`;
+    }
+  },10000);
+}
+
+/* Reiniciar inactividad en cualquier interacción */
+function resetActivity(){
+  if(!sessionActive)return;
+  lastActivity=Date.now();
+  scheduleAutoLock();
+  sessDot.style.background='#3CAC3B';
+}
+
+/* Interceptar clics en láminas — solo si sesión activa */
+function guardedToggleSticker(origFn){
+  return function(...args){
+    if(!sessionActive){lock();return;}
+    resetActivity();
+    origFn.apply(this,args);
+  };
+}
+
+/* ---- Verificar PIN ---- */
+function checkPin(){
+  const val=pinInput.value;
+  if(val===PIN_CODE){
+    unlock();
+  } else {
+    shakeError('Código incorrecto. Inténtalo nuevamente.');
+  }
+}
+
+/* ---- Estilo shake ---- */
+const shakeStyle=document.createElement('style');
+shakeStyle.textContent=`
+@keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)}}
+`;
+document.head.appendChild(shakeStyle);
+
+/* ---- Event listeners del lock ---- */
+pinBtn.addEventListener('click',checkPin);
+pinInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkPin();});
+pinInput.addEventListener('input',e=>{
+  updateDots(e.target.value);
+  lockError.textContent='';
+});
+
+/* ---- Detectar actividad global ---- */
+['click','touchstart','keydown','scroll','mousemove'].forEach(ev=>{
+  document.addEventListener(ev,()=>{if(sessionActive)resetActivity();},{passive:true});
+});
+
+/* ---- Bloquear láminas si no hay sesión ---- */
+/* Sobreescribir click de stickers para verificar sesión */
+document.addEventListener('click',function(e){
+  const st=e.target.closest('.st,.dp-st');
+  if(st && !sessionActive){
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    lock();
+    return false;
+  }
+},true);
+
+/* ---- INIT LOCK ---- */
+buildDots();
+/* Mostrar overlay al cargar — siempre pedir PIN al abrir */
+overlay.style.display='flex';
+sessionActive=false;
+setTimeout(()=>pinInput.focus(),300);
 </script>
 </body>
 </html>
