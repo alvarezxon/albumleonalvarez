@@ -303,7 +303,8 @@ tr:hover td{background:rgba(42,57,141,.07);}
         <div class="rpt-title">📊 REPORTES</div>
         <div class="rpt-btns">
           <button class="btn-rpt export" id="btn-csv">⬇ Exportar CSV</button>
-          <button class="btn-rpt print" id="btn-print">🖨 Imprimir / PDF</button>
+          <button class="btn-rpt" id="btn-pdf" style="background:rgba(230,29,37,.12);border-color:rgba(230,29,37,.35);color:#ff8080;">📄 Ver Reporte / PDF</button>
+          <button class="btn-rpt" id="btn-png" style="background:rgba(255,219,0,.1);border-color:rgba(255,219,0,.3);color:var(--gold);">🖼 Ver Reporte / PDF</button>
         </div>
       </div>
 
@@ -322,9 +323,84 @@ tr:hover td{background:rgba(42,57,141,.07);}
       <!-- Tabla principal -->
       <div id="rpt-table-container"></div>
 
+      <!-- Canvas oculto para exportar PNG -->
+      <canvas id="export-canvas" style="display:none"></canvas>
+
     </div>
   </div>
 </div>
+
+<!-- PANEL IMPRESION EMBEBIDO (se inyecta por JS) -->
+<style>
+/* ===== PRINT PANEL ===== */
+#print-panel{
+  position:fixed;inset:0;z-index:8000;
+  background:#fff;color:#111;
+  overflow-y:auto;
+  font-family:Arial,sans-serif;
+  padding:0;
+}
+.pp-hdr{
+  background:#0F0A1E;color:#fff;
+  padding:8px 14px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:6px;
+}
+.pp-h1{font-size:14px;font-weight:bold;color:#FFDB00;letter-spacing:1px;}
+.pp-h2{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}
+.pp-stats{font-size:10px;display:flex;gap:10px;flex-wrap:wrap;}
+.pp-bar-wrap{height:4px;background:#E5E7EB;}
+.pp-bar{height:100%;background:linear-gradient(90deg,#E61D25,#2A398D,#3CAC3B);}
+.pp-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:3px;padding:8px;
+}
+.pb{
+  border:1px solid #E5E7EB;border-radius:2px;
+  padding:4px 5px;background:#FAFAFA;
+}
+.pbn{font-weight:bold;font-size:9px;color:#111;margin-bottom:1px;}
+.pbs{font-size:8px;color:#555;margin-bottom:2px;}
+.pbc{display:flex;flex-wrap:wrap;gap:2px;}
+.pc{
+  background:#FEE2E2;border:1px solid #FECACA;
+  border-radius:2px;padding:1px 3px;
+  font-size:7px;color:#991B1B;
+}
+.pp-foot{
+  font-size:8px;color:#888;
+  border-top:1px solid #E5E7EB;
+  padding:5px 14px;
+  display:flex;justify-content:space-between;
+}
+.pp-actions{
+  display:flex;gap:10px;justify-content:center;
+  padding:12px;background:#f8f8f8;
+  border-top:2px solid #E5E7EB;
+  position:sticky;bottom:0;
+}
+.pp-btn{
+  padding:10px 24px;border:none;border-radius:6px;
+  font-size:14px;font-weight:bold;cursor:pointer;
+}
+.pp-btn-print{background:#2A398D;color:#fff;}
+.pp-btn-print:active{background:#1a2870;}
+.pp-btn-close{background:#E5E7EB;color:#333;}
+.pp-btn-close:active{background:#ccc;}
+
+@media print{
+  body > *:not(#print-panel){display:none!important;}
+  #print-panel{position:static!important;overflow:visible!important;}
+  .pp-actions{display:none!important;}
+  .pp-grid{grid-template-columns:repeat(4,1fr)!important;}
+  @page{size:A4 landscape;margin:8mm 10mm;}
+  .pb{break-inside:avoid;}
+}
+@media(max-width:500px){
+  .pp-grid{grid-template-columns:repeat(2,1fr)!important;}
+}
+</style>
 
 <script>
 const FLAGS={
@@ -497,7 +573,7 @@ function renderAll(){
 
 /* ===== REPORTES ===== */
 function getReportSections(){
-  if(rptMode==='missing') return DATA.filter(s=>getMissing(s.name).length>0&&getOwned(s.name).size>0);
+  if(rptMode==='missing') return DATA.filter(s=>getMissing(s.name).length>0);
   if(rptMode==='owned')   return DATA.filter(s=>getOwned(s.name).size>0);
   if(rptMode==='complete')return DATA.filter(s=>getOwned(s.name).size===s.codes.length);
   return DATA;
@@ -507,11 +583,10 @@ function renderReportSummary(){
   let tot=0,own=0,comp=0,empty=0;
   DATA.forEach(s=>{tot+=s.codes.length;const c=getOwned(s.name).size;own+=c;if(c===s.codes.length)comp++;if(c===0)empty++;});
   const pct=tot?Math.round(own/tot*100):0;
-  const missing=tot-own;
   document.getElementById('rpt-summary').innerHTML=`
     <div class="rpt-sum-card"><div class="rsc-label">Total láminas</div><div class="rsc-val" style="color:var(--white)">${tot}</div><div class="rsc-sub">${DATA.length} secciones</div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Tengo pegadas</div><div class="rsc-val" style="color:#3CAC3B">${own}</div><div class="rsc-sub">${pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${pct}%;background:#3CAC3B"></div></div></div></div>
-    <div class="rpt-sum-card"><div class="rsc-label">Me faltan</div><div class="rsc-val" style="color:#E61D25">${missing}</div><div class="rsc-sub">${100-pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${100-pct}%;background:#E61D25"></div></div></div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Me faltan</div><div class="rsc-val" style="color:#E61D25">${tot-own}</div><div class="rsc-sub">${100-pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${100-pct}%;background:#E61D25"></div></div></div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Secciones completas</div><div class="rsc-val" style="color:#FFDB00">${comp}</div><div class="rsc-sub">de ${DATA.length} secciones</div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Sin ninguna</div><div class="rsc-val" style="color:rgba(255,255,255,.4)">${empty}</div><div class="rsc-sub">secciones vacías</div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Generado</div><div class="rsc-val" style="font-size:16px;color:rgba(255,255,255,.6)">${new Date().toLocaleDateString('es-CL')}</div><div class="rsc-sub">${new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'})}</div></div>`;
@@ -523,83 +598,57 @@ function renderReportTable(){
   if(!secs.length){container.innerHTML='<div class="empty">No hay datos para este filtro</div>';return;}
 
   if(rptMode==='detail'){
-    // Vista detalle: tabla expandida con chips de láminas
-    let html=`<div class="rpt-table-wrap">
-      <div class="rpt-table-title">DETALLE POR SECCIÓN <span>${secs.length} SECCIONES</span></div>
-      <table><thead><tr><th>País</th><th>Pegadas</th><th>Faltan</th><th>%</th><th>Progreso</th></tr></thead><tbody>`;
+    let html=`<div class="rpt-table-wrap"><div class="rpt-table-title">DETALLE POR SECCIÓN <span>${secs.length} SECCIONES</span></div>
+      <table><thead><tr><th></th><th>Sección</th><th>Pegadas</th><th>Faltan</th><th>%</th><th>Progreso</th></tr></thead><tbody>`;
     secs.forEach(sec=>{
       const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
       const pct=total?Math.round(cnt/total*100):0;
       const miss=getMissing(sec.name);
-      const ownedList=[...owned].sort((a,b)=>{const na=parseInt(a.split(' ')[1]),nb=parseInt(b.split(' ')[1]);return na-nb;});
-      html+=`<tr><td><span class="td-flag">${FLAGS[sec.name]||'🌍'}</span></td><td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}</td>
+      const ownedList=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
+      html+=`<tr><td class="td-flag">${FLAGS[sec.name]||'🌍'}</td><td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}</td>
         <td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td>
         <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
         <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)};height:4px;border-radius:2px"></div></td></tr>`;
       if(ownedList.length>0||miss.length>0){
         html+=`<tr><td colspan="6" style="padding:0">`;
-        if(ownedList.length>0){
-          html+=`<div style="padding:6px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✓ Tengo (${ownedList.length})</div><div class="chips">`;
-          ownedList.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});
-          html+=`</div>`;
-        }
-        if(miss.length>0){
-          html+=`<div style="padding:6px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✗ Faltan (${miss.length})</div><div class="chips">`;
-          miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});
-          html+=`</div>`;
-        }
+        if(ownedList.length>0){html+=`<div style="padding:5px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✓ Tengo (${ownedList.length})</div><div class="chips">`;ownedList.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});html+=`</div>`;}
+        if(miss.length>0){html+=`<div style="padding:5px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✗ Faltan (${miss.length})</div><div class="chips">`;miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});html+=`</div>`;}
         html+=`</td></tr>`;
       }
     });
     html+=`</tbody></table></div>`;
-    container.innerHTML=html;
-    return;
+    container.innerHTML=html;return;
   }
 
-  // Vista tabla simple
   const titles={all:'TODAS LAS SECCIONES',missing:'LÁMINAS FALTANTES',owned:'LÁMINAS QUE TENGO',complete:'SECCIONES COMPLETAS'};
-  let html=`<div class="rpt-table-wrap">
-    <div class="rpt-table-title">${titles[rptMode]||''} <span>${secs.length} SECCIONES</span></div>
+  let html=`<div class="rpt-table-wrap"><div class="rpt-table-title">${titles[rptMode]||''} <span>${secs.length} SECCIONES</span></div>
     <table><thead><tr><th></th><th>Sección</th><th>Tengo</th><th>Faltan</th><th>Total</th><th>%</th><th>Progreso</th>`;
   if(rptMode==='missing'||rptMode==='owned') html+=`<th>Láminas</th>`;
   html+=`</tr></thead><tbody>`;
-
   secs.forEach(sec=>{
     const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
     const pct=total?Math.round(cnt/total*100):0;
     const miss=getMissing(sec.name);
     const ownedArr=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
-    html+=`<tr>
-      <td class="td-flag">${FLAGS[sec.name]||'🌍'}</td>
+    html+=`<tr><td class="td-flag">${FLAGS[sec.name]||'🌍'}</td>
       <td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}${cnt===0?'<span class="tag-empty" style="margin-left:6px">VACÍA</span>':''}</td>
-      <td class="td-owned">${cnt}</td>
-      <td class="td-missing">${miss.length}</td>
+      <td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td>
       <td style="color:rgba(255,255,255,.4)">${total}</td>
       <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
       <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)}"></div></td>`;
-    if(rptMode==='missing'){
-      html+=`<td><div class="chips" style="padding:0;gap:3px">`;
-      miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});
-      html+=`</div></td>`;
-    } else if(rptMode==='owned'){
-      html+=`<td><div class="chips" style="padding:0;gap:3px">`;
-      ownedArr.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});
-      html+=`</div></td>`;
-    }
+    if(rptMode==='missing'){html+=`<td><div class="chips" style="padding:0;gap:3px">`;miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});html+=`</div></td>`;}
+    else if(rptMode==='owned'){html+=`<td><div class="chips" style="padding:0;gap:3px">`;ownedArr.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});html+=`</div></td>`;}
     html+=`</tr>`;
   });
   html+=`</tbody></table></div>`;
   container.innerHTML=html;
 }
 
-function renderReports(){
-  renderReportSummary();
-  renderReportTable();
-}
+function renderReports(){renderReportSummary();renderReportTable();}
 
 /* ---- CSV EXPORT ---- */
 function exportCSV(){
-  let csv='Sección,Tengo,Faltan,Total,Porcentaje,Láminas Pegadas,Láminas Faltantes\n';
+  let csv='Seccion,Tengo,Faltan,Total,Porcentaje,Laminas Pegadas,Laminas Faltantes\n';
   DATA.forEach(sec=>{
     const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
     const pct=total?Math.round(cnt/total*100):0;
@@ -607,11 +656,76 @@ function exportCSV(){
     const missArr=getMissing(sec.name).join(' | ');
     csv+=`"${sec.name}",${cnt},${total-cnt},${total},${pct}%,"${ownedArr}","${missArr}"\n`;
   });
-  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;
-  a.download='Album_Mundial_2026_'+new Date().toISOString().split('T')[0]+'.csv';
-  a.click();URL.revokeObjectURL(url);
+  // data URI — funciona en móvil sin blobs
+  const uri='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  const a=document.createElement('a');
+  a.href=uri;
+  a.download='Album_Mundial2026_'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+/* ---- PANEL DE IMPRESIÓN EMBEBIDO (PDF/PNG) ---- */
+function buildPrintContent(){
+  let totalTot=0,totalOwn=0;
+  DATA.forEach(s=>{totalTot+=s.codes.length;totalOwn+=getOwned(s.name).size;});
+  const pct=totalTot?Math.round(totalOwn/totalTot*100):0;
+  const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const hora=new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+  const secciones=DATA.filter(s=>getMissing(s.name).length>0);
+
+  const secHTML=secciones.map(sec=>{
+    const miss=getMissing(sec.name);
+    const own=getOwned(sec.name).size;
+    const total=sec.codes.length;
+    const p=total?Math.round(own/total*100):0;
+    const bc=p>=60?'#3CAC3B':p>=30?'#2A398D':'#E61D25';
+    return `<div class="pb" style="border-left:3px solid ${bc}">
+      <div class="pbn">${sec.name}</div>
+      <div class="pbs">Tengo ${own}/${total} &nbsp;·&nbsp; Faltan <b style="color:#c00">${miss.length}</b> &nbsp;·&nbsp; ${p}%</div>
+      <div class="pbc">${miss.map(c=>`<span class="pc">${c}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div id="print-panel">
+      <div class="pp-hdr">
+        <div>
+          <div class="pp-h1">ALBUM MUNDIAL 2026 &mdash; LAMINAS FALTANTES</div>
+          <div class="pp-h2">Leon Alvarez Huequelef &nbsp;&middot;&nbsp; ${fecha} ${hora}</div>
+        </div>
+        <div class="pp-stats">
+          <span style="color:#3CAC3B">&#10003; Tengo: <b>${totalOwn}</b></span>
+          &nbsp;
+          <span style="color:#E61D25">&#10007; Faltan: <b>${totalTot-totalOwn}</b></span>
+          &nbsp;
+          <span style="color:#FFDB00">Avance: <b>${pct}%</b></span>
+          &nbsp;
+          <span>Secciones: <b>${secciones.length}</b></span>
+        </div>
+      </div>
+      <div class="pp-bar-wrap"><div class="pp-bar" style="width:${pct}%"></div></div>
+      <div class="pp-grid">${secHTML}</div>
+      <div class="pp-foot">FIFA World Cup 2026 &nbsp;&middot;&nbsp; Album de Laminas &nbsp;&middot;&nbsp; ${fecha}</div>
+      <div class="pp-actions no-print">
+        <button onclick="window.print()" class="pp-btn pp-btn-print">&#128438; Imprimir / Guardar PDF</button>
+        <button onclick="closePrintPanel()" class="pp-btn pp-btn-close">&#10005; Cerrar</button>
+      </div>
+    </div>`;
+}
+
+function showPrintPanel(){
+  // Eliminar panel previo si existe
+  const prev=document.getElementById('print-panel');
+  if(prev)prev.remove();
+
+  const wrapper=document.createElement('div');
+  wrapper.innerHTML=buildPrintContent();
+  document.body.appendChild(wrapper.firstElementChild);
+}
+
+function closePrintPanel(){
+  const p=document.getElementById('print-panel');
+  if(p)p.remove();
 }
 
 /* ---- EVENTS ---- */
@@ -635,7 +749,7 @@ document.getElementById('csel').addEventListener('change',e=>{
   if(selectedCountry){const c=document.querySelector(`[data-sec="${CSS.escape(selectedCountry)}"]`);if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}
 });
 document.getElementById('breset').addEventListener('click',()=>{
-  if(!confirm('¿Reiniciar el álbum desde cero? Se perderá todo el progreso.'))return;
+  if(!confirm('Reiniciar el album desde cero? Se perdera todo el progreso.'))return;
   initDef();saveState();updateStats();renderDetail(selectedCountry);renderAll();
 });
 document.querySelectorAll('.rpt-type-btn').forEach(b=>{
@@ -645,7 +759,8 @@ document.querySelectorAll('.rpt-type-btn').forEach(b=>{
   });
 });
 document.getElementById('btn-csv').addEventListener('click',exportCSV);
-document.getElementById('btn-print').addEventListener('click',()=>window.print());
+document.getElementById('btn-pdf').addEventListener('click',showPrintPanel);
+document.getElementById('btn-png').addEventListener('click',showPrintPanel);
 
 /* ---- INIT ---- */
 loadState();
