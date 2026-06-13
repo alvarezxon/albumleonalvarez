@@ -229,7 +229,7 @@ tr:hover td{background:rgba(42,57,141,.07);}
 
 /* print styles */
 @media print{
-  .nav-tabs,.ctrl,.saved,.rpt-header,.rpt-btns,.rpt-type-sel,#view-album{display:none!important;}
+  .nav-tabs,.ctrl,.saved,.rpt-header,.rpt-btns,.rpt-type-sel,#view-album,#view-repeats{display:none!important;}
   body{background:#fff;color:#000;}
   .hdr{background:#0F0A1E!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .rpt-table-wrap,table,th,td{border-color:#ccc!important;}
@@ -272,6 +272,7 @@ tr:hover td{background:rgba(42,57,141,.07);}
   <!-- TABS -->
   <div class="nav-tabs">
     <div class="nav-tab active" data-view="album">📋 ÁLBUM</div>
+    <div class="nav-tab" data-view="repeats">🔁 REPETIDAS</div>
     <div class="nav-tab" data-view="reports">📊 REPORTES</div>
   </div>
 
@@ -296,7 +297,45 @@ tr:hover td{background:rgba(42,57,141,.07);}
       <div class="sgrid" id="grid"></div>
     </div>
 
-    <!-- VISTA REPORTES -->
+    <!-- VISTA REPETIDAS -->
+    <div class="view" id="view-repeats">
+      <div class="rep-header">
+        <div class="rep-title">🔁 LÁMINAS REPETIDAS</div>
+        <div class="rep-sub">Registra las láminas que tienes duplicadas para intercambiar o llevar control</div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="rep-summary" id="rep-summary"></div>
+
+      <!-- Agregar repetida -->
+      <div class="rep-add-box">
+        <div class="rep-add-title">➕ AGREGAR LÁMINA REPETIDA</div>
+        <div class="rep-add-row">
+          <div class="rep-add-field">
+            <label>País / Sección</label>
+            <select class="rep-sel" id="rep-country-sel"></select>
+          </div>
+          <div class="rep-add-field">
+            <label>N° de lámina</label>
+            <select class="rep-sel" id="rep-code-sel"></select>
+          </div>
+          <div class="rep-add-field">
+            <label>Cantidad repetidas</label>
+            <input class="rep-input" type="number" id="rep-qty" min="1" value="1"/>
+          </div>
+          <button class="rep-btn-add" id="rep-btn-add">AGREGAR</button>
+        </div>
+        <div class="rep-msg" id="rep-msg"></div>
+      </div>
+
+      <!-- Lista de repetidas -->
+      <div class="rep-list-wrap">
+        <div class="rep-list-title">MIS LÁMINAS REPETIDAS <span id="rep-list-count">0 láminas</span></div>
+        <div id="rep-list-container"></div>
+      </div>
+    </div>
+
+
     <div class="view" id="view-reports">
 
       <div class="rpt-header">
@@ -332,6 +371,79 @@ tr:hover td{background:rgba(42,57,141,.07);}
 
 <!-- PANEL IMPRESION EMBEBIDO (se inyecta por JS) -->
 <style>
+/* ===== VISTA REPETIDAS ===== */
+.rep-header{margin-bottom:16px;}
+.rep-title{font-family:var(--ft);font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
+.rep-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.5px;}
+
+.rep-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px;}
+.rep-sum-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+
+.rep-add-box{
+  background:var(--bg2);border:1px solid rgba(42,57,141,.4);
+  border-left:4px solid var(--green);border-radius:10px;
+  padding:16px 18px;margin-bottom:20px;
+}
+.rep-add-title{font-family:var(--ft);font-size:16px;letter-spacing:1.5px;color:var(--white);margin-bottom:12px;}
+.rep-add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+.rep-add-row label{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.rep-add-field{display:flex;flex-direction:column;}
+.rep-sel,.rep-input{
+  background:rgba(42,57,141,.1);border:1px solid var(--border);
+  border-radius:6px;padding:8px 11px;color:var(--white);
+  font-family:var(--fc);font-size:13px;outline:none;min-width:140px;
+}
+.rep-sel:focus,.rep-input:focus{border-color:var(--blue-light);}
+.rep-sel option{background:#160D2A;color:#fff;}
+.rep-input{width:90px;text-align:center;}
+.rep-btn-add{
+  background:var(--green);border:none;border-radius:6px;
+  padding:9px 20px;color:#fff;font-family:var(--ft);
+  font-size:14px;letter-spacing:1px;cursor:pointer;transition:all .15s;
+}
+.rep-btn-add:hover{background:#4ec24d;}
+.rep-btn-add:disabled{background:rgba(255,255,255,.1);color:rgba(255,255,255,.3);cursor:not-allowed;}
+.rep-msg{font-family:var(--fc);font-size:12px;margin-top:8px;letter-spacing:.5px;min-height:16px;}
+.rep-msg.ok{color:#6EE06D;}
+.rep-msg.err{color:#ff6b6b;}
+
+.rep-list-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.rep-list-title{font-family:var(--ft);font-size:16px;letter-spacing:2px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:space-between;}
+.rep-list-title span{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
+.rep-empty{text-align:center;padding:50px 20px;color:rgba(42,57,141,.5);font-family:var(--fc);font-size:16px;letter-spacing:1px;}
+
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;padding:14px;}
+.rep-card{
+  background:rgba(0,0,0,.2);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.rep-card-info{display:flex;align-items:center;gap:10px;}
+.rep-card-flag{font-size:22px;}
+.rep-card-code{font-family:var(--ft);font-size:18px;color:var(--white);letter-spacing:1px;}
+.rep-card-name{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.5px;}
+.rep-card-count{
+  background:rgba(255,219,0,.12);border:1px solid rgba(255,219,0,.3);
+  color:var(--gold);font-family:var(--ft);font-size:16px;
+  padding:3px 12px;border-radius:6px;min-width:36px;text-align:center;
+}
+.rep-card-actions{display:flex;gap:4px;}
+.rep-btn-mini{
+  width:30px;height:30px;border-radius:6px;border:1px solid var(--border);
+  background:rgba(42,57,141,.1);color:var(--white);
+  font-family:var(--ft);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.rep-btn-mini:hover{background:rgba(42,57,141,.3);}
+.rep-btn-mini.minus{color:#ff8080;}
+.rep-btn-mini.plus{color:#6EE06D;}
+.rep-btn-mini.del{color:#ff6b6b;border-color:rgba(230,29,37,.3);}
+.rep-btn-mini.del:hover{background:rgba(230,29,37,.2);}
+
+@media print{
+  #view-repeats{display:none!important;}
+}
+
 /* ===== PRINT PANEL ===== */
 #print-panel{
   position:fixed;inset:0;z-index:8000;
@@ -472,24 +584,26 @@ const DATA=[
 ];
 
 const SK='mundial2026_v3';
-let state={},collapsed={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all';
+let state={},collapsed={},repeats={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all',repCountrySel='';
 
 function getOwned(n){const s=state[n];if(!s)return new Set();return s instanceof Set?s:new Set(s);}
 function getMissing(n){const sec=DATA.find(s=>s.name===n);if(!sec)return[];return sec.codes.filter(c=>!getOwned(n).has(c));}
+function getRepeatCount(code){return repeats[code]||0;}
 function barC(p){return p===100?'#FFDB00':p>=60?'#3CAC3B':p>=30?'#3D52C4':'#E61D25';}
 
 function loadState(){
-  try{const r=localStorage.getItem(SK);if(r){const d=JSON.parse(r);state=d.state||{};collapsed=d.collapsed||{};}else initDef();}
+  try{const r=localStorage.getItem(SK);if(r){const d=JSON.parse(r);state=d.state||{};collapsed=d.collapsed||{};repeats=d.repeats||{};}else initDef();}
   catch{initDef();}
   DATA.forEach(s=>{
     if(state[s.name]&&!(state[s.name] instanceof Set))state[s.name]=new Set(state[s.name]);
     else if(!state[s.name])state[s.name]=new Set(s.init);
   });
+  if(!repeats)repeats={};
 }
-function initDef(){state={};DATA.forEach(s=>{state[s.name]=new Set(s.init);});}
+function initDef(){state={};DATA.forEach(s=>{state[s.name]=new Set(s.init);});repeats={};}
 function saveState(){
   const t={};for(const[k,v]of Object.entries(state))t[k]=v instanceof Set?[...v]:v;
-  try{localStorage.setItem(SK,JSON.stringify({state:t,collapsed}));document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});}
+  try{localStorage.setItem(SK,JSON.stringify({state:t,collapsed,repeats}));document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});}
   catch{document.getElementById('saved-msg').textContent='⚠ No se pudo guardar';}
 }
 function qSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,600);}
@@ -507,7 +621,125 @@ function updateStats(){
 function populateSel(){
   const sel=document.getElementById('csel');
   DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;sel.appendChild(o);});
+
+  // selector de país en vista repetidas
+  const repSel=document.getElementById('rep-country-sel');
+  repSel.innerHTML='';
+  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;repSel.appendChild(o);});
+  populateRepCodeSel();
 }
+
+/* ===== VISTA REPETIDAS ===== */
+function populateRepCodeSel(){
+  const country=document.getElementById('rep-country-sel').value || DATA[0].name;
+  const sec=DATA.find(s=>s.name===country);
+  const codeSel=document.getElementById('rep-code-sel');
+  codeSel.innerHTML='';
+  if(!sec)return;
+  sec.codes.forEach(code=>{
+    const o=document.createElement('option');
+    o.value=code;o.textContent=code;
+    codeSel.appendChild(o);
+  });
+}
+
+function renderRepSummary(){
+  const entries=Object.entries(repeats).filter(([k,v])=>v>0);
+  const totalCodes=entries.length;
+  const totalRepeats=entries.reduce((a,[,v])=>a+v,0);
+  // sección con más repetidas
+  let topSec='-',topCount=0;
+  const bySec={};
+  entries.forEach(([code,cnt])=>{
+    const prefix=code.split(' ')[0];
+    const sec=DATA.find(s=>s.codes.some(c=>c.startsWith(prefix)));
+    const name=sec?sec.name:prefix;
+    bySec[name]=(bySec[name]||0)+cnt;
+  });
+  Object.entries(bySec).forEach(([name,cnt])=>{if(cnt>topCount){topCount=cnt;topSec=name;}});
+
+  document.getElementById('rep-summary').innerHTML=`
+    <div class="rep-sum-card"><div class="rsc-label">Láminas con repetidas</div><div class="rsc-val" style="color:var(--gold)">${totalCodes}</div><div class="rsc-sub">códigos distintos</div></div>
+    <div class="rep-sum-card"><div class="rsc-label">Total repetidas</div><div class="rsc-val" style="color:#3CAC3B">${totalRepeats}</div><div class="rsc-sub">láminas extra disponibles</div></div>
+    <div class="rep-sum-card"><div class="rsc-label">Sección con más</div><div class="rsc-val" style="font-size:16px;color:var(--white)">${FLAGS[topSec]||''} ${topSec}</div><div class="rsc-sub">${topCount} repetidas</div></div>
+  `;
+}
+
+function renderRepList(){
+  const entries=Object.entries(repeats).filter(([k,v])=>v>0);
+  const container=document.getElementById('rep-list-container');
+  document.getElementById('rep-list-count').textContent=entries.length+' lámina'+(entries.length!==1?'s':'');
+
+  if(!entries.length){
+    container.innerHTML='<div class="rep-empty">No tienes láminas repetidas registradas aún</div>';
+    return;
+  }
+
+  // ordenar por sección y número
+  entries.sort((a,b)=>{
+    const pa=a[0].split(' ')[0],pb=b[0].split(' ')[0];
+    if(pa!==pb)return pa.localeCompare(pb);
+    return parseInt(a[0].split(' ')[1])-parseInt(b[0].split(' ')[1]);
+  });
+
+  container.innerHTML=`<div class="rep-grid">${entries.map(([code,cnt])=>{
+    const prefix=code.split(' ')[0];
+    const sec=DATA.find(s=>s.codes.includes(code));
+    const secName=sec?sec.name:prefix;
+    const flag=FLAGS[secName]||'🌍';
+    return `<div class="rep-card" data-code="${code}">
+      <div class="rep-card-info">
+        <span class="rep-card-flag">${flag}</span>
+        <div>
+          <div class="rep-card-code">${code}</div>
+          <div class="rep-card-name">${secName}</div>
+        </div>
+      </div>
+      <div class="rep-card-actions">
+        <button class="rep-btn-mini minus" data-act="dec" data-code="${code}" title="Restar una">−</button>
+        <div class="rep-card-count">${cnt}</div>
+        <button class="rep-btn-mini plus" data-act="inc" data-code="${code}" title="Sumar una">+</button>
+        <button class="rep-btn-mini del" data-act="del" data-code="${code}" title="Eliminar registro">✕</button>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+
+  container.querySelectorAll('.rep-btn-mini').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const code=btn.dataset.code,act=btn.dataset.act;
+      if(act==='inc'){repeats[code]=(repeats[code]||0)+1;}
+      else if(act==='dec'){repeats[code]=Math.max(0,(repeats[code]||0)-1);if(repeats[code]===0)delete repeats[code];}
+      else if(act==='del'){delete repeats[code];}
+      qSave();renderRepSummary();renderRepList();
+    });
+  });
+}
+
+function renderRepeats(){renderRepSummary();renderRepList();}
+
+function addRepeated(){
+  const country=document.getElementById('rep-country-sel').value;
+  const code=document.getElementById('rep-code-sel').value;
+  const qty=parseInt(document.getElementById('rep-qty').value)||0;
+  const msg=document.getElementById('rep-msg');
+
+  if(!code||qty<1){
+    msg.textContent='Selecciona una lámina y una cantidad válida.';
+    msg.className='rep-msg err';
+    return;
+  }
+
+  repeats[code]=(repeats[code]||0)+qty;
+  qSave();
+  renderRepSummary();
+  renderRepList();
+
+  msg.textContent=`✓ Agregado: ${code} (+${qty}) — ahora tienes ${repeats[code]} repetida${repeats[code]!==1?'s':''}.`;
+  msg.className='rep-msg ok';
+  document.getElementById('rep-qty').value=1;
+  setTimeout(()=>{msg.textContent='';msg.className='rep-msg';},3000);
+}
+
 
 /* ---- DETALLE ---- */
 function renderDetail(name){
@@ -737,8 +969,13 @@ document.querySelectorAll('.nav-tab').forEach(tab=>{
     document.getElementById('view-'+tab.dataset.view).classList.add('active');
     document.getElementById('album-ctrl').style.display=tab.dataset.view==='album'?'flex':'none';
     if(tab.dataset.view==='reports') renderReports();
+    if(tab.dataset.view==='repeats') renderRepeats();
   });
 });
+
+document.getElementById('rep-country-sel').addEventListener('change',populateRepCodeSel);
+document.getElementById('rep-btn-add').addEventListener('click',addRepeated);
+document.getElementById('rep-qty').addEventListener('keydown',e=>{if(e.key==='Enter')addRepeated();});
 
 document.querySelectorAll('.fb[data-f]').forEach(b=>{
   b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterMode=b.dataset.f;renderAll();});
