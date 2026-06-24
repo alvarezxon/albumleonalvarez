@@ -15,9 +15,7 @@
   --red:#E61D25;--green:#3CAC3B;
   --white:#FFFFFF;--gold:#FFDB00;
   --border:rgba(42,57,141,0.35);
-  --ft:'Bebas Neue',sans-serif;
-  --fc:'Barlow Condensed',sans-serif;
-  --fb:'Barlow',sans-serif;
+  --ft:'Bebas Neue',sans-serif;--fc:'Barlow Condensed',sans-serif;--fb:'Barlow',sans-serif;
 }
 body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--white);}
 
@@ -32,15 +30,15 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .flag-stripe{display:flex;gap:3px;margin-bottom:12px;}
 .fs{height:3px;border-radius:2px;flex:1;}
 .sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.sc{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center;cursor:default;}
+.sc{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center;}
 .sn{font-family:var(--ft);font-size:25px;line-height:1;}
 .sl{font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
 .pglobal{margin-top:12px;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
 .pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green));border-radius:3px;transition:width .5s ease;}
 
 /* NAV TABS */
-.nav-tabs{display:flex;background:var(--bg2);border-bottom:2px solid var(--border);padding:0 20px;}
-.nav-tab{font-family:var(--ft);font-size:15px;letter-spacing:1.5px;padding:12px 18px;cursor:pointer;color:rgba(255,255,255,.4);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.nav-tabs{display:flex;background:var(--bg2);border-bottom:2px solid var(--border);padding:0 16px;overflow-x:auto;}
+.nav-tab{font-family:var(--ft);font-size:14px;letter-spacing:1.5px;padding:12px 16px;cursor:pointer;color:rgba(255,255,255,.4);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;flex-shrink:0;}
 .nav-tab:hover{color:rgba(255,255,255,.7);}
 .nav-tab.active{color:var(--white);border-bottom-color:var(--red);}
 
@@ -49,7 +47,7 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .srch{flex:1;min-width:140px;background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fb);font-size:13px;outline:none;}
 .srch::placeholder{color:rgba(255,255,255,.25);}
 .srch:focus{border-color:var(--blue-light);}
-.csel{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;cursor:pointer;letter-spacing:.5px;min-width:150px;max-width:200px;}
+.csel{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;cursor:pointer;letter-spacing:.5px;min-width:150px;max-width:220px;}
 .csel:focus{border-color:var(--blue-light);}
 .csel option{background:#160D2A;color:#fff;}
 .fb{background:rgba(42,57,141,.1);border:1px solid rgba(42,57,141,.3);border-radius:6px;padding:7px 12px;color:rgba(255,255,255,.55);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:.5px;white-space:nowrap;}
@@ -63,11 +61,10 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 
 /* CONTENT */
 .content{padding:14px 20px 40px;max-width:1200px;margin:0 auto;}
-.view{display:none;}
-.view.active{display:block;}
+.view{display:none;}.view.active{display:block;}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
 
-/* CARD */
+/* CARD ALBUM */
 .scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .15s;}
 .scard:hover{border-color:rgba(61,82,196,.6);transform:translateY(-1px);}
 .scard.complete{border-color:var(--gold);box-shadow:0 0 14px rgba(255,219,0,.07);}
@@ -88,12 +85,12 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
 .st.owned::after{content:'✓';position:absolute;top:1px;right:3px;font-size:7px;color:#6EE06D;font-weight:900;}
 .sfoot{padding:7px 13px;background:rgba(0,0,0,.18);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.3);}
-.co{color:#6EE06D;font-weight:700;}
-.cm{color:var(--red);font-weight:700;}
+.co{color:#6EE06D;font-weight:700;}.cm{color:var(--red);font-weight:700;}
 .collapsed .stgrid,.collapsed .sfoot{display:none;}
 .empty{text-align:center;padding:50px 20px;color:rgba(42,57,141,.5);font-family:var(--fc);font-size:17px;letter-spacing:1px;}
+.section-label{font-family:var(--ft);font-size:13px;color:rgba(42,57,141,.6);letter-spacing:2px;margin-bottom:10px;border-left:3px solid var(--red);padding-left:8px;}
 
-/* DETAIL */
+/* DETAIL PANEL */
 .dp{background:var(--bg3);border:1px solid rgba(42,57,141,.4);border-left:4px solid var(--red);border-radius:10px;padding:16px 18px;margin-bottom:16px;}
 .dp-title{font-family:var(--ft);font-size:24px;color:var(--white);letter-spacing:2px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .dp-title .subtitle{font-size:13px;color:rgba(255,255,255,.35);letter-spacing:1px;font-family:var(--fc);}
@@ -102,7 +99,7 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .dp-n{font-family:var(--ft);font-size:22px;line-height:1;}
 .dp-l{font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;}
 .dp-pgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;}
-@media(max-width:600px){.dp-pgrid{grid-template-columns:repeat(5,1fr);}.sbar{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.dp-pgrid{grid-template-columns:repeat(5,1fr);}.sbar{grid-template-columns:repeat(2,1fr);}.nav-tab{font-size:11px;padding:10px 10px;}}
 .dp-st{aspect-ratio:1;border-radius:6px;border:1.5px solid rgba(42,57,141,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fc);font-size:9px;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;background:rgba(42,57,141,.07);color:rgba(255,255,255,.28);position:relative;overflow:hidden;padding:2px;}
 .dp-st:hover{border-color:var(--blue-light);background:rgba(42,57,141,.25);color:#fff;transform:scale(1.06);}
 .dp-st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
@@ -114,29 +111,25 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .dp-pct-label{font-family:var(--ft);font-size:12px;color:rgba(255,255,255,.3);margin-top:4px;letter-spacing:1.5px;}
 .close-dp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 14px;color:rgba(255,255,255,.4);font-family:var(--fc);font-size:12px;cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.5px;}
 .close-dp:hover{background:rgba(255,255,255,.1);color:#fff;}
-.section-label{font-family:var(--ft);font-size:13px;color:rgba(42,57,141,.6);letter-spacing:2px;margin-bottom:10px;border-left:3px solid var(--red);padding-left:8px;}
 
-/* ===== REPORTES ===== */
-.rpt-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+/* REPORTES */
+.rpt-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
 .rpt-title{font-family:var(--ft);font-size:22px;letter-spacing:2px;color:var(--gold);}
 .rpt-btns{display:flex;gap:8px;flex-wrap:wrap;}
-.btn-rpt{background:rgba(42,57,141,.15);border:1px solid rgba(42,57,141,.4);border-radius:6px;padding:8px 14px;color:rgba(255,255,255,.7);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+.btn-rpt{background:rgba(42,57,141,.15);border:1px solid rgba(42,57,141,.4);border-radius:6px;padding:8px 14px;color:rgba(255,255,255,.7);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
 .btn-rpt:hover{background:rgba(42,57,141,.3);color:#fff;}
 .btn-rpt.export{background:rgba(60,172,59,.12);border-color:rgba(60,172,59,.35);color:#6EE06D;}
-.btn-rpt.export:hover{background:rgba(60,172,59,.25);}
-.btn-rpt.print{background:rgba(255,219,0,.1);border-color:rgba(255,219,0,.3);color:var(--gold);}
-.btn-rpt.print:hover{background:rgba(255,219,0,.2);}
-
-/* resumen global */
-.rpt-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px;}
+.rpt-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:18px;}
 .rpt-sum-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
 .rsc-label{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
 .rsc-val{font-family:var(--ft);font-size:30px;line-height:1;}
 .rsc-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);margin-top:2px;}
 .rpt-bar-wrap{background:rgba(255,255,255,.05);border-radius:4px;height:8px;overflow:hidden;margin-top:8px;}
 .rpt-bar-fill{height:100%;border-radius:4px;transition:width .5s;}
-
-/* tabla reporte */
+.rpt-type-sel{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.rpt-type-btn{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 14px;color:rgba(255,255,255,.5);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
+.rpt-type-btn:hover{background:rgba(42,57,141,.2);color:#fff;}
+.rpt-type-btn.active{background:var(--blue);border-color:var(--blue-light);color:#fff;font-weight:700;}
 .rpt-table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
 .rpt-table-title{font-family:var(--ft);font-size:16px;letter-spacing:2px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:space-between;}
 .rpt-table-title span{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
@@ -145,99 +138,95 @@ th{font-family:var(--fc);font-size:11px;text-transform:uppercase;letter-spacing:
 td{font-family:var(--fc);font-size:13px;padding:8px 14px;border-bottom:1px solid rgba(42,57,141,.12);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(42,57,141,.07);}
-.td-flag{font-size:16px;}
-.td-name{font-weight:600;letter-spacing:.3px;}
-.td-bar{width:80px;}
-.td-bar-inner{height:4px;border-radius:2px;}
+.td-flag{font-size:16px;}.td-name{font-weight:600;letter-spacing:.3px;}
+.td-bar{width:80px;}.td-bar-inner{height:4px;border-radius:2px;}
 .td-pct{font-family:var(--ft);font-size:14px;text-align:right;}
-.td-owned{color:#6EE06D;font-weight:700;}
-.td-missing{color:var(--red);font-weight:700;}
+.td-owned{color:#6EE06D;font-weight:700;}.td-missing{color:var(--red);font-weight:700;}
 .tag-complete{background:var(--gold);color:#0F0A1E;font-family:var(--ft);font-size:9px;padding:1px 6px;border-radius:3px;letter-spacing:1px;vertical-align:middle;}
 .tag-empty{background:rgba(230,29,37,.2);color:var(--red);font-family:var(--ft);font-size:9px;padding:1px 6px;border-radius:3px;letter-spacing:1px;}
-
-/* chips de láminas faltantes */
 .chips{display:flex;flex-wrap:wrap;gap:4px;padding:10px 14px;border-top:1px solid var(--border);}
 .chip{background:rgba(230,29,37,.12);border:1px solid rgba(230,29,37,.25);border-radius:4px;font-family:var(--fc);font-size:11px;color:rgba(255,100,100,.9);padding:2px 7px;letter-spacing:.3px;}
 .chip.owned-chip{background:rgba(60,172,59,.12);border-color:rgba(60,172,59,.25);color:#6EE06D;}
 
-/* selector tipo reporte */
-.rpt-type-sel{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
-.rpt-type-btn{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:7px 14px;color:rgba(255,255,255,.5);font-family:var(--fc);font-size:13px;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
-.rpt-type-btn:hover{background:rgba(42,57,141,.2);color:#fff;}
-.rpt-type-btn.active{background:var(--blue);border-color:var(--blue-light);color:#fff;font-weight:700;}
+/* REPETIDAS */
+.rep-header{margin-bottom:14px;}
+.rep-title{font-family:var(--ft);font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
+.rep-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.5px;}
+.rep-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:18px;}
+.rep-sum-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.rep-add-box{background:var(--bg2);border:1px solid rgba(42,57,141,.4);border-left:4px solid var(--green);border-radius:10px;padding:16px 18px;margin-bottom:20px;}
+.rep-add-title{font-family:var(--ft);font-size:16px;letter-spacing:1.5px;color:var(--white);margin-bottom:12px;}
+.rep-add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+.rep-add-row label{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.rep-add-field{display:flex;flex-direction:column;}
+.rep-sel,.rep-input{background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:6px;padding:8px 11px;color:var(--white);font-family:var(--fc);font-size:13px;outline:none;min-width:140px;}
+.rep-sel:focus,.rep-input:focus{border-color:var(--blue-light);}
+.rep-sel option{background:#160D2A;color:#fff;}
+.rep-input{width:90px;text-align:center;}
+.rep-btn-add{background:var(--green);border:none;border-radius:6px;padding:9px 20px;color:#fff;font-family:var(--ft);font-size:14px;letter-spacing:1px;cursor:pointer;transition:all .15s;}
+.rep-btn-add:hover{background:#4ec24d;}
+.rep-msg{font-family:var(--fc);font-size:12px;margin-top:8px;letter-spacing:.5px;min-height:16px;}
+.rep-msg.ok{color:#6EE06D;}.rep-msg.err{color:#ff6b6b;}
+.rep-list-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;}
+.rep-list-title{font-family:var(--ft);font-size:16px;letter-spacing:2px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:space-between;}
+.rep-list-title span{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);}
+.rep-empty{text-align:center;padding:50px 20px;color:rgba(42,57,141,.5);font-family:var(--fc);font-size:16px;letter-spacing:1px;}
+.rep-sec-block{border-bottom:1px solid var(--border);padding:12px 14px;}
+.rep-sec-block:last-child{border-bottom:none;}
+.rep-sec-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.rep-sec-flag{font-size:18px;}
+.rep-sec-name{font-family:var(--fc);font-size:14px;font-weight:700;color:var(--white);}
+.rep-sec-prefix{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;}
+.rep-sec-count{margin-left:auto;background:rgba(255,219,0,.12);border:1px solid rgba(255,219,0,.3);color:var(--gold);font-family:var(--ft);font-size:14px;padding:2px 10px;border-radius:6px;}
+.rep-cards-row{display:flex;flex-wrap:wrap;gap:6px;}
+.rep-card{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:7px;padding:7px 10px;display:flex;align-items:center;gap:8px;}
+.rep-card-code{font-family:var(--ft);font-size:15px;color:var(--white);letter-spacing:.5px;}
+.rep-card-cnt{background:rgba(255,219,0,.15);border:1px solid rgba(255,219,0,.3);color:var(--gold);font-family:var(--ft);font-size:13px;padding:2px 8px;border-radius:4px;}
+.rep-card-actions{display:flex;gap:3px;}
+.rep-btn-mini{width:26px;height:26px;border-radius:5px;border:1px solid var(--border);background:rgba(42,57,141,.1);color:var(--white);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.rep-btn-mini:hover{background:rgba(42,57,141,.3);}
+.rep-btn-mini.minus{color:#ff8080;}.rep-btn-mini.plus{color:#6EE06D;}
+.rep-btn-mini.del{color:#ff6b6b;border-color:rgba(230,29,37,.3);}
+.rep-btn-mini.del:hover{background:rgba(230,29,37,.2);}
 
-/* ===== PIN LOCK MODAL ===== */
-#lock-overlay{
-  position:fixed;inset:0;z-index:9999;
-  background:rgba(10,6,25,0.97);
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(8px);
-}
+/* MODAL REPORTE */
+#report-modal{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.95);display:flex;flex-direction:column;overflow:hidden;}
+#report-modal.hidden{display:none;}
+.rm-topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.rm-title{font-family:var(--ft);font-size:18px;color:var(--gold);letter-spacing:2px;flex:1;}
+.rm-btn{border:none;border-radius:6px;padding:8px 14px;font-family:var(--fc);font-size:13px;cursor:pointer;letter-spacing:.5px;display:flex;align-items:center;gap:5px;}
+.rm-btn.pdf{background:var(--red);color:#fff;}
+.rm-btn.img{background:var(--blue);color:#fff;}
+.rm-btn.wa{background:#25D366;color:#fff;}
+.rm-btn.close{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);}
+.rm-body{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:16px;}
+.rm-canvas-wrap{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+.rm-canvas-wrap canvas{display:block;max-width:100%;}
+
+/* LOCK */
+#lock-overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,6,25,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
 #lock-overlay.hidden{display:none;}
-.lock-box{
-  background:var(--bg2);
-  border:1px solid rgba(42,57,141,.5);
-  border-top:3px solid var(--red);
-  border-radius:14px;
-  padding:32px 28px 28px;
-  width:320px;max-width:90vw;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
-  animation:lockIn .3s ease;
-}
+.lock-box{background:var(--bg2);border:1px solid rgba(42,57,141,.5);border-top:3px solid var(--red);border-radius:14px;padding:32px 28px 28px;width:320px;max-width:90vw;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:lockIn .3s ease;}
 @keyframes lockIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)}}
 .lock-icon{font-size:42px;margin-bottom:10px;}
 .lock-title{font-family:var(--ft);font-size:24px;color:var(--white);letter-spacing:2px;margin-bottom:4px;}
 .lock-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:22px;}
-.lock-dots{display:flex;justify-content:center;gap:10px;margin-bottom:20px;}
-.lock-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:transparent;transition:all .15s;}
-.lock-dot.filled{background:var(--blue-light);border-color:var(--blue-light);box-shadow:0 0 8px rgba(61,82,196,.5);}
-.lock-dot.error{background:var(--red);border-color:var(--red);box-shadow:0 0 8px rgba(230,29,37,.5);}
-.lock-dot.success{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(60,172,59,.5);}
-.pin-input{
-  width:100%;background:rgba(42,57,141,.1);
-  border:1px solid var(--border);border-radius:8px;
-  padding:12px 14px;color:var(--white);
-  font-family:var(--fc);font-size:20px;
-  text-align:center;letter-spacing:6px;
-  outline:none;margin-bottom:14px;
-}
+.lock-dots{display:flex;justify-content:center;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.lock-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:transparent;transition:all .15s;}
+.lock-dot.filled{background:var(--blue-light);border-color:var(--blue-light);}
+.lock-dot.error{background:var(--red);border-color:var(--red);}
+.lock-dot.success{background:var(--green);border-color:var(--green);}
+.pin-input{width:100%;background:rgba(42,57,141,.1);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--white);font-family:var(--fc);font-size:20px;text-align:center;letter-spacing:6px;outline:none;margin-bottom:14px;}
 .pin-input:focus{border-color:var(--blue-light);}
 .pin-input::placeholder{font-size:13px;letter-spacing:1px;color:rgba(255,255,255,.2);}
-.pin-btn{
-  width:100%;background:var(--blue);
-  border:none;border-radius:8px;
-  padding:12px;color:var(--white);
-  font-family:var(--ft);font-size:16px;
-  letter-spacing:2px;cursor:pointer;
-  transition:all .15s;
-}
+.pin-btn{width:100%;background:var(--blue);border:none;border-radius:8px;padding:12px;color:var(--white);font-family:var(--ft);font-size:16px;letter-spacing:2px;cursor:pointer;transition:all .15s;}
 .pin-btn:hover{background:var(--blue-light);}
-.pin-btn:active{transform:scale(.97);}
 .lock-error{font-family:var(--fc);font-size:12px;color:var(--red);margin-top:10px;letter-spacing:.5px;min-height:18px;}
-.lock-timer-info{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.2);margin-top:14px;letter-spacing:.5px;}
-/* indicador sesión activa */
-#session-indicator{
-  position:fixed;bottom:12px;right:14px;z-index:100;
-  font-family:var(--fc);font-size:11px;
-  color:rgba(255,255,255,.2);letter-spacing:.5px;
-  display:flex;align-items:center;gap:5px;
-  pointer-events:none;
-}
+#session-indicator{position:fixed;bottom:12px;right:14px;z-index:100;font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.5px;display:flex;align-items:center;gap:5px;pointer-events:none;}
 #session-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
-#session-dot.warning{background:var(--gold);}
 
-/* print styles */
-@media print{
-  .nav-tabs,.ctrl,.saved,.rpt-header,.rpt-btns,.rpt-type-sel,#view-album,#view-repeats{display:none!important;}
-  body{background:#fff;color:#000;}
-  .hdr{background:#0F0A1E!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  .rpt-table-wrap,table,th,td{border-color:#ccc!important;}
-  th,td{color:#000!important;}
-  .rpt-sum-card{border:1px solid #ccc;}
-  .view#view-reports{display:block!important;}
-  .rpt-btns{display:none!important;}
-}
+@media print{body>*{display:none!important;}#carta-print-wrap{display:block!important;}}
 </style>
 </head>
 <body>
@@ -252,12 +241,9 @@ tr:hover td{background:rgba(42,57,141,.07);}
       </div>
     </div>
     <div class="flag-stripe">
-      <div class="fs" style="background:var(--red)"></div>
-      <div class="fs" style="background:var(--blue)"></div>
-      <div class="fs" style="background:var(--green)"></div>
-      <div class="fs" style="background:var(--gold)"></div>
-      <div class="fs" style="background:var(--red)"></div>
-      <div class="fs" style="background:var(--blue-light)"></div>
+      <div class="fs" style="background:var(--red)"></div><div class="fs" style="background:var(--blue)"></div>
+      <div class="fs" style="background:var(--green)"></div><div class="fs" style="background:var(--gold)"></div>
+      <div class="fs" style="background:var(--red)"></div><div class="fs" style="background:var(--blue-light)"></div>
       <div class="fs" style="background:var(--green)"></div>
     </div>
     <div class="sbar">
@@ -269,14 +255,12 @@ tr:hover td{background:rgba(42,57,141,.07);}
     <div class="pglobal"><div class="pfill" id="gbar" style="width:0%"></div></div>
   </div>
 
-  <!-- TABS -->
   <div class="nav-tabs">
     <div class="nav-tab active" data-view="album">📋 ÁLBUM</div>
     <div class="nav-tab" data-view="repeats">🔁 REPETIDAS</div>
     <div class="nav-tab" data-view="reports">📊 REPORTES</div>
   </div>
 
-  <!-- ALBUM CONTROLS -->
   <div class="ctrl" id="album-ctrl">
     <input class="srch" type="text" placeholder="🔍 Buscar sección..." id="srch"/>
     <select class="csel" id="csel"><option value="">🌍 Seleccionar país...</option></select>
@@ -289,237 +273,117 @@ tr:hover td{background:rgba(42,57,141,.07);}
   <div class="saved" id="saved-msg">Cargando...</div>
 
   <div class="content">
-
-    <!-- VISTA ÁLBUM -->
+    <!-- ÁLBUM -->
     <div class="view active" id="view-album">
       <div id="dp-container"></div>
       <div id="grid-label" class="section-label" style="display:none"></div>
       <div class="sgrid" id="grid"></div>
     </div>
 
-    <!-- VISTA REPETIDAS -->
+    <!-- REPETIDAS -->
     <div class="view" id="view-repeats">
       <div class="rep-header">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
           <div>
             <div class="rep-title">🔁 LÁMINAS REPETIDAS</div>
-            <div class="rep-sub">Registra las láminas que tienes duplicadas para intercambiar o llevar control</div>
+            <div class="rep-sub">Registra y gestiona tus láminas duplicadas para intercambiar</div>
           </div>
-          <button onclick="showReportPanel('repeats')" style="background:rgba(255,219,0,.12);border:1px solid rgba(255,219,0,.35);border-radius:6px;padding:8px 14px;color:var(--gold);font-family:var(--fc);font-size:13px;cursor:pointer;letter-spacing:.5px;white-space:nowrap;">📊 Ver Reporte · PDF · WhatsApp</button>
+          <button onclick="openReport('repeats')" style="background:rgba(255,219,0,.12);border:1px solid rgba(255,219,0,.35);border-radius:6px;padding:8px 14px;color:var(--gold);font-family:var(--fc);font-size:13px;cursor:pointer;letter-spacing:.5px;">📊 Reporte · PDF · WhatsApp</button>
         </div>
       </div>
-
-      <!-- Resumen -->
       <div class="rep-summary" id="rep-summary"></div>
-
-      <!-- Agregar repetida -->
       <div class="rep-add-box">
         <div class="rep-add-title">➕ AGREGAR LÁMINA REPETIDA</div>
         <div class="rep-add-row">
-          <div class="rep-add-field">
-            <label>País / Sección</label>
-            <select class="rep-sel" id="rep-country-sel"></select>
-          </div>
-          <div class="rep-add-field">
-            <label>N° de lámina</label>
-            <select class="rep-sel" id="rep-code-sel"></select>
-          </div>
-          <div class="rep-add-field">
-            <label>Cantidad repetidas</label>
-            <input class="rep-input" type="number" id="rep-qty" min="1" value="1"/>
-          </div>
+          <div class="rep-add-field"><label>País / Sección</label><select class="rep-sel" id="rep-country-sel"></select></div>
+          <div class="rep-add-field"><label>N° de lámina</label><select class="rep-sel" id="rep-code-sel"></select></div>
+          <div class="rep-add-field"><label>Cantidad</label><input class="rep-input" type="number" id="rep-qty" min="1" value="1"/></div>
           <button class="rep-btn-add" id="rep-btn-add">AGREGAR</button>
         </div>
         <div class="rep-msg" id="rep-msg"></div>
       </div>
-
-      <!-- Lista de repetidas -->
       <div class="rep-list-wrap">
         <div class="rep-list-title">MIS LÁMINAS REPETIDAS <span id="rep-list-count">0 láminas</span></div>
         <div id="rep-list-container"></div>
       </div>
     </div>
 
-
+    <!-- REPORTES -->
     <div class="view" id="view-reports">
-
       <div class="rpt-header">
         <div class="rpt-title">📊 REPORTES</div>
         <div class="rpt-btns">
           <button class="btn-rpt export" id="btn-csv">⬇ Exportar CSV</button>
-          <button class="btn-rpt" id="btn-pdf" style="background:rgba(230,29,37,.12);border-color:rgba(230,29,37,.35);color:#ff8080;">📄 Ver Reporte / PDF</button>
-          <button class="btn-rpt" id="btn-png" style="background:rgba(255,219,0,.1);border-color:rgba(255,219,0,.3);color:var(--gold);">🖼 Ver Reporte / PDF</button>
+        </div>
+      </div>
+      <div class="rpt-summary" id="rpt-summary"></div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px;">
+        <div onclick="openReport('all')" style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.borderColor='rgba(61,82,196,.6)'" onmouseout="this.style.borderColor='rgba(42,57,141,0.35)'">
+          <div style="font-size:32px;margin-bottom:8px;">🗺️</div>
+          <div style="font-family:var(--ft);font-size:16px;letter-spacing:1px;color:var(--white);margin-bottom:4px;">REPORTE COMPLETO</div>
+          <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);">Verde = tengo · Rojo = falta · Por sección</div>
+        </div>
+        <div onclick="openReport('missing')" style="background:var(--bg2);border:1px solid rgba(230,29,37,.3);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='rgba(230,29,37,.3)'">
+          <div style="font-size:32px;margin-bottom:8px;">❌</div>
+          <div style="font-family:var(--ft);font-size:16px;letter-spacing:1px;color:var(--red);margin-bottom:4px;">LÁMINAS FALTANTES</div>
+          <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);">Solo las láminas repetidas que tengo · Con detalle</div>
+        </div>
+        <div onclick="openReport('repeats')" style="background:var(--bg2);border:1px solid rgba(255,219,0,.25);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,219,0,.25)'">
+          <div style="font-size:32px;margin-bottom:8px;">🔁</div>
+          <div style="font-family:var(--ft);font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">LÁMINAS REPETIDAS</div>
+          <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);">Todas las repetidas con cantidad</div>
         </div>
       </div>
 
-      <!-- Resumen global -->
-      <div class="rpt-summary" id="rpt-summary"></div>
-
-      <!-- Selector tipo reporte -->
       <div class="rpt-type-sel">
         <button class="rpt-type-btn active" data-rpt="all">Todas las secciones</button>
-        <button class="rpt-type-btn" data-rpt="missing">Solo faltan láminas</button>
-        <button class="rpt-type-btn" data-rpt="owned">Solo tengo láminas</button>
-        <button class="rpt-type-btn" data-rpt="complete">Secciones completas</button>
-        <button class="rpt-type-btn" data-rpt="detail">Detalle por sección</button>
+        <button class="rpt-type-btn" data-rpt="missing">Faltan láminas</button>
+        <button class="rpt-type-btn" data-rpt="owned">Tengo láminas</button>
+        <button class="rpt-type-btn" data-rpt="complete">Completas</button>
+        <button class="rpt-type-btn" data-rpt="detail">Detalle completo</button>
       </div>
-
-      <!-- Tabla principal -->
       <div id="rpt-table-container"></div>
-
-      <!-- Canvas oculto para exportar PNG -->
-      <canvas id="export-canvas" style="display:none"></canvas>
-
     </div>
   </div>
 </div>
 
-<!-- PANEL IMPRESION EMBEBIDO (se inyecta por JS) -->
-<style>
-/* ===== VISTA REPETIDAS ===== */
-.rep-header{margin-bottom:16px;}
-.rep-title{font-family:var(--ft);font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;}
-.rep-sub{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.5px;}
+<!-- MODAL REPORTE -->
+<div id="report-modal" class="hidden">
+  <div class="rm-topbar">
+    <div class="rm-title" id="rm-title">REPORTE</div>
+    <button class="rm-btn pdf" id="rm-pdf">📄 PDF Carta</button>
+    <button class="rm-btn img" id="rm-img">⬇ Imagen</button>
+    <button class="rm-btn wa" id="rm-wa">💬 WhatsApp</button>
+    <button class="rm-btn close" id="rm-close">✕ Cerrar</button>
+  </div>
+  <div class="rm-body">
+    <div class="rm-canvas-wrap"><canvas id="report-canvas"></canvas></div>
+  </div>
+</div>
 
-.rep-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px;}
-.rep-sum-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+<!-- SESSION -->
+<div id="session-indicator"><div id="session-dot"></div><span id="session-timer-label">Sesión activa</span></div>
 
-.rep-add-box{
-  background:var(--bg2);border:1px solid rgba(42,57,141,.4);
-  border-left:4px solid var(--green);border-radius:10px;
-  padding:16px 18px;margin-bottom:20px;
-}
-.rep-add-title{font-family:var(--ft);font-size:16px;letter-spacing:1.5px;color:var(--white);margin-bottom:12px;}
-.rep-add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
-.rep-add-row label{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;}
-.rep-add-field{display:flex;flex-direction:column;}
-.rep-sel,.rep-input{
-  background:rgba(42,57,141,.1);border:1px solid var(--border);
-  border-radius:6px;padding:8px 11px;color:var(--white);
-  font-family:var(--fc);font-size:13px;outline:none;min-width:140px;
-}
-.rep-sel:focus,.rep-input:focus{border-color:var(--blue-light);}
-.rep-sel option{background:#160D2A;color:#fff;}
-.rep-input{width:90px;text-align:center;}
-.rep-btn-add{
-  background:var(--green);border:none;border-radius:6px;
-  padding:9px 20px;color:#fff;font-family:var(--ft);
-  font-size:14px;letter-spacing:1px;cursor:pointer;transition:all .15s;
-}
-.rep-btn-add:hover{background:#4ec24d;}
-.rep-btn-add:disabled{background:rgba(255,255,255,.1);color:rgba(255,255,255,.3);cursor:not-allowed;}
-.rep-msg{font-family:var(--fc);font-size:12px;margin-top:8px;letter-spacing:.5px;min-height:16px;}
-.rep-msg.ok{color:#6EE06D;}
-.rep-msg.err{color:#ff6b6b;}
+<!-- LOCK -->
+<div id="lock-overlay">
+  <div class="lock-box">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">ÁLBUM PROTEGIDO</div>
+    <div class="lock-sub" id="lock-subtitle">INGRESA EL CÓDIGO DE ACCESO</div>
+    <div class="lock-dots" id="lock-dots"></div>
+    <input class="pin-input" type="password" id="pin-input" placeholder="Código de acceso" maxlength="8" autocomplete="off" spellcheck="false"/>
+    <button class="pin-btn" id="pin-btn">INGRESAR</button>
+    <div class="lock-error" id="lock-error"></div>
+    <div style="font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.12);margin-top:14px;letter-spacing:.5px;">FIFA WORLD CUP 2026 · León Álvarez Huequelef</div>
+  </div>
+</div>
 
-.rep-list-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.rep-list-title{font-family:var(--ft);font-size:16px;letter-spacing:2px;padding:12px 16px;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:space-between;}
-.rep-list-title span{font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
-.rep-empty{text-align:center;padding:50px 20px;color:rgba(42,57,141,.5);font-family:var(--fc);font-size:16px;letter-spacing:1px;}
-
-.rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;padding:14px;}
-.rep-card{
-  background:rgba(0,0,0,.2);border:1px solid var(--border);
-  border-radius:8px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-}
-.rep-card-info{display:flex;align-items:center;gap:10px;}
-.rep-card-flag{font-size:22px;}
-.rep-card-code{font-family:var(--ft);font-size:18px;color:var(--white);letter-spacing:1px;}
-.rep-card-name{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.5px;}
-.rep-card-count{
-  background:rgba(255,219,0,.12);border:1px solid rgba(255,219,0,.3);
-  color:var(--gold);font-family:var(--ft);font-size:16px;
-  padding:3px 12px;border-radius:6px;min-width:36px;text-align:center;
-}
-.rep-card-actions{display:flex;gap:4px;}
-.rep-btn-mini{
-  width:30px;height:30px;border-radius:6px;border:1px solid var(--border);
-  background:rgba(42,57,141,.1);color:var(--white);
-  font-family:var(--ft);font-size:16px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
-.rep-btn-mini:hover{background:rgba(42,57,141,.3);}
-.rep-btn-mini.minus{color:#ff8080;}
-.rep-btn-mini.plus{color:#6EE06D;}
-.rep-btn-mini.del{color:#ff6b6b;border-color:rgba(230,29,37,.3);}
-.rep-btn-mini.del:hover{background:rgba(230,29,37,.2);}
-
-@media print{
-  #view-repeats{display:none!important;}
-}
-
-/* ===== PRINT PANEL ===== */
-#print-panel{
-  position:fixed;inset:0;z-index:8000;
-  background:#fff;color:#111;
-  overflow-y:auto;
-  font-family:Arial,sans-serif;
-  padding:0;
-}
-.pp-hdr{
-  background:#0F0A1E;color:#fff;
-  padding:8px 14px;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:6px;
-}
-.pp-h1{font-size:14px;font-weight:bold;color:#FFDB00;letter-spacing:1px;}
-.pp-h2{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}
-.pp-stats{font-size:10px;display:flex;gap:10px;flex-wrap:wrap;}
-.pp-bar-wrap{height:4px;background:#E5E7EB;}
-.pp-bar{height:100%;background:linear-gradient(90deg,#E61D25,#2A398D,#3CAC3B);}
-.pp-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:3px;padding:8px;
-}
-.pb{
-  border:1px solid #E5E7EB;border-radius:2px;
-  padding:4px 5px;background:#FAFAFA;
-}
-.pbn{font-weight:bold;font-size:9px;color:#111;margin-bottom:1px;}
-.pbs{font-size:8px;color:#555;margin-bottom:2px;}
-.pbc{display:flex;flex-wrap:wrap;gap:2px;}
-.pc{
-  background:#FEE2E2;border:1px solid #FECACA;
-  border-radius:2px;padding:1px 3px;
-  font-size:7px;color:#991B1B;
-}
-.pp-foot{
-  font-size:8px;color:#888;
-  border-top:1px solid #E5E7EB;
-  padding:5px 14px;
-  display:flex;justify-content:space-between;
-}
-.pp-actions{
-  display:flex;gap:10px;justify-content:center;
-  padding:12px;background:#f8f8f8;
-  border-top:2px solid #E5E7EB;
-  position:sticky;bottom:0;
-}
-.pp-btn{
-  padding:10px 24px;border:none;border-radius:6px;
-  font-size:14px;font-weight:bold;cursor:pointer;
-}
-.pp-btn-print{background:#2A398D;color:#fff;}
-.pp-btn-print:active{background:#1a2870;}
-.pp-btn-close{background:#E5E7EB;color:#333;}
-.pp-btn-close:active{background:#ccc;}
-
-@media print{
-  body > *:not(#print-panel){display:none!important;}
-  #print-panel{position:static!important;overflow:visible!important;}
-  .pp-actions{display:none!important;}
-  .pp-grid{grid-template-columns:repeat(4,1fr)!important;}
-  @page{size:A4 landscape;margin:8mm 10mm;}
-  .pb{break-inside:avoid;}
-}
-@media(max-width:500px){
-  .pp-grid{grid-template-columns:repeat(2,1fr)!important;}
-}
-</style>
+<!-- CARTA PRINT (hidden) -->
+<div id="carta-print-wrap" style="display:none;"></div>
 
 <script>
+/* ===================== DATA ===================== */
 const FLAGS={
   'Argelia':'🇩🇿','Argentina':'🇦🇷','Austria':'🇦🇹','Coca-Cola':'🥤',
   'Colombia':'🇨🇴','Croacia':'🇭🇷','FIFA World Cup History':'🏆',
@@ -588,173 +452,71 @@ const DATA=[
   {name:'Mexico',codes:['MEX 1','MEX 2','MEX 3','MEX 4','MEX 5','MEX 6','MEX 7','MEX 8','MEX 9','MEX 10','MEX 11','MEX 12','MEX 13','MEX 14','MEX 15','MEX 16','MEX 17','MEX 18','MEX 19','MEX 20'],init:['MEX 8','MEX 12']},
 ];
 
-const SK='mundial2026_v3';
-let state={},collapsed={},repeats={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all',repCountrySel='';
+/* ===================== STATE ===================== */
+const SK='mundial2026_v4';
+let state={},collapsed={},repeats={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all';
+let sessionActive=false,lastActivity=Date.now(),sessionLockTimer=null,sessionWarnTimer=null,sessionTickTimer=null;
+const SESSION_MS=60*60*1000, WARN_MS=5*60*1000;
 
+function pfx(sec){return sec&&sec.codes&&sec.codes[0]?sec.codes[0].split(' ')[0]:'';}
 function getOwned(n){const s=state[n];if(!s)return new Set();return s instanceof Set?s:new Set(s);}
 function getMissing(n){const sec=DATA.find(s=>s.name===n);if(!sec)return[];return sec.codes.filter(c=>!getOwned(n).has(c));}
-function getRepeatCount(code){return repeats[code]||0;}
 function barC(p){return p===100?'#FFDB00':p>=60?'#3CAC3B':p>=30?'#3D52C4':'#E61D25';}
+function totals(){let t=0,o=0;DATA.forEach(s=>{t+=s.codes.length;o+=getOwned(s.name).size;});return{t,o,m:t-o,p:t?Math.round(o/t*100):0};}
 
 function loadState(){
   try{const r=localStorage.getItem(SK);if(r){const d=JSON.parse(r);state=d.state||{};collapsed=d.collapsed||{};repeats=d.repeats||{};}else initDef();}
-  catch{initDef();}
+  catch(e){initDef();}
   DATA.forEach(s=>{
     if(state[s.name]&&!(state[s.name] instanceof Set))state[s.name]=new Set(state[s.name]);
     else if(!state[s.name])state[s.name]=new Set(s.init);
   });
-  if(!repeats)repeats={};
 }
 function initDef(){state={};DATA.forEach(s=>{state[s.name]=new Set(s.init);});repeats={};}
 function saveState(){
   const t={};for(const[k,v]of Object.entries(state))t[k]=v instanceof Set?[...v]:v;
-  try{localStorage.setItem(SK,JSON.stringify({state:t,collapsed,repeats}));document.getElementById('saved-msg').textContent='✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});}
-  catch{document.getElementById('saved-msg').textContent='⚠ No se pudo guardar';}
+  try{localStorage.setItem(SK,JSON.stringify({state:t,collapsed,repeats}));setSaved('✓ Guardado · '+new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'}));}
+  catch(e){setSaved('⚠ No se pudo guardar');}
 }
 function qSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,600);}
+function setSaved(msg){const el=document.getElementById('saved-msg');if(el)el.textContent=msg;}
 
 function updateStats(){
-  let tot=0,own=0;DATA.forEach(s=>{tot+=s.codes.length;own+=getOwned(s.name).size;});
-  const pct=tot?Math.round(own/tot*100):0;
-  document.getElementById('st-t').textContent=own;
-  document.getElementById('st-f').textContent=tot-own;
-  document.getElementById('st-p').textContent=pct+'%';
+  const{t,o,m,p}=totals();
+  document.getElementById('st-t').textContent=o;
+  document.getElementById('st-f').textContent=m;
+  document.getElementById('st-p').textContent=p+'%';
   document.getElementById('st-s').textContent=DATA.length;
-  document.getElementById('gbar').style.width=pct+'%';
+  document.getElementById('gbar').style.width=p+'%';
 }
 
+/* ===================== SELECTORES ===================== */
 function populateSel(){
   const sel=document.getElementById('csel');
-  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;sel.appendChild(o);});
-
-  // selector de país en vista repetidas
-  const repSel=document.getElementById('rep-country-sel');
-  repSel.innerHTML='';
-  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name;repSel.appendChild(o);});
+  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name+' ('+pfx(s)+')';sel.appendChild(o);});
+  const rSel=document.getElementById('rep-country-sel');
+  DATA.forEach(s=>{const o=document.createElement('option');o.value=s.name;o.textContent=(FLAGS[s.name]||'🌍')+' '+s.name+' ('+pfx(s)+')';rSel.appendChild(o);});
   populateRepCodeSel();
 }
-
-/* ===== VISTA REPETIDAS ===== */
 function populateRepCodeSel(){
-  const country=document.getElementById('rep-country-sel').value || DATA[0].name;
+  const country=document.getElementById('rep-country-sel').value||DATA[0].name;
   const sec=DATA.find(s=>s.name===country);
   const codeSel=document.getElementById('rep-code-sel');
   codeSel.innerHTML='';
   if(!sec)return;
-  sec.codes.forEach(code=>{
-    const o=document.createElement('option');
-    o.value=code;o.textContent=code;
-    codeSel.appendChild(o);
-  });
+  sec.codes.forEach(code=>{const o=document.createElement('option');o.value=code;o.textContent=code;codeSel.appendChild(o);});
 }
 
-function renderRepSummary(){
-  const entries=Object.entries(repeats).filter(([k,v])=>v>0);
-  const totalCodes=entries.length;
-  const totalRepeats=entries.reduce((a,[,v])=>a+v,0);
-  // sección con más repetidas
-  let topSec='-',topCount=0;
-  const bySec={};
-  entries.forEach(([code,cnt])=>{
-    const prefix=code.split(' ')[0];
-    const sec=DATA.find(s=>s.codes.some(c=>c.startsWith(prefix)));
-    const name=sec?sec.name:prefix;
-    bySec[name]=(bySec[name]||0)+cnt;
-  });
-  Object.entries(bySec).forEach(([name,cnt])=>{if(cnt>topCount){topCount=cnt;topSec=name;}});
-
-  document.getElementById('rep-summary').innerHTML=`
-    <div class="rep-sum-card"><div class="rsc-label">Láminas con repetidas</div><div class="rsc-val" style="color:var(--gold)">${totalCodes}</div><div class="rsc-sub">códigos distintos</div></div>
-    <div class="rep-sum-card"><div class="rsc-label">Total repetidas</div><div class="rsc-val" style="color:#3CAC3B">${totalRepeats}</div><div class="rsc-sub">láminas extra disponibles</div></div>
-    <div class="rep-sum-card"><div class="rsc-label">Sección con más</div><div class="rsc-val" style="font-size:16px;color:var(--white)">${FLAGS[topSec]||''} ${topSec}</div><div class="rsc-sub">${topCount} repetidas</div></div>
-  `;
-}
-
-function renderRepList(){
-  const entries=Object.entries(repeats).filter(([k,v])=>v>0);
-  const container=document.getElementById('rep-list-container');
-  document.getElementById('rep-list-count').textContent=entries.length+' lámina'+(entries.length!==1?'s':'');
-
-  if(!entries.length){
-    container.innerHTML='<div class="rep-empty">No tienes láminas repetidas registradas aún</div>';
-    return;
-  }
-
-  // ordenar por sección y número
-  entries.sort((a,b)=>{
-    const pa=a[0].split(' ')[0],pb=b[0].split(' ')[0];
-    if(pa!==pb)return pa.localeCompare(pb);
-    return parseInt(a[0].split(' ')[1])-parseInt(b[0].split(' ')[1]);
-  });
-
-  container.innerHTML=`<div class="rep-grid">${entries.map(([code,cnt])=>{
-    const prefix=code.split(' ')[0];
-    const sec=DATA.find(s=>s.codes.includes(code));
-    const secName=sec?sec.name:prefix;
-    const flag=FLAGS[secName]||'🌍';
-    return `<div class="rep-card" data-code="${code}">
-      <div class="rep-card-info">
-        <span class="rep-card-flag">${flag}</span>
-        <div>
-          <div class="rep-card-code">${code}</div>
-          <div class="rep-card-name">${secName}</div>
-        </div>
-      </div>
-      <div class="rep-card-actions">
-        <button class="rep-btn-mini minus" data-act="dec" data-code="${code}" title="Restar una">−</button>
-        <div class="rep-card-count">${cnt}</div>
-        <button class="rep-btn-mini plus" data-act="inc" data-code="${code}" title="Sumar una">+</button>
-        <button class="rep-btn-mini del" data-act="del" data-code="${code}" title="Eliminar registro">✕</button>
-      </div>
-    </div>`;
-  }).join('')}</div>`;
-
-  container.querySelectorAll('.rep-btn-mini').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const code=btn.dataset.code,act=btn.dataset.act;
-      if(act==='inc'){repeats[code]=(repeats[code]||0)+1;}
-      else if(act==='dec'){repeats[code]=Math.max(0,(repeats[code]||0)-1);if(repeats[code]===0)delete repeats[code];}
-      else if(act==='del'){delete repeats[code];}
-      qSave();renderRepSummary();renderRepList();
-    });
-  });
-}
-
-function renderRepeats(){renderRepSummary();renderRepList();}
-
-function addRepeated(){
-  const country=document.getElementById('rep-country-sel').value;
-  const code=document.getElementById('rep-code-sel').value;
-  const qty=parseInt(document.getElementById('rep-qty').value)||0;
-  const msg=document.getElementById('rep-msg');
-
-  if(!code||qty<1){
-    msg.textContent='Selecciona una lámina y una cantidad válida.';
-    msg.className='rep-msg err';
-    return;
-  }
-
-  repeats[code]=(repeats[code]||0)+qty;
-  qSave();
-  renderRepSummary();
-  renderRepList();
-
-  msg.textContent=`✓ Agregado: ${code} (+${qty}) — ahora tienes ${repeats[code]} repetida${repeats[code]!==1?'s':''}.`;
-  msg.className='rep-msg ok';
-  document.getElementById('rep-qty').value=1;
-  setTimeout(()=>{msg.textContent='';msg.className='rep-msg';},3000);
-}
-
-
-/* ---- DETALLE ---- */
+/* ===================== DETALLE SECCIÓN ===================== */
 function renderDetail(name){
   const c=document.getElementById('dp-container');
   if(!name){c.innerHTML='';return;}
   const sec=DATA.find(s=>s.name===name);if(!sec){c.innerHTML='';return;}
-  const owned=getOwned(name),total=sec.codes.length,cnt=owned.size,pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
-  const prefix=sec.codes[0]?sec.codes[0].split(' ')[0]:'';
+  const owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
+  const pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
+  const prefix=pfx(sec);
   const stHTML=sec.codes.map(code=>{const num=code.split(' ')[1]||code,pre=code.split(' ')[0];return`<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}"><span class="dp-num">${num}</span><span class="dp-code">${pre}</span></div>`;}).join('');
-  c.innerHTML=`<div class="dp"><div class="dp-title"><span style="font-size:30px">${flag}</span>${name.toUpperCase()}<span class="subtitle">· ${prefix} · ${total} LÁMINAS</span></div>
+  c.innerHTML=`<div class="dp"><div class="dp-title"><span style="font-size:28px">${flag}</span>${name.toUpperCase()}<span class="subtitle"> · ${prefix} · ${total} LÁMINAS</span></div>
   <div class="dp-stats"><div class="dp-sc"><div class="dp-n" style="color:#3CAC3B">${cnt}</div><div class="dp-l">Tengo</div></div><div class="dp-sc"><div class="dp-n" style="color:#E61D25">${total-cnt}</div><div class="dp-l">Faltan</div></div><div class="dp-sc"><div class="dp-n" style="color:#FFDB00">${pct}%</div><div class="dp-l">Progreso</div></div></div>
   <div class="dp-pgrid">${stHTML}</div>
   <div class="dp-bar"><div class="dp-bfill" style="width:${pct}%"></div></div>
@@ -767,9 +529,9 @@ function renderDetail(name){
 function updateCard(name){
   const owned=getOwned(name),sec=DATA.find(s=>s.name===name);if(!sec)return;
   const total=sec.codes.length,cnt=owned.size,pct=total?Math.round(cnt/total*100):0;
-  const card=document.querySelector(`[data-sec="${CSS.escape(name)}"]`);if(!card)return;
+  const card=document.querySelector('[data-sec="'+CSS.escape(name)+'"]');if(!card)return;
   card.querySelector('.pct').textContent=pct+'%';
-  card.querySelector('.mfill').style.width=pct+'%';card.querySelector('.mfill').style.background=barC(pct);
+  card.querySelector('.mfill').style.cssText='width:'+pct+'%;background:'+barC(pct);
   card.querySelector('.co').textContent=cnt;card.querySelector('.cm').textContent=total-cnt;
   card.classList.toggle('complete',cnt===total);
   const cb=card.querySelector('.cbadge');if(cb)cb.style.display=cnt===total?'inline-block':'none';
@@ -779,11 +541,11 @@ function updateCard(name){
 function buildCard(sec){
   const name=sec.name,owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
   const pct=total?Math.round(cnt/total*100):0,complete=cnt===total,flag=FLAGS[name]||'🌍',isCol=!!collapsed[name];
-  const prefix=sec.codes[0]?sec.codes[0].split(' ')[0]:'';
+  const prefix=pfx(sec);
   const div=document.createElement('div');
   div.className='scard'+(complete?' complete':'')+(isCol?' collapsed':'');div.dataset.sec=name;
   const stHTML=sec.codes.map(code=>`<div class="st${owned.has(code)?' owned':''}" data-code="${code}" title="${code}">#${code.split(' ')[1]}</div>`).join('');
-  div.innerHTML=`<div class="shdr"><div class="sname"><span class="flag">${flag}</span><span>${name}</span><span style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.3);font-weight:400;letter-spacing:1px;margin-left:4px">${prefix}</span></div><div class="sprog"><span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span><span class="pct">${pct}%</span><div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC(pct)}"></div></div><span class="tarrow${isCol?'':' open'}">▼</span></div></div>
+  div.innerHTML=`<div class="shdr"><div class="sname"><span class="flag">${flag}</span><span>${name}</span><span style="font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.28);font-weight:400;letter-spacing:1px">${prefix}</span></div><div class="sprog"><span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span><span class="pct">${pct}%</span><div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC(pct)}"></div></div><span class="tarrow${isCol?'':' open'}">▼</span></div></div>
   <div class="stgrid">${stHTML}</div>
   <div class="sfoot"><span><span class="co">${cnt}</span> pegadas · <span class="cm">${total-cnt}</span> faltan</span><span style="color:rgba(61,82,196,.4)">${total} total</span></div>`;
   div.querySelector('.shdr').addEventListener('click',()=>{collapsed[name]=!collapsed[name];qSave();div.classList.toggle('collapsed',!!collapsed[name]);div.querySelector('.tarrow').classList.toggle('open',!collapsed[name]);});
@@ -793,7 +555,7 @@ function buildCard(sec){
 
 function getFiltered(){
   let s=DATA;
-  if(searchQ)s=s.filter(x=>x.name.toLowerCase().includes(searchQ.toLowerCase()));
+  if(searchQ)s=s.filter(x=>x.name.toLowerCase().includes(searchQ.toLowerCase())||pfx(x).toLowerCase().includes(searchQ.toLowerCase()));
   if(filterMode==='owned')s=s.filter(x=>getOwned(x.name).size>0);
   if(filterMode==='missing')s=s.filter(x=>{const c=getOwned(x.name).size;return c>0&&c<x.codes.length;});
   if(filterMode==='complete')s=s.filter(x=>getOwned(x.name).size===x.codes.length);
@@ -810,360 +572,447 @@ function renderAll(){
   secs.forEach(sec=>grid.appendChild(buildCard(sec)));
 }
 
-/* ===== REPORTES ===== */
-function getReportSections(){
-  if(rptMode==='missing') return DATA.filter(s=>getMissing(s.name).length>0);
-  if(rptMode==='owned')   return DATA.filter(s=>getOwned(s.name).size>0);
-  if(rptMode==='complete')return DATA.filter(s=>getOwned(s.name).size===s.codes.length);
-  return DATA;
+/* ===================== REPETIDAS ===================== */
+function renderRepSummary(){
+  const entries=Object.entries(repeats).filter(([,v])=>v>0);
+  const totalCodes=entries.length;
+  const totalRep=entries.reduce((a,[,v])=>a+v,0);
+  const bySec={};
+  entries.forEach(([code,cnt])=>{const sec=DATA.find(s=>s.codes.includes(code));const n=sec?sec.name:code.split(' ')[0];bySec[n]=(bySec[n]||0)+cnt;});
+  let topSec='-',topCount=0;
+  Object.entries(bySec).forEach(([n,c])=>{if(c>topCount){topCount=c;topSec=n;}});
+  document.getElementById('rep-summary').innerHTML=`
+    <div class="rep-sum-card"><div class="rsc-label">Láminas con repetidas</div><div class="rsc-val" style="color:var(--gold)">${totalCodes}</div><div class="rsc-sub">códigos distintos</div></div>
+    <div class="rep-sum-card"><div class="rsc-label">Total repetidas</div><div class="rsc-val" style="color:#3CAC3B">${totalRep}</div><div class="rsc-sub">láminas extra</div></div>
+    <div class="rep-sum-card"><div class="rsc-label">Sección con más</div><div class="rsc-val" style="font-size:16px;color:var(--white)">${(FLAGS[topSec]||'')} ${topSec}</div><div class="rsc-sub">${topCount} repetidas</div></div>`;
 }
 
-function renderReportSummary(){
-  let tot=0,own=0,comp=0,empty=0;
-  DATA.forEach(s=>{tot+=s.codes.length;const c=getOwned(s.name).size;own+=c;if(c===s.codes.length)comp++;if(c===0)empty++;});
-  const pct=tot?Math.round(own/tot*100):0;
+function renderRepList(){
+  const entries=Object.entries(repeats).filter(([,v])=>v>0);
+  document.getElementById('rep-list-count').textContent=entries.length+' lámina'+(entries.length!==1?'s':'');
+  const container=document.getElementById('rep-list-container');
+  if(!entries.length){container.innerHTML='<div class="rep-empty">No tienes láminas repetidas registradas</div>';return;}
+
+  // Agrupar por sección
+  const bySec={};
+  entries.forEach(([code,cnt])=>{
+    const sec=DATA.find(s=>s.codes.includes(code));
+    const key=sec?sec.name:code.split(' ')[0];
+    if(!bySec[key])bySec[key]={sec,entries:[]};
+    bySec[key].entries.push({code,cnt});
+  });
+  Object.values(bySec).forEach(v=>v.entries.sort((a,b)=>parseInt(a.code.split(' ')[1])-parseInt(b.code.split(' ')[1])));
+
+  let html='';
+  Object.entries(bySec).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([secName,{sec,entries:ents}])=>{
+    const flag=FLAGS[secName]||'🌍';
+    const prefix=sec?pfx(sec):'';
+    const total=ents.reduce((a,{cnt})=>a+cnt,0);
+    html+=`<div class="rep-sec-block"><div class="rep-sec-hdr"><span class="rep-sec-flag">${flag}</span><span class="rep-sec-name">${secName}</span><span class="rep-sec-prefix">${prefix}</span><span class="rep-sec-count">${total} repetida${total!==1?'s':''}</span></div>
+    <div class="rep-cards-row">`;
+    ents.forEach(({code,cnt})=>{
+      html+=`<div class="rep-card">
+        <div class="rep-card-code">${code}</div>
+        <div class="rep-card-cnt">(${cnt})</div>
+        <div class="rep-card-actions">
+          <button class="rep-btn-mini minus" data-act="dec" data-code="${code}">−</button>
+          <button class="rep-btn-mini plus" data-act="inc" data-code="${code}">+</button>
+          <button class="rep-btn-mini del" data-act="del" data-code="${code}">✕</button>
+        </div>
+      </div>`;
+    });
+    html+='</div></div>';
+  });
+  container.innerHTML=html;
+  container.querySelectorAll('.rep-btn-mini').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const code=btn.dataset.code,act=btn.dataset.act;
+      if(act==='inc')repeats[code]=(repeats[code]||0)+1;
+      else if(act==='dec'){repeats[code]=Math.max(0,(repeats[code]||0)-1);if(repeats[code]===0)delete repeats[code];}
+      else if(act==='del')delete repeats[code];
+      qSave();renderRepSummary();renderRepList();
+    });
+  });
+}
+
+function addRepeated(){
+  const country=document.getElementById('rep-country-sel').value;
+  const code=document.getElementById('rep-code-sel').value;
+  const qty=parseInt(document.getElementById('rep-qty').value)||0;
+  const msg=document.getElementById('rep-msg');
+  if(!code||qty<1){msg.textContent='Selecciona una lámina y cantidad válida.';msg.className='rep-msg err';return;}
+  repeats[code]=(repeats[code]||0)+qty;
+  qSave();renderRepSummary();renderRepList();
+  msg.textContent='✓ Agregado: '+code+' (+'+qty+') — ahora tienes '+repeats[code]+' repetida'+(repeats[code]!==1?'s':'')+'.';
+  msg.className='rep-msg ok';
+  document.getElementById('rep-qty').value=1;
+  setTimeout(()=>{msg.textContent='';msg.className='rep-msg';},3000);
+}
+
+/* ===================== REPORTES TABLA ===================== */
+function renderRptSummary(){
+  const{t,o,m,p}=totals();
+  let comp=0,empty=0;DATA.forEach(s=>{const c=getOwned(s.name).size;if(c===s.codes.length)comp++;if(c===0)empty++;});
   document.getElementById('rpt-summary').innerHTML=`
-    <div class="rpt-sum-card"><div class="rsc-label">Total láminas</div><div class="rsc-val" style="color:var(--white)">${tot}</div><div class="rsc-sub">${DATA.length} secciones</div></div>
-    <div class="rpt-sum-card"><div class="rsc-label">Tengo pegadas</div><div class="rsc-val" style="color:#3CAC3B">${own}</div><div class="rsc-sub">${pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${pct}%;background:#3CAC3B"></div></div></div></div>
-    <div class="rpt-sum-card"><div class="rsc-label">Me faltan</div><div class="rsc-val" style="color:#E61D25">${tot-own}</div><div class="rsc-sub">${100-pct}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${100-pct}%;background:#E61D25"></div></div></div></div>
-    <div class="rpt-sum-card"><div class="rsc-label">Secciones completas</div><div class="rsc-val" style="color:#FFDB00">${comp}</div><div class="rsc-sub">de ${DATA.length} secciones</div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Total láminas</div><div class="rsc-val" style="color:var(--white)">${t}</div><div class="rsc-sub">${DATA.length} secciones</div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Tengo pegadas</div><div class="rsc-val" style="color:#3CAC3B">${o}</div><div class="rsc-sub">${p}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${p}%;background:#3CAC3B"></div></div></div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Me faltan</div><div class="rsc-val" style="color:#E61D25">${m}</div><div class="rsc-sub">${100-p}% del álbum<div class="rpt-bar-wrap"><div class="rpt-bar-fill" style="width:${100-p}%;background:#E61D25"></div></div></div></div>
+    <div class="rpt-sum-card"><div class="rsc-label">Secciones completas</div><div class="rsc-val" style="color:#FFDB00">${comp}</div><div class="rsc-sub">de ${DATA.length}</div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Sin ninguna</div><div class="rsc-val" style="color:rgba(255,255,255,.4)">${empty}</div><div class="rsc-sub">secciones vacías</div></div>
     <div class="rpt-sum-card"><div class="rsc-label">Generado</div><div class="rsc-val" style="font-size:16px;color:rgba(255,255,255,.6)">${new Date().toLocaleDateString('es-CL')}</div><div class="rsc-sub">${new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'})}</div></div>`;
 }
 
-function renderReportTable(){
-  const secs=getReportSections();
+function renderRptTable(){
   const container=document.getElementById('rpt-table-container');
+  let secs=DATA;
+  if(rptMode==='missing')secs=DATA.filter(s=>getMissing(s.name).length>0);
+  else if(rptMode==='owned')secs=DATA.filter(s=>getOwned(s.name).size>0);
+  else if(rptMode==='complete')secs=DATA.filter(s=>getOwned(s.name).size===s.codes.length);
   if(!secs.length){container.innerHTML='<div class="empty">No hay datos para este filtro</div>';return;}
-
-  if(rptMode==='detail'){
-    let html=`<div class="rpt-table-wrap"><div class="rpt-table-title">DETALLE POR SECCIÓN <span>${secs.length} SECCIONES</span></div>
-      <table><thead><tr><th></th><th>Sección</th><th>Pegadas</th><th>Faltan</th><th>%</th><th>Progreso</th></tr></thead><tbody>`;
-    secs.forEach(sec=>{
-      const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
-      const pct=total?Math.round(cnt/total*100):0;
-      const miss=getMissing(sec.name);
-      const ownedList=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
-      html+=`<tr><td class="td-flag">${FLAGS[sec.name]||'🌍'}</td><td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}</td>
-        <td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td>
-        <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
-        <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)};height:4px;border-radius:2px"></div></td></tr>`;
-      if(ownedList.length>0||miss.length>0){
-        html+=`<tr><td colspan="6" style="padding:0">`;
-        if(ownedList.length>0){html+=`<div style="padding:5px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✓ Tengo (${ownedList.length})</div><div class="chips">`;ownedList.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});html+=`</div>`;}
-        if(miss.length>0){html+=`<div style="padding:5px 14px 2px;font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase">✗ Faltan (${miss.length})</div><div class="chips">`;miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});html+=`</div>`;}
-        html+=`</td></tr>`;
-      }
-    });
-    html+=`</tbody></table></div>`;
-    container.innerHTML=html;return;
-  }
-
-  const titles={all:'TODAS LAS SECCIONES',missing:'LÁMINAS FALTANTES',owned:'LÁMINAS QUE TENGO',complete:'SECCIONES COMPLETAS'};
-  let html=`<div class="rpt-table-wrap"><div class="rpt-table-title">${titles[rptMode]||''} <span>${secs.length} SECCIONES</span></div>
-    <table><thead><tr><th></th><th>Sección</th><th>Tengo</th><th>Faltan</th><th>Total</th><th>%</th><th>Progreso</th>`;
-  if(rptMode==='missing'||rptMode==='owned') html+=`<th>Láminas</th>`;
-  html+=`</tr></thead><tbody>`;
+  const titles={all:'TODAS LAS SECCIONES',missing:'LÁMINAS FALTANTES',owned:'LÁMINAS QUE TENGO',complete:'SECCIONES COMPLETAS',detail:'DETALLE COMPLETO'};
+  let html=`<div class="rpt-table-wrap"><div class="rpt-table-title">${titles[rptMode]} <span>${secs.length} SECCIONES</span></div><table><thead><tr><th></th><th>Sección (Prefix)</th><th>Tengo</th><th>Faltan</th><th>Total</th><th>%</th><th>Progreso</th>${(rptMode==='missing'||rptMode==='owned'||rptMode==='detail')?'<th>Láminas</th>':''}</tr></thead><tbody>`;
   secs.forEach(sec=>{
     const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
     const pct=total?Math.round(cnt/total*100):0;
     const miss=getMissing(sec.name);
     const ownedArr=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
-    html+=`<tr><td class="td-flag">${FLAGS[sec.name]||'🌍'}</td>
-      <td class="td-name">${sec.name}${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}${cnt===0?'<span class="tag-empty" style="margin-left:6px">VACÍA</span>':''}</td>
-      <td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td>
-      <td style="color:rgba(255,255,255,.4)">${total}</td>
-      <td class="td-pct" style="color:${barC(pct)}">${pct}%</td>
-      <td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)}"></div></td>`;
-    if(rptMode==='missing'){html+=`<td><div class="chips" style="padding:0;gap:3px">`;miss.forEach(c=>{html+=`<span class="chip">${c}</span>`;});html+=`</div></td>`;}
-    else if(rptMode==='owned'){html+=`<td><div class="chips" style="padding:0;gap:3px">`;ownedArr.forEach(c=>{html+=`<span class="chip owned-chip">${c}</span>`;});html+=`</div></td>`;}
+    html+=`<tr><td class="td-flag">${FLAGS[sec.name]||'🌍'}</td><td class="td-name">${sec.name} <span style="color:rgba(255,255,255,.3);font-size:10px">(${pfx(sec)})</span>${cnt===total?'<span class="tag-complete" style="margin-left:6px">COMPLETA</span>':''}${cnt===0?'<span class="tag-empty" style="margin-left:6px">VACÍA</span>':''}</td><td class="td-owned">${cnt}</td><td class="td-missing">${miss.length}</td><td style="color:rgba(255,255,255,.4)">${total}</td><td class="td-pct" style="color:${barC(pct)}">${pct}%</td><td class="td-bar"><div class="td-bar-inner" style="width:${pct}%;background:${barC(pct)}"></div></td>`;
+    if(rptMode==='missing')html+=`<td><div class="chips" style="padding:0;gap:3px">${miss.map(c=>`<span class="chip">${c}</span>`).join('')}</div></td>`;
+    else if(rptMode==='owned')html+=`<td><div class="chips" style="padding:0;gap:3px">${ownedArr.map(c=>`<span class="chip owned-chip">${c}</span>`).join('')}</div></td>`;
+    else if(rptMode==='detail')html+=`<td><div class="chips" style="padding:0;gap:3px">${ownedArr.map(c=>`<span class="chip owned-chip">${c}</span>`).join('')}${miss.map(c=>`<span class="chip">${c}</span>`).join('')}</div></td>`;
     html+=`</tr>`;
   });
   html+=`</tbody></table></div>`;
   container.innerHTML=html;
 }
 
-function renderReports(){renderReportSummary();renderReportTable();}
+function renderReports(){renderRptSummary();renderRptTable();}
 
-/* ---- CSV EXPORT ---- */
 function exportCSV(){
-  let csv='Seccion,Tengo,Faltan,Total,Porcentaje,Laminas Pegadas,Laminas Faltantes\n';
+  let csv='Seccion,Prefix,Tengo,Faltan,Total,Porcentaje,Laminas Pegadas,Laminas Faltantes\n';
   DATA.forEach(sec=>{
     const owned=getOwned(sec.name),total=sec.codes.length,cnt=owned.size;
     const pct=total?Math.round(cnt/total*100):0;
     const ownedArr=[...owned].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1])).join(' | ');
     const missArr=getMissing(sec.name).join(' | ');
-    csv+=`"${sec.name}",${cnt},${total-cnt},${total},${pct}%,"${ownedArr}","${missArr}"\n`;
+    csv+=`"${sec.name}","${pfx(sec)}",${cnt},${total-cnt},${total},${pct}%,"${ownedArr}","${missArr}"\n`;
   });
-  // data URI — funciona en móvil sin blobs
   const uri='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
-  const a=document.createElement('a');
-  a.href=uri;
-  a.download='Album_Mundial2026_'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  const a=document.createElement('a');a.href=uri;a.download='Album_Mundial2026_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
 }
 
-/* ---- PANEL DE IMPRESIÓN EMBEBIDO (PDF/PNG) ---- */
-/* ===== GENERADOR DE IMAGEN + PDF + WHATSAPP ===== */
-function getPrefixOf(sec){return sec.codes[0]?sec.codes[0].split(' ')[0]:'';}
+/* ===================== MOTOR CANVAS ===================== */
+const SCALE=2; // alta resolución 2x
+const CW=1400,CH=990; // carta landscape a 96dpi * 2
 
-function buildReportImage(type, callback){
-  // type: 'missing' | 'repeats'
-  let totalTot=0,totalOwn=0;
-  DATA.forEach(s=>{totalTot+=s.codes.length;totalOwn+=getOwned(s.name).size;});
-  const pctGlobal=totalTot?Math.round(totalOwn/totalTot*100):0;
+function drawHeader(ctx,title,subtitle,fecha,hora,W,H,PAD){
+  ctx.fillStyle='#0F0A1E';ctx.fillRect(0,0,W,80);
+  const cols=['#E61D25','#2A398D','#3CAC3B','#FFDB00','#E61D25','#3D52C4','#3CAC3B'];
+  cols.forEach((c,i,a)=>{ctx.fillStyle=c;ctx.fillRect(i*(W/a.length),80,W/a.length,5);});
+  ctx.fillStyle='#FFDB00';ctx.font=`bold ${26*SCALE}px Arial`;ctx.textBaseline='middle';
+  ctx.fillText(title,PAD,32);
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font=`${11*SCALE}px Arial`;
+  ctx.fillText(subtitle+' · Leon Alvarez Huequelef · '+fecha+' '+hora,PAD,60);
+  ctx.textBaseline='alphabetic';
+}
+
+function drawResumen(ctx,W,PAD,y){
+  const{t,o,m,p}=totals();
+  ctx.fillStyle='#F3F4F6';ctx.fillRect(0,y,W,52);
+  ctx.strokeStyle='#E5E7EB';ctx.lineWidth=1;ctx.strokeRect(0,y,W,52);
+  ctx.font=`bold ${13*SCALE}px Arial`;
+  const items=[['Total: '+t,'#111'],['Tengo: '+o,'#3CAC3B'],['Faltan: '+m,'#E61D25'],['Avance: '+p+'%','#2A398D']];
+  let ix=PAD;
+  items.forEach(([txt,col])=>{ctx.fillStyle=col;ctx.fillText(txt,ix,y+24);ix+=ctx.measureText(txt).width+28;});
+  // barra
+  const bx=ix+10,bw=W-bx-PAD,bh=8,by=y+20;
+  ctx.fillStyle='#E5E7EB';ctx.fillRect(bx,by,bw,bh);
+  ctx.fillStyle='#3CAC3B';ctx.fillRect(bx,by,Math.round(bw*p/100),bh);
+  ctx.fillStyle='#666';ctx.font=`${11*SCALE}px Arial`;
+  ctx.fillText('Secciones: '+DATA.length,PAD,y+44);
+  return y+52;
+}
+
+function drawFooter(ctx,W,H,PAD){
+  ctx.fillStyle='#E5E7EB';ctx.fillRect(0,H-28,W,28);
+  ctx.fillStyle='#999';ctx.font=`${9*SCALE}px Arial`;ctx.textAlign='left';
+  ctx.fillText('FIFA World Cup 2026 · Album de Laminas',PAD,H-10);
+  ctx.textAlign='right';
+  ctx.fillText('🦁 Generado con Album Mundial - Leon Alvarez',W-PAD,H-10);
+  ctx.textAlign='left';
+}
+
+function buildCanvas(type){
+  const W=CW*SCALE,H=CH*SCALE,PAD=22*SCALE;
+  const canvas=document.getElementById('report-canvas');
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(SCALE,SCALE);
+
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,CW,CH);
+
   const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
   const hora=new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
 
-  // Carta landscape en 96dpi → 1100x850
-  const CW=1100, CH=850, PAD=22;
-  const canvas=document.createElement('canvas');
-  canvas.width=CW; canvas.height=CH;
-  const ctx=canvas.getContext('2d');
+  let title,subtitle;
+  if(type==='all'){title='ALBUM MUNDIAL 2026 \u2014 REPORTE COMPLETO';subtitle='Verde = Tengo · Rojo = Falta · Todas las secciones';}
+  else if(type==='missing'){title='ALBUM MUNDIAL 2026 \u2014 LAMINAS REPETIDAS (DETALLE)';subtitle='Laminas repetidas que tengo disponibles para intercambio';}
+  else{title='ALBUM MUNDIAL 2026 \u2014 LAMINAS REPETIDAS';subtitle='Laminas duplicadas disponibles para intercambio';}
 
-  // Fondo blanco
-  ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,CW,CH);
+  drawHeader(ctx,title,subtitle,fecha,hora,CW,CH,PAD);
 
-  // Header band
-  ctx.fillStyle='#0F0A1E'; ctx.fillRect(0,0,CW,56);
-  // Franja de colores
-  ['#E61D25','#2A398D','#3CAC3B','#FFDB00','#E61D25','#3D52C4','#3CAC3B'].forEach((c,i,a)=>{
-    ctx.fillStyle=c; ctx.fillRect(i*(CW/a.length),56,CW/a.length,3);
-  });
-  // Título
-  ctx.fillStyle='#FFDB00'; ctx.font='bold 18px Arial';
-  const title=type==='missing'?'ALBUM MUNDIAL 2026 \u2014 LAMINAS FALTANTES':'ALBUM MUNDIAL 2026 \u2014 LAMINAS REPETIDAS';
-  ctx.fillText(title,PAD,34);
-  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='11px Arial';
-  ctx.fillText('Leon Alvarez Huequelef  \u00b7  '+fecha+'  '+hora,PAD,50);
+  let startY=90;
+  startY=drawResumen(ctx,CW,PAD,startY)+8;
 
-  // Resumen
-  ctx.fillStyle='#F3F4F6'; ctx.fillRect(0,59,CW,34);
-  ctx.strokeStyle='#E5E7EB'; ctx.lineWidth=1; ctx.strokeRect(0,59,CW,34);
-  ctx.font='bold 12px Arial';
-  ctx.fillStyle='#111'; ctx.fillText('Total: '+totalTot,PAD,80);
-  ctx.fillStyle='#3CAC3B'; ctx.fillText('Tengo: '+totalOwn,PAD+120,80);
-  ctx.fillStyle='#E61D25'; ctx.fillText('Faltan: '+(totalTot-totalOwn),PAD+240,80);
-  ctx.fillStyle='#2A398D'; ctx.fillText('Avance: '+pctGlobal+'%',PAD+370,80);
-  // barra progreso
-  ctx.fillStyle='#E5E7EB'; ctx.fillRect(PAD+480,72,CW-PAD-500,8);
-  ctx.fillStyle='#3CAC3B'; ctx.fillRect(PAD+480,72,Math.round((CW-PAD-500)*pctGlobal/100),8);
+  const usableW=CW-PAD*2;
+  const COLS=type==='all'?4:5;
+  const cellW=Math.floor(usableW/COLS);
 
-  let secciones, getTags;
-  if(type==='missing'){
-    secciones=DATA.filter(s=>getMissing(s.name).length>0);
-    getTags=sec=>getMissing(sec.name).map(c=>c.split(' ')[1]||c);
-    ctx.fillStyle='#666'; ctx.font='11px Arial';
-    ctx.fillText('Secciones con faltantes: '+secciones.length,PAD+620,80);
-  } else {
-    // Agrupar repetidas por sección conservando toda la info
-    const bySecMap={};
+  // Para 'missing', construir igual que 'repeats'
+  const buildRepBySec=()=>{
+    const bySec={};
     Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
       const sec=DATA.find(s=>s.codes.includes(code));
       const key=sec?sec.name:code.split(' ')[0];
-      if(!bySecMap[key])bySecMap[key]={sec:sec||null,secName:key,entries:[]};
-      bySecMap[key].entries.push({code,cnt});
+      if(!bySec[key])bySec[key]={sec,entries:[]};
+      bySec[key].entries.push({code,cnt});
     });
-    // Ordenar entradas dentro de cada sección
-    Object.values(bySecMap).forEach(v=>{
-      v.entries.sort((a,b)=>parseInt(a.code.split(' ')[1])-parseInt(b.code.split(' ')[1]));
-    });
-    // Construir lista de "secciones" con objeto compatible
-    secciones=Object.values(bySecMap).map(v=>({
-      name:v.secName,
-      codes:v.sec?v.sec.codes:[],
-      _entries:v.entries
-    }));
-    getTags=sec=>sec._entries.map(({code,cnt})=>`${code.split(' ')[1]}(${cnt})`);
-    const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
-    ctx.fillStyle='#92400E'; ctx.font='bold 11px Arial';
-    ctx.fillText('Repetidas: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' codigos  /  Total: '+totalRep+' laminas',PAD+480,80);
+    Object.values(bySec).forEach(v=>v.entries.sort((a,b)=>parseInt(a.code.split(' ')[1])-parseInt(b.code.split(' ')[1])));
+    return bySec;
+  };
+
+  let secciones=[];
+  if(type==='all'){
+    secciones=DATA;
+  } else if(type==='missing'||type==='repeats'){
+    const bySec=buildRepBySec();
+    secciones=DATA.filter(s=>bySec[s.name]).map(s=>({...s,_repEntries:bySec[s.name]?bySec[s.name].entries:[]}));
+    if(!secciones.length){
+      ctx.fillStyle='#555';ctx.font='14px Arial';ctx.textAlign='center';
+      ctx.fillText('No hay laminas repetidas registradas',CW/2,CH/2);
+      ctx.textAlign='left';
+      drawFooter(ctx,CW,CH,PAD);
+      ctx.setTransform(1,0,0,1,0,0);
+      return;
+    }
   }
 
-  // Layout de secciones en grilla compacta
-  const startY=98, usableH=CH-startY-26;
-  const usableW=CW-PAD*2;
-  const COLS=5;
-  const cellW=Math.floor(usableW/COLS);
+  const getChips=sec=>{
+    if(type==='all')return{owned:[...getOwned(sec.name)].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1])),missing:getMissing(sec.name)};
+    if(type==='missing'||type==='repeats')return{owned:[],missing:[],rep:sec._repEntries||[]};
+    return{owned:[],missing:[],rep:[]};
+  };
 
-  // Estimar altura por sección para calcular filas
-  const secData=secciones.map(sec=>{
-    const tags=getTags(sec);
-    const prefix=sec.codes&&sec.codes[0]?sec.codes[0].split(' ')[0]:'';
-    const tagsPerRow=Math.floor((cellW-10)/42);
-    const tagRows=Math.ceil(tags.length/Math.max(1,tagsPerRow));
-    const blockH=Math.max(42,28+tagRows*14+4);
-    return {sec,tags,prefix,blockH};
+  const CHIP_W=(type==='repeats'||type==='missing')?48:38,CHIP_H=13,GAP=2;
+  const ROW_H=20;
+
+  // calcular alturas dinámicas
+  const secSizes=secciones.map(sec=>{
+    const chips=getChips(sec);
+    let count=type==='all'?sec.codes.length:type==='missing'?chips.missing.length:chips.rep?chips.rep.length:0;
+    const perRow=Math.floor((cellW-10)/( CHIP_W+GAP));
+    const rows=Math.ceil(count/Math.max(1,perRow));
+    return Math.max(44,ROW_H+rows*(CHIP_H+GAP)+8);
   });
 
-  // Calcular altura uniforme por fila
-  let y=startY;
-  let colIdx=0;
-  let rowH=0;
+  let col=0,y=startY,rowMaxH=0;
   const positions=[];
-  secData.forEach((sd,i)=>{
-    if(colIdx===COLS){colIdx=0;y+=rowH+3;rowH=0;}
-    positions.push({x:PAD+colIdx*cellW,y,w:cellW-3,h:sd.blockH});
-    rowH=Math.max(rowH,sd.blockH);
-    colIdx++;
+  secSizes.forEach((h,i)=>{
+    if(col===COLS){col=0;y+=rowMaxH+3;rowMaxH=0;}
+    positions.push({x:PAD+col*cellW,y,w:cellW-3,h});
+    rowMaxH=Math.max(rowMaxH,h);
+    col++;
   });
 
-  // Dibujar cada sección
-  secData.forEach((sd,i)=>{
-    const {x,y:sy,w,h}=positions[i];
-    const pct=sd.sec.codes&&sd.sec.codes.length?Math.round(getOwned(sd.sec.name).size/sd.sec.codes.length*100):0;
-    const bc=pct>=60?'#3CAC3B':pct>=30?'#2A398D':'#E61D25';
+  secciones.forEach((sec,i)=>{
+    if(i>=positions.length)return;
+    const{x,y:sy,w,h}=positions[i];
+    const owned=getOwned(sec.name);
+    const total=sec.codes.length;
+    const cnt=owned.size;
+    const pct=total?Math.round(cnt/total*100):0;
+    const bc=barC(pct);
 
-    ctx.fillStyle='#FAFAFA'; ctx.fillRect(x,sy,w,h);
-    ctx.strokeStyle='#E5E7EB'; ctx.lineWidth=0.5; ctx.strokeRect(x,sy,w,h);
-    ctx.fillStyle=bc; ctx.fillRect(x,sy,3,h);
+    // fondo
+    ctx.fillStyle='#FAFAFA';ctx.fillRect(x,sy,w,h);
+    ctx.strokeStyle='#E5E7EB';ctx.lineWidth=0.5;ctx.strokeRect(x,sy,w,h);
+    ctx.fillStyle=bc;ctx.fillRect(x,sy,4,h);
 
-    // Nombre + prefijo
-    ctx.fillStyle='#111'; ctx.font='bold 9px Arial';
-    ctx.fillText(sd.sec.name.substring(0,18),x+7,sy+11);
-    ctx.fillStyle='#888'; ctx.font='8px Arial';
-    ctx.fillText(sd.prefix+' · '+pct+'%',x+7,sy+21);
+    // nombre + prefix + stats
+    ctx.fillStyle='#111';ctx.font=`bold ${8.5}px Arial`;
+    ctx.fillText((FLAGS[sec.name]||'')+' '+(sec.name.length>16?sec.name.substring(0,15)+'…':sec.name),x+7,sy+11);
+    ctx.fillStyle='#888';ctx.font=`${7.5}px Arial`;
+    ctx.fillText('('+pfx(sec)+') '+pct+'% — '+cnt+'/'+total,x+7,sy+20);
 
-    // Tags (chips de láminas)
-    const CHIP_W=type==='missing'?38:46, CHIP_H=13, GAP=2;
-    let cx=x+6,cy=sy+26;
-    const chipColor=type==='missing'
-      ?{bg:'#FEE2E2',border:'#FECACA',text:'#991B1B'}
-      :{bg:'#FEF3C7',border:'#FDE68A',text:'#78350F'};
-    sd.tags.forEach((tag)=>{
-      if(cx+CHIP_W>x+w-4){cx=x+6;cy+=CHIP_H+GAP;}
-      if(cy+CHIP_H>sy+h-2)return;
-      ctx.fillStyle=chipColor.bg; ctx.fillRect(cx,cy,CHIP_W,CHIP_H);
-      ctx.strokeStyle=chipColor.border; ctx.lineWidth=0.4; ctx.strokeRect(cx,cy,CHIP_W,CHIP_H);
-      ctx.fillStyle=chipColor.text; ctx.font='bold 7.5px Arial'; ctx.textAlign='center';
-      ctx.fillText(String(tag).substring(0,7),cx+CHIP_W/2,cy+CHIP_H-3);
-      ctx.textAlign='left';
-      cx+=CHIP_W+GAP;
-    });
+    // chips
+    const chips=getChips(sec);
+    let cx=x+6,cy=sy+24;
+    ctx.textAlign='center';
+
+    if(type==='all'){
+      sec.codes.forEach(code=>{
+        if(cx+CHIP_W>x+w-2){cx=x+6;cy+=CHIP_H+GAP;}
+        if(cy+CHIP_H>sy+h-2)return;
+        const isOwned=owned.has(code);
+        ctx.fillStyle=isOwned?'#DCFCE7':'#FEE2E2';
+        ctx.fillRect(cx,cy,CHIP_W,CHIP_H);
+        ctx.strokeStyle=isOwned?'#86EFAC':'#FECACA';ctx.lineWidth=0.4;ctx.strokeRect(cx,cy,CHIP_W,CHIP_H);
+        ctx.fillStyle=isOwned?'#15803D':'#991B1B';ctx.font='bold 7px Arial';
+        ctx.fillText(code.split(' ')[1],cx+CHIP_W/2,cy+CHIP_H-3);
+        cx+=CHIP_W+GAP;
+      });
+    } else {
+      // missing y repeats — mismo render: chips ámbar con código (cantidad)
+      (chips.rep||[]).forEach(({code,cnt:c})=>{
+        if(cx+CHIP_W>x+w-2){cx=x+6;cy+=CHIP_H+GAP;}
+        if(cy+CHIP_H>sy+h-2)return;
+        ctx.fillStyle='#FEF3C7';ctx.fillRect(cx,cy,CHIP_W,CHIP_H);
+        ctx.strokeStyle='#FDE68A';ctx.lineWidth=0.4;ctx.strokeRect(cx,cy,CHIP_W,CHIP_H);
+        ctx.fillStyle='#78350F';ctx.font='bold 7px Arial';
+        ctx.fillText(code.split(' ')[1]+' ('+c+')',cx+CHIP_W/2,cy+CHIP_H-3);
+        cx+=CHIP_W+GAP;
+      });
+    }
+    ctx.textAlign='left';
   });
 
-  // Footer
-  ctx.fillStyle='#E5E7EB'; ctx.fillRect(0,CH-22,CW,22);
-  ctx.fillStyle='#999'; ctx.font='9px Arial'; ctx.textAlign='left';
-  ctx.fillText('FIFA World Cup 2026  \u00b7  Album de Laminas  \u00b7  '+fecha,PAD,CH-8);
-  ctx.textAlign='right';
-  ctx.fillText('Leon Alvarez Huequelef',CW-PAD,CH-8);
-  ctx.textAlign='left';
-
-  callback(canvas);
+  drawFooter(ctx,CW,CH,PAD);
+  ctx.setTransform(1,0,0,1,0,0);
 }
 
-function showReportPanel(type){
-  const prev=document.getElementById('rpt-image-panel');
-  if(prev)prev.remove();
+/* ===================== MODAL REPORTE ===================== */
+let currentReportType='missing';
 
-  buildReportImage(type,canvas=>{
-    const imgSrc=canvas.toDataURL('image/png');
-    const typeLabel=type==='missing'?'Láminas Faltantes':'Láminas Repetidas';
-
-    const panel=document.createElement('div');
-    panel.id='rpt-image-panel';
-    panel.style.cssText='position:fixed;inset:0;z-index:8500;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;padding:16px;';
-
-    panel.innerHTML=`
-      <div style="width:100%;max-width:900px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#FFDB00;letter-spacing:2px;">📊 ${typeLabel.toUpperCase()}</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button id="rp-download" style="background:#3CAC3B;border:none;border-radius:6px;padding:9px 16px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">⬇ Descargar Imagen</button>
-            <button id="rp-pdf" style="background:#E61D25;border:none;border-radius:6px;padding:9px 16px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📄 Imprimir / PDF</button>
-            <button id="rp-whatsapp" style="background:#25D366;border:none;border-radius:6px;padding:9px 16px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">💬 WhatsApp</button>
-            <button id="rp-close" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:9px 16px;color:rgba(255,255,255,.7);font-family:'Barlow Condensed',sans-serif;font-size:13px;cursor:pointer;">✕ Cerrar</button>
-          </div>
-        </div>
-        <img id="rp-img" src="${imgSrc}" style="width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.1);display:block;"/>
-        <div id="rp-wa-msg" style="display:none;margin-top:10px;background:#1a2e1a;border:1px solid #25D366;border-radius:8px;padding:12px 14px;font-family:'Barlow Condensed',sans-serif;font-size:12px;color:#6EE06D;line-height:1.6;"></div>
-      </div>`;
-
-    document.body.appendChild(panel);
-
-    // Descargar imagen PNG
-    document.getElementById('rp-download').addEventListener('click',()=>{
-      const a=document.createElement('a');
-      a.href=imgSrc;
-      a.download='Reporte_Mundial2026_'+type+'_'+new Date().toISOString().slice(0,10)+'.png';
-      a.click();
-    });
-
-    // PDF carta — iframe oculto
-    document.getElementById('rp-pdf').addEventListener('click',()=>{
-      const printWrap=document.createElement('div');
-      printWrap.id='carta-print-frame';
-      printWrap.style.cssText='display:none;';
-      printWrap.innerHTML=`<img src="${imgSrc}" style="width:100%;display:block;"/>`;
-      document.body.appendChild(printWrap);
-
-      const style=document.createElement('style');
-      style.id='carta-print-style';
-      style.textContent=`@media print{body>*:not(#carta-print-frame){display:none!important;}#carta-print-frame{display:block!important;position:fixed;inset:0;z-index:99999;}#carta-print-frame img{width:100%;height:100%;object-fit:contain;}@page{size:letter landscape;margin:0;}}`;
-      document.head.appendChild(style);
-
-      window.print();
-      setTimeout(()=>{printWrap.remove();style.remove();},1000);
-    });
-
-    // WhatsApp
-    document.getElementById('rp-whatsapp').addEventListener('click',()=>{
-      let totalTot=0,totalOwn=0;
-      DATA.forEach(s=>{totalTot+=s.codes.length;totalOwn+=getOwned(s.name).size;});
-      const pct=totalTot?Math.round(totalOwn/totalTot*100):0;
-      const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
-
-      let msg='';
-      if(type==='missing'){
-        const secs=DATA.filter(s=>getMissing(s.name).length>0);
-        msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS FALTANTES*\n';
-        msg+='📅 '+fecha+'\n';
-        msg+='✅ Tengo: '+totalOwn+' | ❌ Faltan: '+(totalTot-totalOwn)+' | 📊 Avance: '+pct+'%\n\n';
-        secs.forEach(sec=>{
-          const prefix=sec.codes[0]?sec.codes[0].split(' ')[0]:'';
-          const miss=getMissing(sec.name);
-          msg+='*'+FLAGS[sec.name]||''+''+sec.name+' ('+prefix+')*: '+miss.join(', ')+'\n';
-        });
-      } else {
-        const bySecWa={};
-        Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
-          const sec=DATA.find(s=>s.codes.includes(code));
-          const key=sec?sec.name:code.split(' ')[0];
-          if(!bySecWa[key])bySecWa[key]=[];
-          bySecWa[key].push(code+' ('+cnt+')');
-        });
-        const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
-        msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS REPETIDAS*\n';
-        msg+='📅 '+fecha+'\n';
-        msg+='🔁 Codigos distintos: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' | Total: '+totalRep+' laminas\n\n';
-        Object.entries(bySecWa).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([secName,codes])=>{
-          const sec=DATA.find(s=>s.name===secName);
-          const prefix=sec&&sec.codes[0]?sec.codes[0].split(' ')[0]:'';
-          msg+='*'+(FLAGS[secName]||'')+' '+secName+' ('+prefix+')*\n';
-          msg+=codes.join('  ·  ')+'\n\n';
-        });
-      }
-      msg+='\n_Generado con Album Mundial 2026_';
-
-      const encoded=encodeURIComponent(msg);
-      const url='https://wa.me/?text='+encoded;
-      window.open(url,'_blank');
-
-      const waMsg=document.getElementById('rp-wa-msg');
-      waMsg.style.display='block';
-      waMsg.innerHTML='💬 <b>Se abrirá WhatsApp</b> con el texto del reporte listo para enviar.<br>Para compartir la <b>imagen</b>: descárgala primero con ⬇ y luego adjúntala en el chat de WhatsApp.';
-    });
-
-    document.getElementById('rp-close').addEventListener('click',()=>panel.remove());
-  });
+function openReport(type){
+  currentReportType=type;
+  const labels={all:'REPORTE COMPLETO',missing:'LÁMINAS REPETIDAS (DETALLE)',repeats:'LÁMINAS REPETIDAS'};
+  document.getElementById('rm-title').textContent='📊 '+labels[type];
+  document.getElementById('report-modal').classList.remove('hidden');
+  setTimeout(()=>buildCanvas(type),50);
 }
 
-function showPrintPanel(){showReportPanel('missing');}
-function closePrintPanel(){const p=document.getElementById('rpt-image-panel');if(p)p.remove();}
+document.getElementById('rm-close').addEventListener('click',()=>{document.getElementById('report-modal').classList.add('hidden');});
 
+document.getElementById('rm-img').addEventListener('click',()=>{
+  const canvas=document.getElementById('report-canvas');
+  const a=document.createElement('a');
+  a.href=canvas.toDataURL('image/png');
+  a.download='Reporte_Mundial2026_'+currentReportType+'_'+new Date().toISOString().slice(0,10)+'.png';
+  a.click();
+});
 
-/* ---- EVENTS ---- */
+document.getElementById('rm-pdf').addEventListener('click',()=>{
+  const canvas=document.getElementById('report-canvas');
+  const img=canvas.toDataURL('image/png');
+  const wrap=document.getElementById('carta-print-wrap');
+  wrap.innerHTML=`<img src="${img}" style="width:100%;height:100%;object-fit:contain;display:block;"/>`;
+  const s=document.createElement('style');
+  s.id='_ps';s.textContent='@media print{body>*:not(#carta-print-wrap){display:none!important;}#carta-print-wrap{display:block!important;position:fixed;inset:0;}@page{size:letter landscape;margin:0;}}';
+  document.head.appendChild(s);
+  window.print();
+  setTimeout(()=>{s.remove();wrap.innerHTML='';},1500);
+});
+
+document.getElementById('rm-wa').addEventListener('click',()=>{
+  const{t,o,m,p}=totals();
+  const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
+  let msg='';
+  if(currentReportType==='all'){
+    msg='🏆 *ALBUM MUNDIAL 2026 - RESUMEN COMPLETO*\n📅 '+fecha+'\n✅ Tengo: '+o+' | ❌ Faltan: '+m+' | 📊 Avance: '+p+'%\n\n';
+    DATA.forEach(sec=>{
+      const cnt=getOwned(sec.name).size;const total=sec.codes.length;const pct2=total?Math.round(cnt/total*100):0;
+      msg+=(FLAGS[sec.name]||'')+' *'+sec.name+'* ('+pfx(sec)+'): '+cnt+'/'+total+' — '+pct2+'%\n';
+    });
+  } else if(currentReportType==='missing'){
+    // "missing" en reportes = repetidas detalladas
+    const bySec={};
+    Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
+      const sec=DATA.find(s=>s.codes.includes(code));const key=sec?sec.name:code.split(' ')[0];
+      if(!bySec[key])bySec[key]=[];bySec[key].push(code+' ('+cnt+')');
+    });
+    const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
+    msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS REPETIDAS (DETALLE)*\n📅 '+fecha+'\n🔁 Codigos: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' | Total: '+totalRep+'\n\n';
+    Object.entries(bySec).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([secName,codes])=>{
+      const sec=DATA.find(s=>s.name===secName);
+      msg+='*'+(FLAGS[secName]||'')+' '+secName+' ('+pfx(sec)+')*\n'+codes.join(' · ')+'\n\n';
+    });
+  } else {
+    const bySec={};
+    Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
+      const sec=DATA.find(s=>s.codes.includes(code));const key=sec?sec.name:code.split(' ')[0];
+      if(!bySec[key])bySec[key]=[];bySec[key].push(code+' ('+cnt+')');
+    });
+    const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
+    msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS REPETIDAS*\n📅 '+fecha+'\n🔁 Codigos: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' | Total: '+totalRep+'\n\n';
+    Object.entries(bySec).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([secName,codes])=>{
+      const sec=DATA.find(s=>s.name===secName);
+      msg+='*'+(FLAGS[secName]||'')+' '+secName+' ('+pfx(sec)+')*\n'+codes.join(' · ')+'\n\n';
+    });
+  }
+  msg+='🦁 _Generado con Album Mundial - Leon Alvarez_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+});
+
+/* ===================== SESION / PIN ===================== */
+const PIN='Leon2020';
+function buildDots(){
+  const d=document.getElementById('lock-dots');d.innerHTML='';
+  for(let i=0;i<PIN.length;i++){const dot=document.createElement('div');dot.className='lock-dot';dot.id='ld'+i;d.appendChild(dot);}
+}
+function updateDots(val){for(let i=0;i<PIN.length;i++){const d=document.getElementById('ld'+i);if(!d)continue;d.className='lock-dot'+(i<val.length?' filled':'');}}
+function shakeError(msg){
+  document.getElementById('lock-error').textContent=msg;
+  document.querySelectorAll('.lock-dot').forEach(d=>{d.className='lock-dot error';});
+  document.getElementById('lock-dots').style.animation='shake .4s ease';
+  setTimeout(()=>{document.getElementById('lock-dots').style.animation='';document.querySelectorAll('.lock-dot').forEach(d=>{d.className='lock-dot';});document.getElementById('pin-input').value='';},600);
+}
+function unlock(){
+  document.querySelectorAll('.lock-dot').forEach(d=>{d.className='lock-dot success';});
+  document.getElementById('lock-subtitle').textContent='✓ ACCESO CONCEDIDO';
+  document.getElementById('lock-subtitle').style.color='#3CAC3B';
+  sessionActive=true;lastActivity=Date.now();scheduleAutoLock();startSessionTick();
+  setTimeout(()=>{
+    document.getElementById('lock-overlay').style.display='none';
+    document.getElementById('pin-input').value='';
+    document.getElementById('lock-subtitle').textContent='INGRESA EL CÓDIGO DE ACCESO';
+    document.getElementById('lock-subtitle').style.color='';
+    document.getElementById('lock-error').textContent='';
+    updateDots('');
+  },700);
+}
+function lock(){
+  sessionActive=false;
+  document.getElementById('lock-overlay').style.display='flex';
+  clearTimeout(sessionLockTimer);clearTimeout(sessionWarnTimer);clearInterval(sessionTickTimer);
+  document.getElementById('session-dot').style.background='#E61D25';
+  document.getElementById('session-timer-label').textContent='Sesión bloqueada';
+  setTimeout(()=>document.getElementById('pin-input').focus(),200);
+}
+function scheduleAutoLock(){
+  clearTimeout(sessionLockTimer);clearTimeout(sessionWarnTimer);
+  sessionWarnTimer=setTimeout(()=>{document.getElementById('session-dot').style.background='#FFDB00';},SESSION_MS-WARN_MS);
+  sessionLockTimer=setTimeout(()=>{lock();},SESSION_MS);
+}
+function startSessionTick(){
+  clearInterval(sessionTickTimer);
+  sessionTickTimer=setInterval(()=>{
+    if(!sessionActive)return;
+    const rem=SESSION_MS-(Date.now()-lastActivity);
+    if(rem<=0){lock();return;}
+    const min=Math.floor(rem/60000),sec=Math.floor((rem%60000)/1000);
+    if(rem<=WARN_MS){document.getElementById('session-dot').style.background='#FFDB00';document.getElementById('session-timer-label').textContent=`Cierra en ${min}:${String(sec).padStart(2,'0')}`;}
+    else{document.getElementById('session-dot').style.background='#3CAC3B';document.getElementById('session-timer-label').textContent=`Sesión: ${min}m`;}
+  },15000);
+}
+function resetActivity(){if(!sessionActive)return;lastActivity=Date.now();scheduleAutoLock();document.getElementById('session-dot').style.background='#3CAC3B';}
+
+document.getElementById('pin-btn').addEventListener('click',()=>{const v=document.getElementById('pin-input').value;if(v===PIN)unlock();else shakeError('Código incorrecto. Intenta nuevamente.');});
+document.getElementById('pin-input').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=document.getElementById('pin-input').value;if(v===PIN)unlock();else shakeError('Código incorrecto.');}});
+document.getElementById('pin-input').addEventListener('input',e=>{updateDots(e.target.value);document.getElementById('lock-error').textContent='';});
+['click','touchstart','keydown','scroll'].forEach(ev=>{document.addEventListener(ev,()=>{if(sessionActive)resetActivity();},{passive:true});});
+document.addEventListener('click',function(e){const st=e.target.closest('.st,.dp-st');if(st&&!sessionActive){e.stopImmediatePropagation();e.preventDefault();lock();}},true);
+
+/* ===================== TABS / EVENTOS ===================== */
 document.querySelectorAll('.nav-tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
@@ -1171,260 +1020,34 @@ document.querySelectorAll('.nav-tab').forEach(tab=>{
     tab.classList.add('active');
     document.getElementById('view-'+tab.dataset.view).classList.add('active');
     document.getElementById('album-ctrl').style.display=tab.dataset.view==='album'?'flex':'none';
-    if(tab.dataset.view==='reports') renderReports();
-    if(tab.dataset.view==='repeats') renderRepeats();
+    if(tab.dataset.view==='reports')renderReports();
+    if(tab.dataset.view==='repeats'){renderRepSummary();renderRepList();}
   });
 });
 
+document.querySelectorAll('.fb[data-f]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterMode=b.dataset.f;renderAll();});});
+document.getElementById('srch').addEventListener('input',e=>{searchQ=e.target.value;document.getElementById('csel').value='';selectedCountry='';renderDetail('');renderAll();});
+document.getElementById('csel').addEventListener('change',e=>{
+  selectedCountry=e.target.value;searchQ='';document.getElementById('srch').value='';renderDetail(selectedCountry);
+  if(selectedCountry){const c=document.querySelector('[data-sec="'+CSS.escape(selectedCountry)+'"]');if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}
+});
+document.getElementById('breset').addEventListener('click',()=>{if(!confirm('Reiniciar el album desde cero?'))return;initDef();saveState();updateStats();renderDetail(selectedCountry);renderAll();});
+document.querySelectorAll('.rpt-type-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.rpt-type-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');rptMode=b.dataset.rpt;renderRptTable();});});
+document.getElementById('btn-csv').addEventListener('click',exportCSV);
 document.getElementById('rep-country-sel').addEventListener('change',populateRepCodeSel);
 document.getElementById('rep-btn-add').addEventListener('click',addRepeated);
 document.getElementById('rep-qty').addEventListener('keydown',e=>{if(e.key==='Enter')addRepeated();});
 
-document.querySelectorAll('.fb[data-f]').forEach(b=>{
-  b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterMode=b.dataset.f;renderAll();});
-});
-document.getElementById('srch').addEventListener('input',e=>{searchQ=e.target.value;document.getElementById('csel').value='';selectedCountry='';renderDetail('');renderAll();});
-document.getElementById('csel').addEventListener('change',e=>{
-  selectedCountry=e.target.value;searchQ='';document.getElementById('srch').value='';renderDetail(selectedCountry);
-  if(selectedCountry){const c=document.querySelector(`[data-sec="${CSS.escape(selectedCountry)}"]`);if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}
-});
-document.getElementById('breset').addEventListener('click',()=>{
-  if(!confirm('Reiniciar el album desde cero? Se perdera todo el progreso.'))return;
-  initDef();saveState();updateStats();renderDetail(selectedCountry);renderAll();
-});
-document.querySelectorAll('.rpt-type-btn').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('.rpt-type-btn').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');rptMode=b.dataset.rpt;renderReports();
-  });
-});
-document.getElementById('btn-csv').addEventListener('click',exportCSV);
-document.getElementById('btn-pdf').addEventListener('click',()=>showReportPanel('missing'));
-document.getElementById('btn-png').addEventListener('click',()=>showReportPanel('missing'));
-
-/* ---- INIT ---- */
+/* ===================== INIT ===================== */
 loadState();
 populateSel();
 updateStats();
 renderAll();
-document.getElementById('saved-msg').textContent='Datos cargados · haz clic en una lámina para marcarla';
-</script>
-
-<!-- SESSION INDICATOR -->
-<div id="session-indicator" style="position:fixed;bottom:12px;right:14px;z-index:100;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.5px;display:flex;align-items:center;gap:5px;pointer-events:none;">
-  <div id="session-dot" style="width:6px;height:6px;border-radius:50%;background:#3CAC3B;flex-shrink:0;"></div>
-  <span id="session-timer-label">Sesión activa</span>
-</div>
-
-<!-- PIN LOCK OVERLAY -->
-<div id="lock-overlay" style="position:fixed;inset:0;z-index:9999;background:rgba(10,6,25,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
-  <div class="lock-box">
-    <div class="lock-icon">🔒</div>
-    <div class="lock-title">ÁLBUM PROTEGIDO</div>
-    <div class="lock-sub" id="lock-subtitle">INGRESA EL CÓDIGO DE ACCESO</div>
-    <div class="lock-dots" id="lock-dots"></div>
-    <input class="pin-input" type="password" id="pin-input" placeholder="Código de acceso" maxlength="11" autocomplete="off" autocorrect="off" spellcheck="false"/>
-    <button class="pin-btn" id="pin-btn">INGRESAR</button>
-    <div class="lock-error" id="lock-error"></div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.15);margin-top:16px;letter-spacing:.5px;">FIFA WORLD CUP 2026 · León Álvarez Huequelef</div>
-  </div>
-</div>
-
-<script>
-/* ===== PIN / SESSION SYSTEM ===== */
-const PIN_CODE = 'Leon2020';
-const SESSION_TIMEOUT = 60 * 60 * 1000; // 1 hora en ms
-const WARN_AT = 5 * 60 * 1000; // advertencia 5 min antes
-
-let sessionActive = false;
-let lastActivity = Date.now();
-let sessionCheckInterval = null;
-let sessionWarnTimeout = null;
-let sessionLockTimeout = null;
-
-const overlay   = document.getElementById('lock-overlay');
-const pinInput  = document.getElementById('pin-input');
-const pinBtn    = document.getElementById('pin-btn');
-const lockError = document.getElementById('lock-error');
-const lockDots  = document.getElementById('lock-dots');
-const lockSub   = document.getElementById('lock-subtitle');
-const sessDot   = document.getElementById('session-dot');
-const sessLabel = document.getElementById('session-timer-label');
-
-/* Construir puntos indicadores según largo del PIN */
-function buildDots(){
-  lockDots.innerHTML='';
-  for(let i=0;i<PIN_CODE.length;i++){
-    const d=document.createElement('div');
-    d.className='lock-dot';d.id='ld'+i;
-    lockDots.appendChild(d);
-  }
-}
-
-/* Actualizar puntos mientras escribe */
-function updateDots(val){
-  for(let i=0;i<PIN_CODE.length;i++){
-    const d=document.getElementById('ld'+i);
-    if(!d)continue;
-    d.classList.remove('filled','error','success');
-    if(i<val.length)d.classList.add('filled');
-  }
-}
-
-/* Animación error */
-function shakeError(msg){
-  lockError.textContent=msg;
-  const dots=lockDots.querySelectorAll('.lock-dot');
-  dots.forEach(d=>{d.classList.remove('filled','success');d.classList.add('error');});
-  lockDots.style.animation='shake .4s ease';
-  setTimeout(()=>{lockDots.style.animation='';dots.forEach(d=>{d.classList.remove('error');});pinInput.value='';},600);
-}
-
-/* Animación éxito */
-function showSuccess(){
-  const dots=lockDots.querySelectorAll('.lock-dot');
-  dots.forEach(d=>{d.classList.remove('filled','error');d.classList.add('success');});
-  lockError.textContent='';
-  lockSub.textContent='✓ ACCESO CONCEDIDO';
-  lockSub.style.color='#3CAC3B';
-}
-
-/* Desbloquear */
-function unlock(){
-  showSuccess();
-  sessionActive=true;
-  lastActivity=Date.now();
-  scheduleAutoLock();
-  startSessionDisplay();
-  setTimeout(()=>{
-    overlay.style.display='none';
-    pinInput.value='';
-    lockSub.textContent='INGRESA EL CÓDIGO DE ACCESO';
-    lockSub.style.color='';
-    lockError.textContent='';
-    updateDots('');
-  },700);
-}
-
-/* Bloquear */
-function lock(){
-  sessionActive=false;
-  overlay.style.display='flex';
-  clearTimeouts();
-  sessDot.style.background='#E61D25';
-  sessLabel.textContent='Sesión bloqueada';
-  pinInput.focus();
-}
-
-function clearTimeouts(){
-  clearTimeout(sessionWarnTimeout);
-  clearTimeout(sessionLockTimeout);
-  clearInterval(sessionCheckInterval);
-}
-
-/* Programar bloqueo automático */
-function scheduleAutoLock(){
-  clearTimeouts();
-  const remaining=SESSION_TIMEOUT-(Date.now()-lastActivity);
-  const warnIn=remaining-WARN_AT;
-
-  if(warnIn>0){
-    sessionWarnTimeout=setTimeout(()=>{
-      sessDot.style.background='#FFDB00';
-      sessLabel.textContent='Sesión expira en 5 min';
-    },warnIn);
-  }
-
-  sessionLockTimeout=setTimeout(()=>{
-    lock();
-  },remaining>0?remaining:0);
-}
-
-/* Contador visual de tiempo restante */
-function startSessionDisplay(){
-  clearInterval(sessionCheckInterval);
-  sessionCheckInterval=setInterval(()=>{
-    if(!sessionActive)return;
-    const elapsed=Date.now()-lastActivity;
-    const remaining=SESSION_TIMEOUT-elapsed;
-    if(remaining<=0){lock();return;}
-    const mins=Math.floor(remaining/60000);
-    const secs=Math.floor((remaining%60000)/1000);
-    if(remaining<=WARN_AT){
-      sessDot.style.background='#FFDB00';
-      sessLabel.textContent=`Cierra en ${mins}:${String(secs).padStart(2,'0')}`;
-    } else {
-      sessDot.style.background='#3CAC3B';
-      sessLabel.textContent=`Sesión: ${mins}m restante`;
-    }
-  },10000);
-}
-
-/* Reiniciar inactividad en cualquier interacción */
-function resetActivity(){
-  if(!sessionActive)return;
-  lastActivity=Date.now();
-  scheduleAutoLock();
-  sessDot.style.background='#3CAC3B';
-}
-
-/* Interceptar clics en láminas — solo si sesión activa */
-function guardedToggleSticker(origFn){
-  return function(...args){
-    if(!sessionActive){lock();return;}
-    resetActivity();
-    origFn.apply(this,args);
-  };
-}
-
-/* ---- Verificar PIN ---- */
-function checkPin(){
-  const val=pinInput.value;
-  if(val===PIN_CODE){
-    unlock();
-  } else {
-    shakeError('Código incorrecto. Inténtalo nuevamente.');
-  }
-}
-
-/* ---- Estilo shake ---- */
-const shakeStyle=document.createElement('style');
-shakeStyle.textContent=`
-@keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)}}
-`;
-document.head.appendChild(shakeStyle);
-
-/* ---- Event listeners del lock ---- */
-pinBtn.addEventListener('click',checkPin);
-pinInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkPin();});
-pinInput.addEventListener('input',e=>{
-  updateDots(e.target.value);
-  lockError.textContent='';
-});
-
-/* ---- Detectar actividad global ---- */
-['click','touchstart','keydown','scroll','mousemove'].forEach(ev=>{
-  document.addEventListener(ev,()=>{if(sessionActive)resetActivity();},{passive:true});
-});
-
-/* ---- Bloquear láminas si no hay sesión ---- */
-/* Sobreescribir click de stickers para verificar sesión */
-document.addEventListener('click',function(e){
-  const st=e.target.closest('.st,.dp-st');
-  if(st && !sessionActive){
-    e.stopImmediatePropagation();
-    e.preventDefault();
-    lock();
-    return false;
-  }
-},true);
-
-/* ---- INIT LOCK ---- */
 buildDots();
-/* Mostrar overlay al cargar — siempre pedir PIN al abrir */
-overlay.style.display='flex';
+setSaved('Datos cargados · toca una lámina para marcarla');
+document.getElementById('lock-overlay').style.display='flex';
 sessionActive=false;
-setTimeout(()=>pinInput.focus(),300);
+setTimeout(()=>document.getElementById('pin-input').focus(),300);
 </script>
 </body>
 </html>
