@@ -454,6 +454,7 @@ const DATA=[
 
 /* ===================== STATE ===================== */
 const SK='mundial2026_v4';
+const SK_PREV=['mundial2026_v3','mundial2026_v2','mundial2026_v1'];
 let state={},collapsed={},repeats={},filterMode='all',searchQ='',selectedCountry='',saveTimer=null,rptMode='all';
 let sessionActive=false,lastActivity=Date.now(),sessionLockTimer=null,sessionWarnTimer=null,sessionTickTimer=null;
 const SESSION_MS=60*60*1000, WARN_MS=5*60*1000;
@@ -465,8 +466,29 @@ function barC(p){return p===100?'#FFDB00':p>=60?'#3CAC3B':p>=30?'#3D52C4':'#E61D
 function totals(){let t=0,o=0;DATA.forEach(s=>{t+=s.codes.length;o+=getOwned(s.name).size;});return{t,o,m:t-o,p:t?Math.round(o/t*100):0};}
 
 function loadState(){
-  try{const r=localStorage.getItem(SK);if(r){const d=JSON.parse(r);state=d.state||{};collapsed=d.collapsed||{};repeats=d.repeats||{};}else initDef();}
-  catch(e){initDef();}
+  try{
+    // 1. Intentar clave actual v4
+    let raw=localStorage.getItem(SK);
+    // 2. Si no existe, buscar en claves anteriores y migrar
+    if(!raw){
+      for(const oldKey of SK_PREV){
+        raw=localStorage.getItem(oldKey);
+        if(raw){
+          // Migrar datos al nuevo key
+          try{localStorage.setItem(SK,raw);}catch(e){}
+          break;
+        }
+      }
+    }
+    if(raw){
+      const d=JSON.parse(raw);
+      state=d.state||{};
+      collapsed=d.collapsed||{};
+      repeats=d.repeats||{};
+    } else {
+      initDef();
+    }
+  } catch(e){initDef();}
   DATA.forEach(s=>{
     if(state[s.name]&&!(state[s.name] instanceof Set))state[s.name]=new Set(state[s.name]);
     else if(!state[s.name])state[s.name]=new Set(s.init);
