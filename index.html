@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Álbum Mundial 2026 – León Alvarez</title>
+<title>Álbum Mundial 2026 – León Álvarez</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -79,11 +79,13 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .cbadge{background:var(--gold);color:#0F0A1E;font-family:var(--ft);font-size:10px;padding:2px 7px;border-radius:4px;letter-spacing:1px;}
 .tarrow{font-size:9px;color:rgba(42,57,141,.5);transition:transform .2s;}
 .tarrow.open{transform:rotate(180deg);}
-.stgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:11px 13px;}
-.st{aspect-ratio:1;border-radius:5px;border:1.5px solid rgba(42,57,141,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fc);font-size:10px;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;background:rgba(42,57,141,.06);color:rgba(255,255,255,.28);letter-spacing:.3px;position:relative;overflow:hidden;}
+.stgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:8px 10px;}
+.st{border-radius:5px;border:1.5px solid rgba(42,57,141,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fc);cursor:pointer;transition:all .15s;user-select:none;background:rgba(42,57,141,.06);color:rgba(255,255,255,.85);position:relative;overflow:hidden;text-align:center;padding:4px 2px;gap:2px;min-height:52px;}
 .st:hover{border-color:var(--blue-light);background:rgba(42,57,141,.22);color:var(--white);transform:scale(1.07);}
 .st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
 .st.owned::after{content:'✓';position:absolute;top:1px;right:3px;font-size:7px;color:#6EE06D;font-weight:900;}
+.st-code{font-size:13px;font-weight:700;line-height:1;opacity:.65;letter-spacing:.3px;}
+.st-name{font-size:14px;font-weight:700;line-height:1.2;letter-spacing:.2px;word-break:break-all;}
 .sfoot{padding:7px 13px;background:rgba(0,0,0,.18);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.3);}
 .co{color:#6EE06D;font-weight:700;}.cm{color:var(--red);font-weight:700;}
 .collapsed .stgrid,.collapsed .sfoot{display:none;}
@@ -104,8 +106,8 @@ body{font-family:var(--fb);background:var(--bg);min-height:100vh;color:var(--whi
 .dp-st:hover{border-color:var(--blue-light);background:rgba(42,57,141,.25);color:#fff;transform:scale(1.06);}
 .dp-st.owned{background:rgba(60,172,59,.2);border-color:var(--green);color:#6EE06D;}
 .dp-st.owned::after{content:'✓';position:absolute;top:1px;right:3px;font-size:7px;color:#6EE06D;font-weight:900;}
-.dp-num{font-size:14px;font-weight:700;line-height:1.1;}
-.dp-code{font-size:8px;opacity:.45;line-height:1;}
+.dp-num{font-size:14px;font-weight:700;line-height:1.1;letter-spacing:.3px;}
+.dp-code{font-size:12px;font-weight:600;opacity:.9;line-height:1.2;text-align:center;}
 .dp-bar{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-top:12px;}
 .dp-bfill{height:100%;background:linear-gradient(90deg,var(--red),var(--blue-light),var(--green));border-radius:3px;transition:width .3s;}
 .dp-pct-label{font-family:var(--ft);font-size:12px;color:rgba(255,255,255,.3);margin-top:4px;letter-spacing:1.5px;}
@@ -399,6 +401,258 @@ const FLAGS={
   'Brasil':'🇧🇷','Suiza':'🇨🇭','Qatar':'🇶🇦','Bosnia':'🇧🇦',
   'Canadá':'🇨🇦','Sudáfrica':'🇿🇦','Czechia':'🇨🇿','Korea':'🇰🇷','Mexico':'🇲🇽'
 };
+/* ===================== PLAYERS (Fuente: Panini FIFA World Cup 2026 oficial) ===================== */
+const PLAYERS={
+  // ARGELIA
+  'ALG 1':'Logo','ALG 2':'Guendouz','ALG 3':'Bensebaini','ALG 4':'Atal','ALG 5':'Aït-Nouri',
+  'ALG 6':'Tougai','ALG 7':'Mandi','ALG 8':'Ibañez','ALG 9':'Benlamri','ALG 10':'Bentaleb',
+  'ALG 11':'Brahimi','ALG 12':'Zerrouki','ALG 13':'Foto','ALG 14':'Ounahi A.','ALG 15':'Belaili',
+  'ALG 16':'Bounedjah','ALG 17':'Slimani','ALG 18':'Mahrez','ALG 19':'Amoura','ALG 20':'Benrahma',
+  // ARGENTINA
+  'ARG 1':'Logo','ARG 2':'Dibu Martínez','ARG 3':'Montiel','ARG 4':'Romero','ARG 5':'Lisandro M.',
+  'ARG 6':'Tagliafico','ARG 7':'Molina','ARG 8':'De Paul','ARG 9':'Fernández E.','ARG 10':'Paredes',
+  'ARG 11':'Mac Allister','ARG 12':'Almada','ARG 13':'Foto','ARG 14':'Acuña','ARG 15':'Di María',
+  'ARG 16':'Dybala','ARG 17':'Lautaro M.','ARG 18':'Álvarez J.','ARG 19':'Messi','ARG 20':'Soulé',
+  // AUSTRIA
+  'AUT 1':'Logo','AUT 2':'Pentz','AUT 3':'Lienhart','AUT 4':'Wöber','AUT 5':'Posch',
+  'AUT 6':'Prass','AUT 7':'Seiwald','AUT 8':'Laimer','AUT 9':'Grillitsch','AUT 10':'Sabitzer',
+  'AUT 11':'Baumgartner','AUT 12':'Wimmer','AUT 13':'Foto','AUT 14':'Kainz','AUT 15':'Gregoritsch',
+  'AUT 16':'Entrup','AUT 17':'Arnautovic','AUT 18':'Querfeld','AUT 19':'Daniliuc','AUT 20':'Weimann',
+  // COCA-COLA
+  'CC 1':'Mbappé','CC 2':'Bellingham','CC 3':'Vinicius Jr.','CC 4':'De Bruyne','CC 5':'Haaland',
+  'CC 6':'Pedri','CC 7':'Salah','CC 8':'Saka','CC 9':'Lamine Yamal','CC 10':'Son',
+  'CC 11':'Musiala','CC 12':'Pulisic','CC 13':'Davies A.','CC 14':'Giménez S.',
+  // COLOMBIA
+  'COL 1':'Logo','COL 2':'Vargas C.','COL 3':'Mina Y.','COL 4':'Lucumí','COL 5':'Mojica',
+  'COL 6':'Muñoz D.','COL 7':'Lerma','COL 8':'Uribe M.','COL 9':'Ríos','COL 10':'Carrascal',
+  'COL 11':'Vidal T.','COL 12':'Quintero','COL 13':'Foto','COL 14':'Díaz L.','COL 15':'Borré',
+  'COL 16':'Sinisterra','COL 17':'Cabal','COL 18':'Córdoba S.','COL 19':'Arango','COL 20':'Jiménez E.',
+  // CROACIA
+  'CRO 1':'Logo','CRO 2':'Livaković','CRO 3':'Vida','CRO 4':'Gvardiol','CRO 5':'Sosa',
+  'CRO 6':'Stanišić','CRO 7':'Brozović','CRO 8':'Kovačić','CRO 9':'Modrić','CRO 10':'Ivanušec',
+  'CRO 11':'Sučić','CRO 12':'Majer','CRO 13':'Foto','CRO 14':'Perišić','CRO 15':'Petković B.',
+  'CRO 16':'Kramarić','CRO 17':'Budimir','CRO 18':'Pašalić','CRO 19':'Rog','CRO 20':'Vlašić',
+  // FIFA WORLD CUP HISTORY
+  'FWC 1':'Emblema','FWC 2':'Emblema','FWC 3':'Mascotas','FWC 4':'Slogan','FWC 5':'Balón oficial',
+  'FWC 6':'Canadá - Sede','FWC 7':'México - Sede','FWC 8':'USA - Sede','FWC 9':'Italia 1934',
+  'FWC 10':'Uruguay 1950','FWC 11':'Alemania 1954','PWC 12':'Brasil 1962','FWC 13':'Alemania 1974',
+  // GHANA
+  'GHA 1':'Logo','GHA 2':'Wollacott','GHA 3':'Schäfer A.','GHA 4':'Amartey','GHA 5':'Seidu',
+  'GHA 6':'Lamptey','GHA 7':'Doku','GHA 8':'Yirenkyi','GHA 9':'Fatawu','GHA 10':'Partey',
+  'GHA 11':'Samed','GHA 12':'Sulemana','GHA 13':'Foto','GHA 14':'Kudus','GHA 15':'I. Williams',
+  'GHA 16':'Jordan Ayew','GHA 17':'André Ayew','GHA 18':'Paintsil','GHA 19':'Bukari','GHA 20':'Semenyo',
+  // INGLATERRA
+  'ENG 1':'Logo','ENG 2':'Pickford','ENG 3':'Walker','ENG 4':'Maguire','ENG 5':'Trippier',
+  'ENG 6':'Guehi','ENG 7':'Alexander-Arnold','ENG 8':'Rice','ENG 9':'Bellingham','ENG 10':'Gallagher',
+  'ENG 11':'Phillips','ENG 12':'Toney','ENG 13':'Foto','ENG 14':'Saka','ENG 15':'Grealish',
+  'ENG 16':'Rashford','ENG 17':'Foden','ENG 18':'Kane','ENG 19':'Watkins','ENG 20':'Gordon',
+  // IRAQ
+  'IRQ 1':'Logo','IRQ 2':'Basim','IRQ 3':'Humam','IRQ 4':'Rebin','IRQ 5':'Amjad',
+  'IRQ 6':'Ali Adnan','IRQ 7':'Hussein A.','IRQ 8':'Mohannad','IRQ 9':'Aymen','IRQ 10':'Saad A.',
+  'IRQ 11':'Karrar','IRQ 12':'Foto','IRQ 13':'Hassan A.','IRQ 14':'Alaa Abbas','IRQ 15':'Safaa',
+  'IRQ 16':'Akram Afif','IRQ 17':'Mahdi K.','IRQ 18':'Amir','IRQ 19':'Yousif','IRQ 20':'Almutairi',
+  // JORDANIA
+  'JOR 1':'Logo','JOR 2':'Shafi','JOR 3':'Al-Nawateer','JOR 4':'Bani Attiyeh','JOR 5':'Foto',
+  'JOR 6':'Al-Rawabdeh','JOR 7':'Almomani','JOR 8':'Al-Tamari','JOR 9':'Bani Yaseen','JOR 10':'Al-Dardour',
+  'JOR 11':'Nader','JOR 12':'Al-Ajalin','JOR 13':'Obeidat','JOR 14':'Hasan A.','JOR 15':'Yousef',
+  'JOR 16':'Qasem','JOR 17':'Al-Hajaili','JOR 18':'Al-Gharib','JOR 19':'Al-Nabhan','JOR 20':'Hamza',
+  // NORUEGA
+  'NOR 1':'Logo','NOR 2':'Nyland','NOR 3':'Ryerson','NOR 4':'Strandberg','NOR 5':'Ajer',
+  'NOR 6':'Ostigard','NOR 7':'Meling','NOR 8':'Thorsby','NOR 9':'Berge','NOR 10':'Odegaard',
+  'NOR 11':'Sørloth','NOR 12':'Elyounoussi','NOR 13':'Foto','NOR 14':'Hauge','NOR 15':'Normann',
+  'NOR 16':'Solbakken','NOR 17':'Haaland','NOR 18':'Bobb','NOR 19':'Pedersen','NOR 20':'Brekalo',
+  // PANAMÁ
+  'PAN 1':'Logo','PAN 2':'Mosquera','PAN 3':'Mejía','PAN 4':'Escobar F.','PAN 5':'Andrade',
+  'PAN 6':'Murillo','PAN 7':'Davis E.','PAN 8':'Córdoba J.','PAN 9':'Blackman','PAN 10':'Martínez C.',
+  'PAN 11':'Godoy','PAN 12':'Carrasquilla','PAN 13':'Foto','PAN 14':'Bárcenas','PAN 15':'Harvey',
+  'PAN 16':'Díaz I.','PAN 17':'Fajardo','PAN 18':'Waterman','PAN 19':'Rodríguez J.','PAN 20':'Quintero A.',
+  // PORTUGAL
+  'POR 1':'Logo','POR 2':'Costa D.','POR 3':'Cancelo','POR 4':'Pepe','POR 5':'Danilo',
+  'POR 6':'Diogo Dalot','POR 7':'Nunes M.','POR 8':'Vitinha','POR 9':'Bernardo S.','POR 10':'Fernandes B.',
+  'POR 11':'Horta','POR 12':'Palinha','POR 13':'Foto','POR 14':'Leão','POR 15':'Guedes G.',
+  'POR 16':'Conceição F.','POR 17':'Cristiano','POR 18':'Ramos G.','POR 19':'Trincão','POR 20':'Pedro G.',
+  // RD DEL CONGO
+  'COD 1':'Logo','COD 2':'Kasanda','COD 3':'Bola','COD 4':'Inonga','COD 5':'Tshite',
+  'COD 6':'Bakambu','COD 7':'Mbokani','COD 8':'Kibonge','COD 9':'Mpoku','COD 10':'Tshibola',
+  'COD 11':'Luyindama','COD 12':'Bolasie','COD 13':'Foto','COD 14':'Kayembe','COD 15':'Chaduli',
+  'COD 16':'Toko Ekambi','COD 17':'Ilunga','COD 18':'Kibande','COD 19':'Onana J.','COD 20':'Banzuzi',
+  // SENEGAL
+  'SEN 1':'Logo','SEN 2':'Mendy E.','SEN 3':'Koulibaly','SEN 4':'Saliou Ciss','SEN 5':'Sabaly',
+  'SEN 6':'Niakhaté','SEN 7':'Kouyaté I.','SEN 8':'Kouyaté C.','SEN 9':'Gueye I.','SEN 10':'Diatta L.',
+  'SEN 11':'Ndiaye P.','SEN 12':'Sarr I.','SEN 13':'Foto','SEN 14':'Dia B.','SEN 15':'Mané',
+  'SEN 16':'Diedhiou','SEN 17':'Doucouré','SEN 18':'Dieng M.','SEN 19':'Jackson N.','SEN 20':'Bamba',
+  // UZBEKISTÁN
+  'UZB 1':'Logo','UZB 2':'Nishonov','UZB 3':'Jaloliddin','UZB 4':'Khamdamov','UZB 5':'Yusupov',
+  'UZB 6':'Alibekov','UZB 7':'Tursunov','UZB 8':'Masharipov','UZB 9':'Shomurodov','UZB 10':'Djurayev',
+  'UZB 11':'Saidov','UZB 12':'Hamrobekov','UZB 13':'Foto','UZB 14':'Ergashev','UZB 15':'Ismailov',
+  'UZB 16':'Yokubov','UZB 17':'Komilov','UZB 18':'Makhstaliev','UZB 19':'Rashidov','UZB 20':'Murtazayev',
+  // FRANCIA
+  'FRA 1':'Logo','FRA 2':'Maignan','FRA 3':'Koundé','FRA 4':'Upamecano','FRA 5':'Hernández T.',
+  'FRA 6':'Saliba','FRA 7':'Pavard','FRA 8':'Tchouaméni','FRA 9':'Camavinga','FRA 10':'Rabiot',
+  'FRA 11':'Kanté','FRA 12':'Dembélé O.','FRA 13':'Foto','FRA 14':'Griezmann','FRA 15':'Thuram M.',
+  'FRA 16':'Mbappé','FRA 17':'Coman','FRA 18':'Giroud','FRA 19':'Zaire-Emery','FRA 20':'Kolo Muani',
+  // URUGUAY
+  'URU 1':'Logo','URU 2':'Rochet','URU 3':'Cáceres Martín','URU 4':'Giménez J.','URU 5':'Araújo R.',
+  'URU 6':'Nández','URU 7':'Olivera M.','URU 8':'Valverde F.','URU 9':'Bentancur','URU 10':'de la Cruz',
+  'URU 11':'Ugarte M.','URU 12':'Barrios M.','URU 13':'Foto','URU 14':'Pellistri','URU 15':'Núñez D.',
+  'URU 16':'Cavani','URU 17':'Suárez','URU 18':'Vidal F.','URU 19':'García B.','URU 20':'Gómez F.',
+  // ARABIA SAUDITA
+  'KSA 1':'Logo','KSA 2':'Al-Owais','KSA 3':'Saud Abdulhamid','KSA 4':'Al-Bulaihi','KSA 5':'Al-Ghannam',
+  'KSA 6':'Al-Amri','KSA 7':'Al-Shahrani','KSA 8':'Kanno','KSA 9':'Al-Dawsari','KSA 10':'Al-Qasem',
+  'KSA 11':'Otayf','KSA 12':'Al-Malki','KSA 13':'Foto','KSA 14':'Al-Abed','KSA 15':'Al-Buraikan',
+  'KSA 16':'Al-Faraj','KSA 17':'Al-Hamdan','KSA 18':'Saleh Al-Shehri','KSA 19':'Al-Khaibari','KSA 20':'Nasser',
+  // CABO VERDE
+  'CPV 1':'Logo','CPV 2':'Vozinha','CPV 3':'Stopira','CPV 4':'Ryan Mendes','CPV 5':'Jamiro',
+  'CPV 6':'Kenny Rocha','CPV 7':'Jeffry Fortes','CPV 8':'Bebeto','CPV 9':'Willy Semedo','CPV 10':'Pé Roxo',
+  'CPV 11':'Andrade P.','CPV 12':'Garry Rodrigues','CPV 13':'Foto','CPV 14':'Tavares I.','CPV 15':'Heldon',
+  'CPV 16':'Elohim Rollon','CPV 17':'Julio Tavares','CPV 18':'Djaniny','CPV 19':'Lp','CPV 20':'Mário Barbosa',
+  // ESPAÑA
+  'ESP 1':'Logo','ESP 2':'Unai Simón','ESP 3':'Carvajal','ESP 4':'Le Normand','ESP 5':'Laporte',
+  'ESP 6':'Grimaldo','ESP 7':'Oyarzabal','ESP 8':'Rodri','ESP 9':'Pedri','ESP 10':'Gavi',
+  'ESP 11':'Merino M.','ESP 12':'Yamal L.','ESP 13':'Foto','ESP 14':'Williams N.','ESP 15':'Olmo D.',
+  'ESP 16':'Morata','ESP 17':'Torres F.','ESP 18':'Joselu','ESP 19':'Fabián R.','ESP 20':'Zubimendi',
+  // NUEVA ZELANDA
+  'NZL 1':'Logo','NZL 2':'Sail','NZL 3':'Smeltz','NZL 4':'Dekker','NZL 5':'Papalii',
+  'NZL 6':'Waine','NZL 7':'McGlinchey','NZL 8':'Thomas L.','NZL 9':'Bott','NZL 10':'Bell C.',
+  'NZL 11':'Sargeant','NZL 12':'Just','NZL 13':'Foto','NZL 14':'Cacace','NZL 15':'Wood C.',
+  'NZL 16':'James L.','NZL 17':'Garbett','NZL 18':'Haak','NZL 19':'Rojas M.','NZL 20':'Bedoya',
+  // IRÁN
+  'IRN 1':'Logo','IRN 2':'Hossein Hosseini','IRN 3':'Pouraliganji','IRN 4':'Mohammadi','IRN 5':'Hajsafi',
+  'IRN 6':'Rezaeian','IRN 7':'Noorollahi','IRN 8':'Ezatolahi','IRN 9':'Shojaei M.','IRN 10':'Jahanbakhsh',
+  'IRN 11':'Gholizadeh','IRN 12':'Taremi','IRN 13':'Foto','IRN 14':'Cheshmi','IRN 15':'Azmoun',
+  'IRN 16':'Sarlak','IRN 17':'Nosrati','IRN 18':'Karimi H.','IRN 19':'Torabi','IRN 20':'Mohammadi A.',
+  // EGIPTO
+  'EGY 1':'Logo','EGY 2':'El-Shenawy','EGY 3':'Hamdi Fathi','EGY 4':'Hegazi','EGY 5':'Abdelmonem',
+  'EGY 6':'Kahraba','EGY 7':'Salah M.','EGY 8':'Mostafa M.','EGY 9':'Ashraf','EGY 10':'Elneny',
+  'EGY 11':'Hamdi M.','EGY 12':'Trezeguet','EGY 13':'Foto','EGY 14':'Shobeir','EGY 15':'Taher',
+  'EGY 16':'Nasr M.','EGY 17':'Hassan A.','EGY 18':'Afsha','EGY 19':'Ramadan S.','EGY 20':'Marmoush',
+  // BÉLGICA
+  'BEL 1':'Logo','BEL 2':'Casteels','BEL 3':'Castagne','BEL 4':'Debast','BEL 5':'Vertonghen',
+  'BEL 6':'Faes','BEL 7':'Theate','BEL 8':'Witsel','BEL 9':'Tielemans','BEL 10':'Onana A.',
+  'BEL 11':'De Bruyne','BEL 12':'Doku','BEL 13':'Foto','BEL 14':'Lukaku','BEL 15':'Batshuayi',
+  'BEL 16':'De Ketelaere','BEL 17':'Vanaken','BEL 18':'Mangala O.','BEL 19':'Loïs Openda','BEL 20':'Trossard',
+  // TÚNEZ
+  'TUN 1':'Logo','TUN 2':'Dahmen','TUN 3':'Talbi M.','TUN 4':'Meriah','TUN 5':'Ben Slimane',
+  'TUN 6':'Drager','TUN 7':'Skhiri','TUN 8':'Laidouni','TUN 9':'Ben Romdhane','TUN 10':'Maaloul',
+  'TUN 11':'Khazri','TUN 12':'Laifaoui','TUN 13':'Foto','TUN 14':'Sliti','TUN 15':'Khenissi',
+  'TUN 16':'Jaziri','TUN 17':'Badri','TUN 18':'Dräger','TUN 19':'Ben Amor','TUN 20':'Msakni',
+  // SUECIA
+  'SWE 1':'Logo','SWE 2':'Olsen','SWE 3':'Lindelöf','SWE 4':'Danielson','SWE 5':'Augustinsson',
+  'SWE 6':'Krafth','SWE 7':'Karlström','SWE 8':'Larsson S.','SWE 9':'Ekdal','SWE 10':'Forsberg E.',
+  'SWE 11':'Svanberg','SWE 12':'Claesson','SWE 13':'Foto','SWE 14':'Ibrahimović','SWE 15':'Berg M.',
+  'SWE 16':'Isak','SWE 17':'Quaison','SWE 18':'Gyökeres','SWE 19':'Elanga','SWE 20':'Asoro',
+  // JAPÓN
+  'JPN 1':'Logo','JPN 2':'Gonda','JPN 3':'Itakura','JPN 4':'Yoshida','JPN 5':'Nagatomo',
+  'JPN 6':'Yamane','JPN 7':'Tomiyasu','JPN 8':'Endo W.','JPN 9':'Morita','JPN 10':'Tanaka H.',
+  'JPN 11':'Kamada','JPN 12':'Kubo','JPN 13':'Foto','JPN 14':'Minamino','JPN 15':'Maeda D.',
+  'JPN 16':'Ueda A.','JPN 17':'Mitoma','JPN 18':'Doan','JPN 19':'Furuhashi','JPN 20':'Ito H.',
+  // PAÍSES BAJOS
+  'NED 1':'Logo','NED 2':'Flekken','NED 3':'Dumfries','NED 4':'Van Dijk','NED 5':'De Ligt',
+  'NED 6':'Blind','NED 7':'Malacia','NED 8':'De Jong F.','NED 9':'Klaassen','NED 10':'Gakpo',
+  'NED 11':'Wijnaldum','NED 12':'Berghuis','NED 13':'Foto','NED 14':'Bergwijn','NED 15':'Depay',
+  'NED 16':'Weghorst','NED 17':'Van der Ven','NED 18':'Malen','NED 19':'Zirkzee','NED 20':'Reijnders',
+  // ECUADOR
+  'ECU 1':'Logo','ECU 2':'Galíndez','ECU 3':'Preciado A.','ECU 4':'Torres B.','ECU 5':'Hincapié',
+  'ECU 6':'Mena','ECU 7':'Estupiñán','ECU 8':'Caicedo M.','ECU 9':'Gruezo','ECU 10':'Sarmiento J.',
+  'ECU 11':'Plata','ECU 12':'Valencia E.','ECU 13':'Foto','ECU 14':'Ibarra','ECU 15':'Castillo E.',
+  'ECU 16':'Quintero C.','ECU 17':'Muñoz G.','ECU 18':'Méndez P.','ECU 19':'Torres R.','ECU 20':'Estrada F.',
+  // COSTA DE MARFIL
+  'CIV 1':'Logo','CIV 2':'Badra','CIV 3':'Cissé C.','CIV 4':'Deli','CIV 5':'Bailly',
+  'CIV 6':'Aurier','CIV 7':'Kanon','CIV 8':'Seri J.','CIV 9':'Sangaré','CIV 10':'Touré H.',
+  'CIV 11':'Fofana W.','CIV 12':'Pépe N.','CIV 13':'Foto','CIV 14':'Toko Ekambi','CIV 15':'Traoré F.',
+  'CIV 16':'Gradel','CIV 17':'Koné S.','CIV 18':'Haller','CIV 19':'Kessié','CIV 20':'Zaha',
+  // CURAZAO
+  'CUW 1':'Logo','CUW 2':'Dos Santos P.','CUW 3':'Resanovic','CUW 4':'Martina','CUW 5':'Cijntje',
+  'CUW 6':'Faneyte','CUW 7':'Angelina','CUW 8':'Fer L.','CUW 9':'Kwidama','CUW 10':'Hasselbaink J.',
+  'CUW 11':'Emanuelson','CUW 12':'Clasie','CUW 13':'Foto','CUW 14':'Chavarría','CUW 15':'Sinclair',
+  'CUW 16':'Daal','CUW 17':'Bakboord','CUW 18':'Janga E.','CUW 19':'Pieters E.','CUW 20':'Druijf',
+  // ALEMANIA
+  'GER 1':'Logo','GER 2':'Neuer','GER 3':'Rüdiger','GER 4':'Schlotterbeck','GER 5':'Kimmich',
+  'GER 6':'Sané','GER 7':'Müller','GER 8':'Kroos','GER 9':'Gündogan','GER 10':'Goretzka',
+  'GER 11':'Wirtz','GER 12':'Havertz','GER 13':'Foto','GER 14':'Gnabry','GER 15':'Musiala',
+  'GER 16':'Füllkrug','GER 17':'Bellingham J.','GER 18':'Raum','GER 19':'Klose J.','GER 20':'Undav',
+  // TURQUÍA
+  'TUR 1':'Logo','TUR 2':'Çakır U.','TUR 3':'Güneok M.','TUR 4':'Demiral','TUR 5':'Çelik Z.',
+  'TUR 6':'Söyüncü','TUR 7':'Ayhan','TUR 8':'Yüksek','TUR 9':'Yazıcı','TUR 10':'Akturkoglu',
+  'TUR 11':'Calhanoglu','TUR 12':'Kökcü','TUR 13':'Foto','TUR 14':'Karaman','TUR 15':'Under C.',
+  'TUR 16':'Güler','TUR 17':'Tosun','TUR 18':'Kahveci','TUR 19':'Soyuncu','TUR 20':'Yildiz K.',
+  // AUSTRALIA
+  'AUS 1':'Logo','AUS 2':'Ryan M.','AUS 3':'Gauci','AUS 4':'Souttar H.','AUS 5':'Circati',
+  'AUS 6':'Bos J.','AUS 7':'Behich','AUS 8':'Burgess C.','AUS 9':'Miller L.','AUS 10':'Degenek',
+  'AUS 11':'Irvine J.','AUS 12':'McGree','AUS 13':'Foto','AUS 14':'O\'Neill A.','AUS 15':'Metcalfe',
+  'AUS 16':'Yazbek','AUS 17':'Goodwin C.','AUS 18':'Veng K.','AUS 19':'Irankunda','AUS 20':'Touré M.',
+  // PARAGUAY
+  'PAR 1':'Logo','PAR 2':'Fernández R.','PAR 3':'Gill O.','PAR 4':'Gómez G.','PAR 5':'Balbuena',
+  'PAR 6':'Cáceres J.','PAR 7':'Alderete','PAR 8':'Alonso J.','PAR 9':'Villasanti','PAR 10':'Gómez D.',
+  'PAR 11':'Bobadilla','PAR 12':'Cubas A.','PAR 13':'Foto','PAR 14':'Galarza','PAR 15':'Enciso',
+  'PAR 16':'Romero Gamarra','PAR 17':'Almirón','PAR 18':'Sosa R.','PAR 19':'Romero Á.','PAR 20':'Sanabria',
+  // USA
+  'USA 1':'Logo','USA 2':'Freese','USA 3':'Richards C.','USA 4':'Ream','USA 5':'McKenzie M.',
+  'USA 6':'Freeman A.','USA 7':'Robinson A.','USA 8':'Adams T.','USA 9':'Tessmann','USA 10':'McKennie',
+  'USA 11':'Roldan','USA 12':'Weah T.','USA 13':'Foto','USA 14':'Luna D.','USA 15':'Tillman',
+  'USA 16':'Pulisic','USA 17':'Aaronson','USA 18':'Pepi','USA 19':'Wright H.','USA 20':'Balogun',
+  // ESCOCIA
+  'SCO 1':'Logo','SCO 2':'Gunn A.','SCO 3':'Hendry J.','SCO 4':'Tierney','SCO 5':'Hickey',
+  'SCO 6':'Robertson','SCO 7':'McKenna S.','SCO 8':'Souttar J.','SCO 9':'Ralston','SCO 10':'Hanley',
+  'SCO 11':'McTominay','SCO 12':'Gilmour B.','SCO 13':'Foto','SCO 14':'Ferguson L.','SCO 15':'Christie R.',
+  'SCO 16':'McLean K.','SCO 17':'McGinn','SCO 18':'Dykes','SCO 19':'Adams C.','SCO 20':'Doak',
+  // HAITÍ
+  'HAI 1':'Logo','HAI 2':'Placide','HAI 3':'Arcus','HAI 4':'Expérience','HAI 5':'Duverne',
+  'HAI 6':'Adé','HAI 7':'Lacroix','HAI 8':'Metusala','HAI 9':'Delcroix','HAI 10':'Pierre L.',
+  'HAI 11':'Jean Jacques','HAI 12':'Bellegarde','HAI 13':'Foto','HAI 14':'Attys','HAI 15':'Etienne Jr.',
+  'HAI 16':'Casimir','HAI 17':'Providence','HAI 18':'Nazon','HAI 19':'Deedson','HAI 20':'Pierrot',
+  // MARRUECOS
+  'MAR 1':'Logo','MAR 2':'Bounou','MAR 3':'El Kajoui','MAR 4':'Hakimi','MAR 5':'Mazraoui',
+  'MAR 6':'Aguerd','MAR 7':'Saiss','MAR 8':'El Yamiq','MAR 9':'Masina','MAR 10':'Amrabat',
+  'MAR 11':'Ounahi A.','MAR 12':'Ben Seghir','MAR 13':'Foto','MAR 14':'El Khannouss','MAR 15':'Saibari',
+  'MAR 16':'En-Nesyri','MAR 17':'Ezzalzouli','MAR 18':'Rahimi','MAR 19':'Brahim Díaz','MAR 20':'El Kaabi',
+  // BRASIL
+  'BRA 1':'Logo','BRA 2':'Alisson','BRA 3':'Bento','BRA 4':'Marquinhos','BRA 5':'Militão',
+  'BRA 6':'G. Magalhães','BRA 7':'Danilo','BRA 8':'Wesley','BRA 9':'Paquetá','BRA 10':'Casemiro',
+  'BRA 11':'Bruno G.','BRA 12':'L. Henrique','BRA 13':'Foto','BRA 14':'Vinicius Jr.','BRA 15':'Rodrygo',
+  'BRA 16':'João Pedro','BRA 17':'Cunha M.','BRA 18':'Martinelli','BRA 19':'Raphinha','BRA 20':'Estévão',
+  // SUIZA
+  'SUI 1':'Logo','SUI 2':'Kobel','SUI 3':'Mvogo','SUI 4':'Akanji','SUI 5':'Ricardo R.',
+  'SUI 6':'Elvedi','SUI 7':'Amenda','SUI 8':'Widmer','SUI 9':'Xhaka','SUI 10':'Zakaria',
+  'SUI 11':'Freuler','SUI 12':'Rieder','SUI 13':'Foto','SUI 14':'Jashari','SUI 15':'Manzambi',
+  'SUI 16':'Aebischer','SUI 17':'Embolo','SUI 18':'Vargas R.','SUI 19':'Ndoye','SUI 20':'Amdouni',
+  // QATAR
+  'QAT 1':'Logo','QAT 2':'Barsham','QAT 3':'Albrake','QAT 4':'Lucas Mendes','QAT 5':'Homam',
+  'QAT 6':'Khoukhi','QAT 7':'Pedro Miguel','QAT 8':'Salman T.','QAT 9':'Al-Mannai','QAT 10':'Boudiaf',
+  'QAT 11':'Madibo','QAT 12':'Fatehi','QAT 13':'Foto','QAT 14':'Waad M.','QAT 15':'Hatem A.',
+  'QAT 16':'Al-Haydos','QAT 17':'Edmilson Jr.','QAT 18':'Afif','QAT 19':'Al Ganehi','QAT 20':'Ali A.',
+  // BOSNIA
+  'BIH 1':'Logo','BIH 2':'Vasilj','BIH 3':'Dedic','BIH 4':'Kolasinac','BIH 5':'Muharemovic',
+  'BIH 6':'Mujakic','BIH 7':'Katic','BIH 8':'Hadziahmetovic','BIH 9':'Tahirovic','BIH 10':'Gigovic',
+  'BIH 11':'Sunjic','BIH 12':'Basic I.','BIH 13':'Foto','BIH 14':'Burnic','BIH 15':'Bajraktarevic',
+  'BIH 16':'Memic','BIH 17':'Demirovic','BIH 18':'Dzeko','BIH 19':'Bazdar','BIH 20':'Tabakovic',
+  // CANADÁ
+  'CAN 1':'Logo','CAN 2':'St.Clair','CAN 3':'Davies A.','CAN 4':'Johnston A.','CAN 5':'Adekugbe',
+  'CAN 6':'Laryea','CAN 7':'Cornelius D.','CAN 8':'Bombito','CAN 9':'Miller K.','CAN 10':'Eustáquio',
+  'CAN 11':'Koné I.','CAN 12':'Osorio J.','CAN 13':'Foto','CAN 14':'Shaffelburg','CAN 15':'Choinière',
+  'CAN 16':'Sigur','CAN 17':'Buchanan T.','CAN 18':'Millar L.','CAN 19':'Larin','CAN 20':'David J.',
+  // SUDÁFRICA
+  'RSA 1':'Logo','RSA 2':'Williams R.','RSA 3':'Chaine','RSA 4':'Modiba','RSA 5':'Kabini',
+  'RSA 6':'Mbokazi','RSA 7':'Ndamane','RSA 8':'Ngezana','RSA 9':'Mudau','RSA 10':'Sibisi',
+  'RSA 11':'Mokoena T.','RSA 12':'Mbatha','RSA 13':'Foto','RSA 14':'Aubaas','RSA 15':'Sithole Y.',
+  'RSA 16':'Mbule','RSA 17':'Foster L.','RSA 18':'Rayners','RSA 19':'Nkota','RSA 20':'Appollis',
+  // CZECHIA
+  'CZE 1':'Logo','CZE 2':'Kovár M.','CZE 3':'Stanek','CZE 4':'Krejci L.','CZE 5':'Coufal',
+  'CZE 6':'Zeleny','CZE 7':'Holes','CZE 8':'Zima D.','CZE 9':'Sadilek','CZE 10':'Provod',
+  'CZE 11':'Cerv','CZE 12':'Soucek','CZE 13':'Foto','CZE 14':'Sulc','CZE 15':'Vydra',
+  'CZE 16':'Kusej','CZE 17':'Chory','CZE 18':'Cerny V.','CZE 19':'Hlozek','CZE 20':'Schick',
+  // KOREA
+  'KOR 1':'Logo','KOR 2':'Jo H.','KOR 3':'Kim S-G.','KOR 4':'Kim M-J.','KOR 5':'Cho Y-M.',
+  'KOR 6':'Seol Y-W.','KOR 7':'Lee H-B.','KOR 8':'Lee T-S.','KOR 9':'Lee M-J.','KOR 10':'Lee J-S.',
+  'KOR 11':'Hwang I-B.','KOR 12':'Lee K-I.','KOR 13':'Foto','KOR 14':'Paik S-H.','KOR 15':'Castrop',
+  'KOR 16':'Lee D-Y.','KOR 17':'Cho G-S.','KOR 18':'Son H-M.','KOR 19':'Hwang H-C.','KOR 20':'Oh H-G.',
+  // MEXICO
+  'MEX 1':'Logo','MEX 2':'Malagón','MEX 3':'Vásquez J.','MEX 4':'Sánchez J.','MEX 5':'Montes C.',
+  'MEX 6':'Gallardo J.','MEX 7':'Reyes I.','MEX 8':'Lainez','MEX 9':'Rodríguez C.','MEX 10':'Álvarez E.',
+  'MEX 11':'Pineda O.','MEX 12':'Ruiz M.','MEX 13':'Foto','MEX 14':'Sánchez E.','MEX 15':'Lozano H.',
+  'MEX 16':'Giménez S.','MEX 17':'Jiménez R.','MEX 18':'Vega A.','MEX 19':'Alvarado R.','MEX 20':'Huerta C.',
+};
+
 const DATA=[
   {name:'Argelia',codes:['ALG 1','ALG 2','ALG 3','ALG 4','ALG 5','ALG 6','ALG 7','ALG 8','ALG 9','ALG 10','ALG 11','ALG 12','ALG 13','ALG 14','ALG 15','ALG 16','ALG 17','ALG 18','ALG 19','ALG 20'],init:['ALG 6']},
   {name:'Argentina',codes:['ARG 1','ARG 2','ARG 3','ARG 4','ARG 5','ARG 6','ARG 7','ARG 8','ARG 9','ARG 10','ARG 11','ARG 12','ARG 13','ARG 14','ARG 15','ARG 16','ARG 17','ARG 18','ARG 19','ARG 20'],init:['ARG 13']},
@@ -537,7 +791,7 @@ function renderDetail(name){
   const owned=getOwned(name),total=sec.codes.length,cnt=owned.size;
   const pct=total?Math.round(cnt/total*100):0,flag=FLAGS[name]||'🌍';
   const prefix=pfx(sec);
-  const stHTML=sec.codes.map(code=>{const num=code.split(' ')[1]||code,pre=code.split(' ')[0];return`<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}"><span class="dp-num">${num}</span><span class="dp-code">${pre}</span></div>`;}).join('');
+  const stHTML=sec.codes.map(code=>{const num=code.split(' ')[1]||code,pre=code.split(' ')[0];const player=PLAYERS[code]||'';const short=player.length>9?player.substring(0,9):player;return`<div class="dp-st${owned.has(code)?' owned':''}" data-code="${code}" data-sec="${name}" title="${code}: ${player}"><span class="dp-num">${pre} ${num}</span><span class="dp-code">${short||pre}</span></div>`;}).join('');
   c.innerHTML=`<div class="dp"><div class="dp-title"><span style="font-size:28px">${flag}</span>${name.toUpperCase()}<span class="subtitle"> · ${prefix} · ${total} LÁMINAS</span></div>
   <div class="dp-stats"><div class="dp-sc"><div class="dp-n" style="color:#3CAC3B">${cnt}</div><div class="dp-l">Tengo</div></div><div class="dp-sc"><div class="dp-n" style="color:#E61D25">${total-cnt}</div><div class="dp-l">Faltan</div></div><div class="dp-sc"><div class="dp-n" style="color:#FFDB00">${pct}%</div><div class="dp-l">Progreso</div></div></div>
   <div class="dp-pgrid">${stHTML}</div>
@@ -566,7 +820,18 @@ function buildCard(sec){
   const prefix=pfx(sec);
   const div=document.createElement('div');
   div.className='scard'+(complete?' complete':'')+(isCol?' collapsed':'');div.dataset.sec=name;
-  const stHTML=sec.codes.map(code=>`<div class="st${owned.has(code)?' owned':''}" data-code="${code}" title="${code}">#${code.split(' ')[1]}</div>`).join('');
+  const stHTML=sec.codes.map(code=>{
+    const num=code.split(' ')[1]||code;
+    const pre=code.split(' ')[0];
+    const player=PLAYERS[code]||'';
+    const isSpecial=player==='Logo'||player==='Foto';
+    const nameLine=isSpecial?player:(player||('#'+num));
+    const short=nameLine.length>8?nameLine.substring(0,8):nameLine;
+    return`<div class="st${owned.has(code)?' owned':''}" data-code="${code}" title="${code}: ${player}">
+      <span class="st-code">${pre} ${num}</span>
+      <span class="st-name">${short}</span>
+    </div>`;
+  }).join('');
   div.innerHTML=`<div class="shdr"><div class="sname"><span class="flag">${flag}</span><span>${name}</span><span style="font-family:var(--fc);font-size:10px;color:rgba(255,255,255,.28);font-weight:400;letter-spacing:1px">${prefix}</span></div><div class="sprog"><span class="cbadge" style="display:${complete?'inline-block':'none'}">COMPLETA</span><span class="pct">${pct}%</span><div class="mbar"><div class="mfill" style="width:${pct}%;background:${barC(pct)}"></div></div><span class="tarrow${isCol?'':' open'}">▼</span></div></div>
   <div class="stgrid">${stHTML}</div>
   <div class="sfoot"><span><span class="co">${cnt}</span> pegadas · <span class="cm">${total-cnt}</span> faltan</span><span style="color:rgba(61,82,196,.4)">${total} total</span></div>`;
