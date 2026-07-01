@@ -329,7 +329,7 @@ tr:hover td{background:rgba(42,57,141,.07);}
         <div onclick="openReport('missing')" style="background:var(--bg2);border:1px solid rgba(230,29,37,.3);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='rgba(230,29,37,.3)'">
           <div style="font-size:32px;margin-bottom:8px;">❌</div>
           <div style="font-family:var(--ft);font-size:16px;letter-spacing:1px;color:var(--red);margin-bottom:4px;">LÁMINAS FALTANTES</div>
-          <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);">Solo las láminas repetidas que tengo · Con detalle</div>
+          <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.4);">Detalle de cuáles faltan por selección</div>
         </div>
         <div onclick="openReport('repeats')" style="background:var(--bg2);border:1px solid rgba(255,219,0,.25);border-radius:10px;padding:18px;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,219,0,.25)'">
           <div style="font-size:32px;margin-bottom:8px;">🔁</div>
@@ -989,181 +989,198 @@ function exportCSV(){
 }
 
 /* ===================== MOTOR CANVAS ===================== */
-const SCALE=2; // alta resolución 2x
-const CW=1400,CH=990; // carta landscape a 96dpi * 2
+const SCALE=2;
 
-function drawHeader(ctx,title,subtitle,fecha,hora,W,H,PAD){
-  ctx.fillStyle='#0F0A1E';ctx.fillRect(0,0,W,80);
+function drawHeader(ctx,title,subtitle,fecha,hora,W,PAD){
+  ctx.fillStyle='#0F0A1E';ctx.fillRect(0,0,W,76);
   const cols=['#E61D25','#2A398D','#3CAC3B','#FFDB00','#E61D25','#3D52C4','#3CAC3B'];
-  cols.forEach((c,i,a)=>{ctx.fillStyle=c;ctx.fillRect(i*(W/a.length),80,W/a.length,5);});
-  ctx.fillStyle='#FFDB00';ctx.font=`bold ${26*SCALE}px Arial`;ctx.textBaseline='middle';
-  ctx.fillText(title,PAD,32);
-  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font=`${11*SCALE}px Arial`;
-  ctx.fillText(subtitle+' · Leon Alvarez Huequelef · '+fecha+' '+hora,PAD,60);
+  cols.forEach((c,i,a)=>{ctx.fillStyle=c;ctx.fillRect(i*(W/a.length),76,W/a.length,4);});
+  ctx.fillStyle='#FFDB00';ctx.font='bold 17px Arial';ctx.textBaseline='middle';
+  ctx.fillText(title,PAD,28);
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='11px Arial';
+  ctx.fillText(subtitle+' · Leon Alvarez Huequelef · '+fecha+' '+hora,PAD,56);
   ctx.textBaseline='alphabetic';
 }
 
-function drawResumen(ctx,W,PAD,y){
+function drawResumenBar(ctx,W,PAD,y){
   const{t,o,m,p}=totals();
-  ctx.fillStyle='#F3F4F6';ctx.fillRect(0,y,W,52);
-  ctx.strokeStyle='#E5E7EB';ctx.lineWidth=1;ctx.strokeRect(0,y,W,52);
-  ctx.font=`bold ${13*SCALE}px Arial`;
-  const items=[['Total: '+t,'#111'],['Tengo: '+o,'#3CAC3B'],['Faltan: '+m,'#E61D25'],['Avance: '+p+'%','#2A398D']];
+  ctx.fillStyle='#F3F4F6';ctx.fillRect(0,y,W,42);
+  ctx.strokeStyle='#E5E7EB';ctx.lineWidth=0.5;ctx.strokeRect(0,y,W,42);
+  ctx.font='bold 12px Arial';
+  const items=[['Total: '+t,'#111'],['Tengo: '+o,'#3CAC3B'],['Faltan: '+m,'#E61D25'],['Avance: '+p+'%','#2A398D'],['Secciones: '+DATA.length,'#555']];
   let ix=PAD;
-  items.forEach(([txt,col])=>{ctx.fillStyle=col;ctx.fillText(txt,ix,y+24);ix+=ctx.measureText(txt).width+28;});
-  // barra
-  const bx=ix+10,bw=W-bx-PAD,bh=8,by=y+20;
-  ctx.fillStyle='#E5E7EB';ctx.fillRect(bx,by,bw,bh);
-  ctx.fillStyle='#3CAC3B';ctx.fillRect(bx,by,Math.round(bw*p/100),bh);
-  ctx.fillStyle='#666';ctx.font=`${11*SCALE}px Arial`;
-  ctx.fillText('Secciones: '+DATA.length,PAD,y+44);
-  return y+52;
+  items.forEach(([txt,col])=>{ctx.fillStyle=col;ctx.fillText(txt,ix,y+20);ix+=ctx.measureText(txt).width+24;});
+  const bx=ix+10,bw=W-bx-PAD,bh=6,by=y+16;
+  if(bw>0){ctx.fillStyle='#E5E7EB';ctx.fillRect(bx,by,bw,bh);ctx.fillStyle='#3CAC3B';ctx.fillRect(bx,by,Math.round(bw*p/100),bh);}
+  ctx.fillStyle='#999';ctx.font='10px Arial';ctx.fillText('Generado: '+new Date().toLocaleDateString('es-CL'),PAD,y+36);
+  return y+42;
 }
 
 function drawFooter(ctx,W,H,PAD){
-  ctx.fillStyle='#E5E7EB';ctx.fillRect(0,H-28,W,28);
-  ctx.fillStyle='#999';ctx.font=`${9*SCALE}px Arial`;ctx.textAlign='left';
-  ctx.fillText('FIFA World Cup 2026 · Album de Laminas',PAD,H-10);
+  ctx.fillStyle='#E5E7EB';ctx.fillRect(0,H-24,W,24);
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='left';
+  ctx.fillText('FIFA World Cup 2026 · Album de Laminas Panini',PAD,H-8);
   ctx.textAlign='right';
-  ctx.fillText('🦁 Generado con Album Mundial - Leon Alvarez',W-PAD,H-10);
+  ctx.fillText('🦁 Generado con Album Mundial - Leon Alvarez',W-PAD,H-8);
   ctx.textAlign='left';
 }
 
+function computeLayout(type,secciones,W,PAD){
+  // Definir columnas y chip sizes según tipo
+  const COLS=type==='all'?5:4;
+  const cellW=Math.floor((W-PAD*2)/COLS);
+  const CHIP_W=type==='all'?34:type==='missing'?38:46;
+  const CHIP_H=12,GAP=2,HDR_H=22;
+
+  const sizes=secciones.map(sec=>{
+    let count=0;
+    if(type==='all')count=sec.codes.length;
+    else if(type==='missing')count=getMissing(sec.name).length;
+    else count=(sec._repEntries||[]).length;
+    const perRow=Math.max(1,Math.floor((cellW-8)/(CHIP_W+GAP)));
+    const rows=Math.ceil(count/perRow);
+    return Math.max(40,HDR_H+rows*(CHIP_H+GAP)+6);
+  });
+
+  return{COLS,cellW,CHIP_W,CHIP_H,GAP,sizes};
+}
+
 function buildCanvas(type){
-  const W=CW*SCALE,H=CH*SCALE,PAD=22*SCALE;
-  const canvas=document.getElementById('report-canvas');
-  canvas.width=W;canvas.height=H;
-  const ctx=canvas.getContext('2d');
-  ctx.scale(SCALE,SCALE);
-
-  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,CW,CH);
-
   const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
   const hora=new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
 
-  let title,subtitle;
-  if(type==='all'){title='ALBUM MUNDIAL 2026 \u2014 REPORTE COMPLETO';subtitle='Verde = Tengo · Rojo = Falta · Todas las secciones';}
-  else if(type==='missing'){title='ALBUM MUNDIAL 2026 \u2014 LAMINAS REPETIDAS (DETALLE)';subtitle='Laminas repetidas que tengo disponibles para intercambio';}
-  else{title='ALBUM MUNDIAL 2026 \u2014 LAMINAS REPETIDAS';subtitle='Laminas duplicadas disponibles para intercambio';}
-
-  drawHeader(ctx,title,subtitle,fecha,hora,CW,CH,PAD);
-
-  let startY=90;
-  startY=drawResumen(ctx,CW,PAD,startY)+8;
-
-  const usableW=CW-PAD*2;
-  const COLS=type==='all'?4:5;
-  const cellW=Math.floor(usableW/COLS);
-
-  // Para 'missing', construir igual que 'repeats'
+  // Preparar datos según tipo
   const buildRepBySec=()=>{
     const bySec={};
     Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
       const sec=DATA.find(s=>s.codes.includes(code));
       const key=sec?sec.name:code.split(' ')[0];
-      if(!bySec[key])bySec[key]={sec,entries:[]};
+      if(!bySec[key])bySec[key]={entries:[]};
       bySec[key].entries.push({code,cnt});
     });
     Object.values(bySec).forEach(v=>v.entries.sort((a,b)=>parseInt(a.code.split(' ')[1])-parseInt(b.code.split(' ')[1])));
     return bySec;
   };
 
-  let secciones=[];
+  let secciones=[],title,subtitle;
   if(type==='all'){
     secciones=DATA;
-  } else if(type==='missing'||type==='repeats'){
+    title='ALBUM MUNDIAL 2026 — REPORTE COMPLETO';
+    subtitle='Verde=Tengo · Rojo=Falta · Todas las selecciones';
+  } else if(type==='missing'){
+    secciones=DATA.filter(s=>getMissing(s.name).length>0);
+    title='ALBUM MUNDIAL 2026 — LAMINAS FALTANTES';
+    subtitle='Detalle de todas las laminas pendientes por seleccion';
+  } else {
     const bySec=buildRepBySec();
-    secciones=DATA.filter(s=>bySec[s.name]).map(s=>({...s,_repEntries:bySec[s.name]?bySec[s.name].entries:[]}));
-    if(!secciones.length){
-      ctx.fillStyle='#555';ctx.font='14px Arial';ctx.textAlign='center';
-      ctx.fillText('No hay laminas repetidas registradas',CW/2,CH/2);
-      ctx.textAlign='left';
-      drawFooter(ctx,CW,CH,PAD);
-      ctx.setTransform(1,0,0,1,0,0);
-      return;
-    }
+    secciones=DATA.filter(s=>bySec[s.name]).map(s=>({...s,_repEntries:bySec[s.name].entries}));
+    title='ALBUM MUNDIAL 2026 — LAMINAS REPETIDAS';
+    subtitle='Laminas duplicadas disponibles para intercambio';
   }
 
-  const getChips=sec=>{
-    if(type==='all')return{owned:[...getOwned(sec.name)].sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1])),missing:getMissing(sec.name)};
-    if(type==='missing'||type==='repeats')return{owned:[],missing:[],rep:sec._repEntries||[]};
-    return{owned:[],missing:[],rep:[]};
-  };
+  // Calcular dimensiones reales
+  const W=1400,PAD=20;
+  const{COLS,cellW,CHIP_W,CHIP_H,GAP,sizes}=computeLayout(type,secciones,W,PAD);
 
-  const CHIP_W=(type==='repeats'||type==='missing')?48:38,CHIP_H=13,GAP=2;
-  const ROW_H=20;
-
-  // calcular alturas dinámicas
-  const secSizes=secciones.map(sec=>{
-    const chips=getChips(sec);
-    let count=type==='all'?sec.codes.length:type==='missing'?chips.missing.length:chips.rep?chips.rep.length:0;
-    const perRow=Math.floor((cellW-10)/( CHIP_W+GAP));
-    const rows=Math.ceil(count/Math.max(1,perRow));
-    return Math.max(44,ROW_H+rows*(CHIP_H+GAP)+8);
-  });
-
-  let col=0,y=startY,rowMaxH=0;
+  // Calcular altura total necesaria
+  let y=85,col=0,rowH=0;
   const positions=[];
-  secSizes.forEach((h,i)=>{
-    if(col===COLS){col=0;y+=rowMaxH+3;rowMaxH=0;}
+  sizes.forEach((h,i)=>{
+    if(col===COLS){col=0;y+=rowH+3;rowH=0;}
     positions.push({x:PAD+col*cellW,y,w:cellW-3,h});
-    rowMaxH=Math.max(rowMaxH,h);
-    col++;
+    rowH=Math.max(rowH,h);col++;
+  });
+  const totalH=y+rowH+30;
+
+  // Crear canvas con altura real
+  const canvas=document.getElementById('report-canvas');
+  canvas.width=W*SCALE;
+  canvas.height=totalH*SCALE;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(SCALE,SCALE);
+
+  // Fondo
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,totalH);
+
+  drawHeader(ctx,title,subtitle,fecha,hora,W,PAD);
+  let sy2=85;
+  sy2=drawResumenBar(ctx,W,PAD,sy2)+4;
+
+  // Recalcular posiciones con y real post-resumen
+  const finalPositions=[];
+  col=0;rowH=0;y=sy2;
+  sizes.forEach((h,i)=>{
+    if(col===COLS){col=0;y+=rowH+3;rowH=0;}
+    finalPositions.push({x:PAD+col*cellW,y,w:cellW-3,h});
+    rowH=Math.max(rowH,h);col++;
   });
 
+  // Dibujar cada sección
   secciones.forEach((sec,i)=>{
-    if(i>=positions.length)return;
-    const{x,y:sy,w,h}=positions[i];
+    const pos=finalPositions[i];if(!pos)return;
+    const{x,y:sy,w,h}=pos;
     const owned=getOwned(sec.name);
     const total=sec.codes.length;
     const cnt=owned.size;
     const pct=total?Math.round(cnt/total*100):0;
-    const bc=barC(pct);
+    const bc=pct===100?'#FFDB00':pct>=60?'#3CAC3B':pct>=30?'#2A398D':'#E61D25';
 
-    // fondo
+    // Fondo sección
     ctx.fillStyle='#FAFAFA';ctx.fillRect(x,sy,w,h);
     ctx.strokeStyle='#E5E7EB';ctx.lineWidth=0.5;ctx.strokeRect(x,sy,w,h);
-    ctx.fillStyle=bc;ctx.fillRect(x,sy,4,h);
+    ctx.fillStyle=bc;ctx.fillRect(x,sy,3,h);
 
-    // nombre + prefix + stats
-    ctx.fillStyle='#111';ctx.font=`bold ${8.5}px Arial`;
-    ctx.fillText((FLAGS[sec.name]||'')+' '+(sec.name.length>16?sec.name.substring(0,15)+'…':sec.name),x+7,sy+11);
-    ctx.fillStyle='#888';ctx.font=`${7.5}px Arial`;
-    ctx.fillText('('+pfx(sec)+') '+pct+'% — '+cnt+'/'+total,x+7,sy+20);
+    // Encabezado
+    ctx.fillStyle='#111';ctx.font='bold 8.5px Arial';
+    const nameStr=(sec.name.length>17?sec.name.substring(0,16)+'…':sec.name);
+    ctx.fillText(nameStr,x+6,sy+10);
+    ctx.fillStyle='#888';ctx.font='7px Arial';
+    ctx.fillText('('+pfx(sec)+') '+pct+'% '+cnt+'/'+total,x+6,sy+19);
 
-    // chips
-    const chips=getChips(sec);
-    let cx=x+6,cy=sy+24;
+    // Chips
+    let cx=x+5,chipY=sy+23;
     ctx.textAlign='center';
 
     if(type==='all'){
       sec.codes.forEach(code=>{
-        if(cx+CHIP_W>x+w-2){cx=x+6;cy+=CHIP_H+GAP;}
-        if(cy+CHIP_H>sy+h-2)return;
+        if(cx+CHIP_W>x+w-2){cx=x+5;chipY+=CHIP_H+GAP;}
+        if(chipY+CHIP_H>sy+h-2)return;
         const isOwned=owned.has(code);
         ctx.fillStyle=isOwned?'#DCFCE7':'#FEE2E2';
-        ctx.fillRect(cx,cy,CHIP_W,CHIP_H);
-        ctx.strokeStyle=isOwned?'#86EFAC':'#FECACA';ctx.lineWidth=0.4;ctx.strokeRect(cx,cy,CHIP_W,CHIP_H);
-        ctx.fillStyle=isOwned?'#15803D':'#991B1B';ctx.font='bold 7px Arial';
-        ctx.fillText(code.split(' ')[1],cx+CHIP_W/2,cy+CHIP_H-3);
+        ctx.fillRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.strokeStyle=isOwned?'#86EFAC':'#FECACA';ctx.lineWidth=0.4;ctx.strokeRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.fillStyle=isOwned?'#15803D':'#991B1B';ctx.font='bold 6.5px Arial';
+        ctx.fillText(code.split(' ')[1],cx+CHIP_W/2,chipY+CHIP_H-3);
+        cx+=CHIP_W+GAP;
+      });
+    } else if(type==='missing'){
+      getMissing(sec.name).forEach(code=>{
+        if(cx+CHIP_W>x+w-2){cx=x+5;chipY+=CHIP_H+GAP;}
+        if(chipY+CHIP_H>sy+h-2)return;
+        ctx.fillStyle='#FEE2E2';ctx.fillRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.strokeStyle='#FECACA';ctx.lineWidth=0.4;ctx.strokeRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.fillStyle='#991B1B';ctx.font='bold 6.5px Arial';
+        ctx.fillText(code.split(' ')[1],cx+CHIP_W/2,chipY+CHIP_H-3);
         cx+=CHIP_W+GAP;
       });
     } else {
-      // missing y repeats — mismo render: chips ámbar con código (cantidad)
-      (chips.rep||[]).forEach(({code,cnt:c})=>{
-        if(cx+CHIP_W>x+w-2){cx=x+6;cy+=CHIP_H+GAP;}
-        if(cy+CHIP_H>sy+h-2)return;
-        ctx.fillStyle='#FEF3C7';ctx.fillRect(cx,cy,CHIP_W,CHIP_H);
-        ctx.strokeStyle='#FDE68A';ctx.lineWidth=0.4;ctx.strokeRect(cx,cy,CHIP_W,CHIP_H);
-        ctx.fillStyle='#78350F';ctx.font='bold 7px Arial';
-        ctx.fillText(code.split(' ')[1]+' ('+c+')',cx+CHIP_W/2,cy+CHIP_H-3);
+      (sec._repEntries||[]).forEach(({code,cnt:c})=>{
+        if(cx+CHIP_W>x+w-2){cx=x+5;chipY+=CHIP_H+GAP;}
+        if(chipY+CHIP_H>sy+h-2)return;
+        ctx.fillStyle='#FEF3C7';ctx.fillRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.strokeStyle='#FDE68A';ctx.lineWidth=0.4;ctx.strokeRect(cx,chipY,CHIP_W,CHIP_H);
+        ctx.fillStyle='#78350F';ctx.font='bold 6.5px Arial';
+        ctx.fillText(code.split(' ')[1]+' ('+c+')',cx+CHIP_W/2,chipY+CHIP_H-3);
         cx+=CHIP_W+GAP;
       });
     }
     ctx.textAlign='left';
   });
 
-  drawFooter(ctx,CW,CH,PAD);
+  // Footer
+  const fH=finalPositions.length?finalPositions[finalPositions.length-1].y+sizes[sizes.length-1]+4:totalH;
+  drawFooter(ctx,W,fH+24,PAD);
+
   ctx.setTransform(1,0,0,1,0,0);
 }
 
@@ -1172,29 +1189,40 @@ let currentReportType='missing';
 
 function openReport(type){
   currentReportType=type;
-  const labels={all:'REPORTE COMPLETO',missing:'LÁMINAS REPETIDAS (DETALLE)',repeats:'LÁMINAS REPETIDAS'};
+  const labels={all:'REPORTE COMPLETO',missing:'LÁMINAS FALTANTES',repeats:'LÁMINAS REPETIDAS'};
   document.getElementById('rm-title').textContent='📊 '+labels[type];
   document.getElementById('report-modal').classList.remove('hidden');
-  setTimeout(()=>buildCanvas(type),50);
+  // Mostrar spinner mientras genera
+  const canvas=document.getElementById('report-canvas');
+  canvas.width=100;canvas.height=100;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,100,100);
+  ctx.fillStyle='#888';ctx.font='12px Arial';ctx.textAlign='center';
+  ctx.fillText('Generando...',50,55);
+  setTimeout(()=>buildCanvas(type),80);
 }
 
-document.getElementById('rm-close').addEventListener('click',()=>{document.getElementById('report-modal').classList.add('hidden');});
+document.getElementById('rm-close').addEventListener('click',()=>{
+  document.getElementById('report-modal').classList.add('hidden');
+});
 
 document.getElementById('rm-img').addEventListener('click',()=>{
   const canvas=document.getElementById('report-canvas');
   const a=document.createElement('a');
   a.href=canvas.toDataURL('image/png');
   a.download='Reporte_Mundial2026_'+currentReportType+'_'+new Date().toISOString().slice(0,10)+'.png';
-  a.click();
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
 });
 
 document.getElementById('rm-pdf').addEventListener('click',()=>{
   const canvas=document.getElementById('report-canvas');
   const img=canvas.toDataURL('image/png');
   const wrap=document.getElementById('carta-print-wrap');
-  wrap.innerHTML=`<img src="${img}" style="width:100%;height:100%;object-fit:contain;display:block;"/>`;
+  // Escalar imagen para que quepa en una hoja carta landscape
+  wrap.innerHTML=`<img src="${img}" style="width:100%;display:block;page-break-after:avoid;"/>`;
   const s=document.createElement('style');
-  s.id='_ps';s.textContent='@media print{body>*:not(#carta-print-wrap){display:none!important;}#carta-print-wrap{display:block!important;position:fixed;inset:0;}@page{size:letter landscape;margin:0;}}';
+  s.id='_ps';
+  s.textContent='@media print{body>*:not(#carta-print-wrap){display:none!important;}#carta-print-wrap{display:block!important;}#carta-print-wrap img{width:100%;height:auto;display:block;}@page{size:letter landscape;margin:5mm;}}';
   document.head.appendChild(s);
   window.print();
   setTimeout(()=>{s.remove();wrap.innerHTML='';},1500);
@@ -1204,30 +1232,34 @@ document.getElementById('rm-wa').addEventListener('click',()=>{
   const{t,o,m,p}=totals();
   const fecha=new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'});
   let msg='';
+
   if(currentReportType==='all'){
     msg='🏆 *ALBUM MUNDIAL 2026 - RESUMEN COMPLETO*\n📅 '+fecha+'\n✅ Tengo: '+o+' | ❌ Faltan: '+m+' | 📊 Avance: '+p+'%\n\n';
     DATA.forEach(sec=>{
-      const cnt=getOwned(sec.name).size;const total=sec.codes.length;const pct2=total?Math.round(cnt/total*100):0;
-      msg+=(FLAGS[sec.name]||'')+' *'+sec.name+'* ('+pfx(sec)+'): '+cnt+'/'+total+' — '+pct2+'%\n';
+      const cnt=getOwned(sec.name).size;
+      const total=sec.codes.length;
+      const pct2=total?Math.round(cnt/total*100):0;
+      const bar=pct2===100?'✅':pct2>=50?'🔶':'❌';
+      msg+=bar+' *'+sec.name+'* ('+pfx(sec)+'): '+cnt+'/'+total+' — '+pct2+'%\n';
     });
+
   } else if(currentReportType==='missing'){
-    // "missing" en reportes = repetidas detalladas
-    const bySec={};
-    Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
-      const sec=DATA.find(s=>s.codes.includes(code));const key=sec?sec.name:code.split(' ')[0];
-      if(!bySec[key])bySec[key]=[];bySec[key].push(code+' ('+cnt+')');
+    const secs=DATA.filter(s=>getMissing(s.name).length>0);
+    msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS FALTANTES*\n📅 '+fecha+'\n✅ Tengo: '+o+' | ❌ Faltan: '+m+' | 📊 Avance: '+p+'%\n\n';
+    secs.forEach(sec=>{
+      const miss=getMissing(sec.name);
+      // Incluir número + apellido del jugador
+      const detail=miss.map(code=>code.split(' ')[1]).join(' · ');
+      msg+='*'+(FLAGS[sec.name]||'')+' '+sec.name+' ('+pfx(sec)+')*\nFaltan '+miss.length+': '+detail+'\n\n';
     });
-    const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
-    msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS REPETIDAS (DETALLE)*\n📅 '+fecha+'\n🔁 Codigos: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' | Total: '+totalRep+'\n\n';
-    Object.entries(bySec).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([secName,codes])=>{
-      const sec=DATA.find(s=>s.name===secName);
-      msg+='*'+(FLAGS[secName]||'')+' '+secName+' ('+pfx(sec)+')*\n'+codes.join(' · ')+'\n\n';
-    });
+
   } else {
     const bySec={};
     Object.entries(repeats).filter(([,v])=>v>0).forEach(([code,cnt])=>{
-      const sec=DATA.find(s=>s.codes.includes(code));const key=sec?sec.name:code.split(' ')[0];
-      if(!bySec[key])bySec[key]=[];bySec[key].push(code+' ('+cnt+')');
+      const sec=DATA.find(s=>s.codes.includes(code));
+      const key=sec?sec.name:code.split(' ')[0];
+      if(!bySec[key])bySec[key]=[];
+      bySec[key].push(code+' ('+cnt+')');
     });
     const totalRep=Object.values(repeats).filter(v=>v>0).reduce((a,v)=>a+v,0);
     msg='🏆 *ALBUM MUNDIAL 2026 - LAMINAS REPETIDAS*\n📅 '+fecha+'\n🔁 Codigos: '+Object.keys(repeats).filter(k=>repeats[k]>0).length+' | Total: '+totalRep+'\n\n';
@@ -1236,6 +1268,7 @@ document.getElementById('rm-wa').addEventListener('click',()=>{
       msg+='*'+(FLAGS[secName]||'')+' '+secName+' ('+pfx(sec)+')*\n'+codes.join(' · ')+'\n\n';
     });
   }
+
   msg+='🦁 _Generado con Album Mundial - Leon Alvarez_';
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 });
